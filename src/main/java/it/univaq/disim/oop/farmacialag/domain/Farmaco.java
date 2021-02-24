@@ -4,20 +4,16 @@ public class Farmaco {
 
     private String nome;
     private String descrizione;
-    private String scheda;
-    private boolean stock;
+    private int q_min;
+    private int quantita;
+    private int f_stock;
 
-    public Farmaco(String nome, String descrizione, String scheda, boolean stock) {
+    public Farmaco(String nome, String descrizione, int q_min, int quantita, int f_stock) {
         this.nome = nome;
         this.descrizione = descrizione;
-        this.scheda = scheda;
-        this.stock = stock;
-    }
-
-    public Farmaco(String nome, String scheda, boolean stock) {
-        this.nome = nome;
-        this.scheda = scheda;
-        this.stock = stock;
+        this.q_min = q_min;
+        this.quantita = quantita;
+        this.f_stock = f_stock;
     }
 
     public String getNome() {
@@ -36,19 +32,27 @@ public class Farmaco {
         this.descrizione = descrizione;
     }
 
-    public String getScheda() {
-        return scheda;
+    public int getQ_min() {
+        return q_min;
     }
 
-    public void setScheda(String scheda) {
-        this.scheda = scheda;
+    public void setQ_min(int q_min) {
+        this.q_min = q_min;
     }
 
-    public boolean isStock() {
-        return stock;
+    public int getQuantita() {
+        return quantita;
     }
 
-    public void setStock(boolean stock) {
-        this.stock = stock;
+    public void setQuantita(int quantita) {
+        this.quantita = quantita;
+    }
+
+    public int getF_stock() {
+        return f_stock;
+    }
+
+    public void setF_stock(int f_stock) {
+        this.f_stock = f_stock;
     }
 }
