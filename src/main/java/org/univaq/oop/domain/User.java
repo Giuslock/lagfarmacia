@@ -23,6 +23,9 @@ public class User implements Serializable {
 
     private List<Prescription> prescriptions;
 
+    public User() {
+    }
+
     public User(String name, String surname, String username, String password, Role role) {
         this.name = name;
         this.surname = surname;

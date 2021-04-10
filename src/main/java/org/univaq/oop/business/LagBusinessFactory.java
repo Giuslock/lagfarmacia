@@ -1,6 +1,6 @@
 package org.univaq.oop.business;
 
-import org.univaq.oop.business.impl.FileLagBusinessFactoryImpl;
+import org.univaq.oop.business.impl.file.FileLagBusinessFactoryImpl;
 
 public abstract class LagBusinessFactory {
 

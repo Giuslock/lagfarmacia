@@ -37,7 +37,7 @@ public class ViewDispatcher {
     //metodo che carica la pagina di iscrizione
     public void iscrivitiView(){
         try {
-            Parent loginView = loadView("Iscrizione").getView();
+            Parent loginView = loadView("iscrizione").getView();
             Scene scene = new Scene(loginView);
             stage.setScene(scene);
         } catch (ViewException e) {
