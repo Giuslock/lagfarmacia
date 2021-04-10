@@ -1,0 +1,15 @@
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/view/ViewException.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/domain/Medicine.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/controller/LoginController.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/controller/DataInitializable.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/view/ViewDispatcher.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/domain/MedicinePrescription.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/App.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/module-info.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/view/View.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/domain/User.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/business/BusinessException.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/business/UserNotFoundException.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/domain/Prescription.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/business/UserService.java
+/home/giuslock/Projects/Nuovoprogettosucuilavorare/src/main/java/org/univaq/oop/domain/Role.java

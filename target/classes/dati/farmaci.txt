@@ -1,0 +1,7 @@
+7
+1,oki,ketoprofene,dompé,2021-12-01,5,11
+2,kestine,ebastina,almirall,2021-12-02,10,2
+3,tachipirina,paracetamolo,angelini,2022-10-01,3,3
+4,Sinopol forte,mioinositolo,Laborest,2021-07-03,5,15
+5,neoduplamox,amoxicillina,valeas,2022-07-09,4,13
+6,a,a,a,2021-04-21,10,19

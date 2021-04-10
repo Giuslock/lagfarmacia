@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.farmasoft.controller.ElencoFarmaciPazienteController">
+   <children>
+      <Label prefHeight="73.0" prefWidth="199.0" text="  Elenco Farmaci:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
+      <TableView fx:id="elencoFarmaciTable" prefHeight="370.0" prefWidth="700.0">
+         <columns>
+            <TableColumn fx:id="codiceTableColumn" prefWidth="89.0" text="Codice" />
+            <TableColumn fx:id="nomeTableColumn" prefWidth="113.0" text="Nome" />
+            <TableColumn fx:id="casaTableColumn" prefWidth="192.0" text="Casa Farmaceutica" />
+            <TableColumn fx:id="principioTableColumn" prefWidth="146.0" text="Principio attivo" />
+            <TableColumn fx:id="statoTableColumn" prefWidth="159.0" text="Stato" />
+         </columns>
+      </TableView>
+   </children>
+</VBox>

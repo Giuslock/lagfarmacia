@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.farmasoft.controller.PrescrizioniMedicoController">
+   <children>
+      <Label prefHeight="65.0" prefWidth="268.0" text="  Elenco Prescrizioni:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <GridPane prefHeight="34.0" prefWidth="684.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="109.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="447.0" minWidth="10.0" prefWidth="242.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.0" minWidth="10.0" prefWidth="57.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.0" minWidth="10.0" prefWidth="377.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="cercaButton" mnemonicParsing="false" onAction="#cercaPrescrizioneAction" onMouseClicked="#cercaPrescrizioneAction" text="Cerca" GridPane.rowIndex="1" />
+            <TextField fx:id="cercaText" promptText="codice..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="errorLab" prefHeight="19.0" prefWidth="357.0" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <TableView fx:id="elencoPrescrizioniTable" prefHeight="402.0" prefWidth="700.0">
+        <columns>
+          <TableColumn fx:id="numeroTableColumn" prefWidth="54.33333206176758" text="Numero" visible="false" />
+          <TableColumn fx:id="dataTableColumn" prefWidth="89.66666793823242" text="Data" />
+            <TableColumn fx:id="farmaco1TableColumn" prefWidth="87.0" text="Farmaco" />
+            <TableColumn fx:id="qta1TableColumn" prefWidth="63.0" text="Q.tà" />
+            <TableColumn fx:id="farmaco2TableColumn" prefWidth="98.33334350585938" text="Farmaco" />
+            <TableColumn fx:id="qta2TableColumn" prefWidth="122.66665649414062" text="Q.tà" />
+            <TableColumn fx:id="pazienteTableColumn" prefWidth="91.33331298828125" text="Paziente" />
+            <TableColumn fx:id="azioniTableColumn" prefWidth="145.0" text="Azioni" />
+        </columns>
+      </TableView>
+      <GridPane prefHeight="32.0" prefWidth="694.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="dataLab" prefHeight="34.0" prefWidth="83.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="farmaco1Lab" prefHeight="31.0" prefWidth="87.0" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="qta1Lab" prefHeight="31.0" prefWidth="87.0" GridPane.columnIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="farmaco2Lab" prefHeight="31.0" prefWidth="87.0" GridPane.columnIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="qta2Lab" prefHeight="31.0" prefWidth="87.0" GridPane.columnIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="pazienteLab" prefHeight="31.0" prefWidth="87.0" GridPane.columnIndex="5">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="modificaButton" mnemonicParsing="false" onAction="#modificaCercataAction" onMouseClicked="#modificaCercataAction" prefHeight="25.0" prefWidth="86.0" text="Modifica" GridPane.columnIndex="6" />
+         </children>
+      </GridPane>
+      <Button fx:id="aggiungiButton" mnemonicParsing="false" onAction="#aggiungiAction" onMouseClicked="#aggiungiAction" prefHeight="25.0" prefWidth="89.0" text="Aggiungi">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>
