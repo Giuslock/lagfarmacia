@@ -7,6 +7,13 @@ import org.univaq.oop.domain.Prescription;
 import java.util.List;
 
 public class FilePrescriptionServiceImpl implements PrescriptionService {
+
+    private String prescrizioniFileName;
+
+    public FilePrescriptionServiceImpl(String prescrizioniFileName) {
+        this.prescrizioniFileName = prescrizioniFileName;
+    }
+
     @Override
     public List<Prescription> findAllPrescrizioni() throws BusinessException {
         return null;

@@ -25,7 +25,7 @@ public class FileUtenteServiceImpl implements UserService {
             FileData fileData = Utility.readAllRows(userFileName);
             for (String[] colonne : fileData.getRighe()) {
                 if (colonne[3].equals(username) && colonne[4].equals(password)) {
-                    User utente = null;
+                    User utente = new User();
                     // colonna[3] identifica il ruolo
                     switch (colonne[5]) {
                         case "ADMIN":

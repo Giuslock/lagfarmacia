@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.MedicineService;
+import org.univaq.oop.business.impl.file.FileMedicineServiceImpl;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
@@ -35,10 +36,10 @@ public class FarmaciController implements Initializable, DataInitializable<User>
     private TableColumn<Medicine, String> codiceTableColumn;
 
     @FXML
-    private TableColumn<Medicine, String> minimumTableColumn;
+    private TableColumn<Medicine, Integer> minimumTableColumn;
 
     @FXML
-    private TableColumn<Medicine, String> quantityTableColumn;
+    private TableColumn<Medicine, Integer> quantityTableColumn1;
 
     @FXML
     private TableColumn<Medicine, String> statoTableColumn;
@@ -53,23 +54,14 @@ public class FarmaciController implements Initializable, DataInitializable<User>
     private MedicineService farmacoService;
 
 
-    @Override
-    public void initializeData(User user) {
-        try {
-            List<Medicine> farmaci = farmacoService.findAllFarmaci();
-            ObservableList<Medicine> farmaciData = FXCollections.observableArrayList(farmaci);
-            elencoFarmaciTable.setItems(farmaciData);
-        } catch (BusinessException e) {
-            dispatcher.renderError(e);
-        }
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        codiceTableColumn.setCellValueFactory(new PropertyValueFactory<>("codice"));
+        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        codiceTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         minimumTableColumn.setCellValueFactory(new PropertyValueFactory<>("minimum"));
-        quantityTableColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        quantityTableColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("statoFarmaco"));
         azioniTableColumn.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn.setCellValueFactory(
@@ -89,6 +81,18 @@ public class FarmaciController implements Initializable, DataInitializable<User>
                     }
                 });
     }
+
+    @Override
+    public void initializeData(User user) {
+        try {
+            List<Medicine> farmaci = farmacoService.findAllFarmaci();
+            ObservableList<Medicine> farmaciData = FXCollections.observableArrayList(farmaci);
+            elencoFarmaciTable.setItems(farmaciData);
+        } catch (BusinessException e) {
+            dispatcher.renderError(e);
+        }
+    }
+
 
 
     public void aggiungiAction(ActionEvent event) {

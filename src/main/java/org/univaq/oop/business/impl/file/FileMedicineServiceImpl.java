@@ -6,14 +6,17 @@ import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Prescription;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileMedicineServiceImpl implements MedicineService {
 
     private String farmacoFileName;
+
+
+    public FileMedicineServiceImpl(String farmacoFileName) {
+        this.farmacoFileName = farmacoFileName;
+    }
 
     @Override
     public List<Medicine> findAllFarmaci() throws BusinessException {
@@ -35,6 +38,7 @@ public class FileMedicineServiceImpl implements MedicineService {
             e.printStackTrace();
             throw new BusinessException(e);
         }
+        System.out.println("eccoci");
         return result;
     }
 
