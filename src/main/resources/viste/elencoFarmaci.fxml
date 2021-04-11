@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -8,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.farmasoft.controller.FarmaciController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciController">
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="  Elenco Farmaci:">
          <font>
@@ -25,9 +29,9 @@
          <columns>
             <TableColumn fx:id="codiceTableColumn" prefWidth="89.0" text="Codice" />
             <TableColumn fx:id="nomeTableColumn" prefWidth="93.0" text="Nome" />
-            <TableColumn fx:id="casaTableColumn" prefWidth="158.0" text="Casa Farmaceutica" />
-            <TableColumn fx:id="principioTableColumn" prefWidth="124.0" text="Principio attivo" />
             <TableColumn fx:id="statoTableColumn" prefWidth="118.0" text="Stato" />
+            <TableColumn fx:id="minimumTableColumn" prefWidth="118.0" text="Minimum" />
+            <TableColumn fx:id="quantityTableColumn1" prefWidth="118.0" text="ActualQuantity" />
             <TableColumn fx:id="azioniTableColumn" prefWidth="117.0" text="Azioni" />
          </columns>
       </TableView>

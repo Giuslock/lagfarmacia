@@ -19,6 +19,9 @@ public class Medicine implements Serializable {
 
     private String medicineStatus;
 
+    public Medicine() {
+    }
+
     public Medicine(String name, String description, int minimum, int quantity) {
         this.name = name;
         this.description = description;
@@ -79,13 +82,13 @@ public class Medicine implements Serializable {
         return outOfStock;
     }
 
-    public void setOutOfStock(boolean outOfStock) {
+    public void setOutOfStock() {
         if (quantity <= minimum) this.outOfStock = true;
         else this.outOfStock = false;
     }
 
     public void setStatoFarmaco() {
-        if (outOfStock) this.medicineStatus = "RUNNING OUT";
+        if (this.outOfStock) this.medicineStatus = "RUNNING OUT";
         else this.medicineStatus = "AVAILABLE";
     }
 

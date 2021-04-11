@@ -1,5 +1,5 @@
 5
-1,paz,paz,paziente,katiuscia,pellone,pllksc00,2000-10-26,123456
-2,admin,admin,amministratore,francesca,controguerra,ctrfrn00,2000-06-25,654321
-3,med,med,medico,giuseppe,rossi,rsigsp90,1990-10-10,1598423
-4,farma,farma,farmacista,marta,verdi,vrdmrt88,1988-12-12,3548649
+1,gianni,cavallo,patient,secret,PATIENT,gnncvll111
+2,ammi,nistra,admin,secret,ADMIN,admn222
+3,med,ico,doctor,secret,DOCTOR,dctr333
+4,farma,cista,pharmacist,secret,PHARMACIST,phrmcst444
