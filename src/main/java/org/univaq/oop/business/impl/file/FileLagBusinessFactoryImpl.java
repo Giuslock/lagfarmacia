@@ -6,6 +6,7 @@ import org.univaq.oop.business.PrescriptionService;
 import org.univaq.oop.business.UserService;
 
 public class FileLagBusinessFactoryImpl extends LagBusinessFactory {
+
     @Override
     public UserService getUtenteService() {
         return null;

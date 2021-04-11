@@ -65,6 +65,7 @@ public class RegisterController implements Initializable, DataInitializable<User
         medicoRadioButton.setSelected(true);
 
         pazienteRadioButton.setToggleGroup(group);
+        farmacistaRadioButton.setToggleGroup(group);
 
         iscrivitiButton.disableProperty().bind(usernameIscrivitiText.textProperty().isEmpty()
                 .or(passwordIscrivitiText.textProperty().isEmpty()
@@ -76,23 +77,29 @@ public class RegisterController implements Initializable, DataInitializable<User
     @FXML
     public void iscrivitiAction(ActionEvent event) throws BusinessException, ViewException {
         //se è selezionato il radio button Medico, crea un utente medico
-        if (medicoRadioButton.isSelected()) {
-            User utente = new User();
-            utente.setName(nomeText.getText());
-            utente.setSurname(cognomeText.getText());
-            utente.setFiscalCode(codiceFiscaleText.getText());
-            utente.setUsername(usernameIscrivitiText.getText());
-            utente.setPassword(passwordIscrivitiText.getText());
+
+        User utente = new User();
+        utente.setName(nomeText.getText());
+        utente.setSurname(cognomeText.getText());
+        utente.setFiscalCode(codiceFiscaleText.getText());
+        utente.setUsername(usernameIscrivitiText.getText());
+        utente.setPassword(passwordIscrivitiText.getText());
+        if (medicoRadioButton.isSelected())
             utente.setRole(Role.DOCTOR);
-            try {
-                //aggiunge l'utente nell'elenco degli utenti e torna alla schermata di login
-                utenteService.addUser(utente);
-                dispatcher.logout();
-            } catch (BusinessException e) {
-                e.printStackTrace();
-            }
+        else if (farmacistaRadioButton.isSelected())
+            utente.setRole(Role.PHARMACIST);
+        else
+            utente.setRole(Role.PATIENT);
+        try {
+            //aggiunge l'utente nell'elenco degli utenti e torna alla schermata di login
+            utenteService.addUser(utente);
+            dispatcher.logout();
+        } catch (BusinessException e) {
+            e.printStackTrace();
         }
     }
+
+
     @FXML
     public void tornaHomeAction(ActionEvent event) throws ViewException {
         dispatcher.logout();
