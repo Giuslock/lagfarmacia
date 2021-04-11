@@ -33,12 +33,13 @@ public class FileMedicineServiceImpl implements MedicineService {
                 farmaco.setOutOfStock();
                 farmaco.setStatoFarmaco();
                 result.add(farmaco);
+
             }
         } catch (IOException e){
             e.printStackTrace();
             throw new BusinessException(e);
         }
-        System.out.println("eccoci");
+
         return result;
     }
 

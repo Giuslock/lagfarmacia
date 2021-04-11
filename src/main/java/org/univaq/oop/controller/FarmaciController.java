@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.MedicineService;
-import org.univaq.oop.business.impl.file.FileMedicineServiceImpl;
+import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
@@ -54,15 +54,22 @@ public class FarmaciController implements Initializable, DataInitializable<User>
     private MedicineService farmacoService;
 
 
+    public FarmaciController() {
+        dispatcher = ViewDispatcher.getInstance();
+        LagBusinessFactory factory = LagBusinessFactory.getInstance();
+        farmacoService = factory.getFarmacoService();
+    }
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         codiceTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         minimumTableColumn.setCellValueFactory(new PropertyValueFactory<>("minimum"));
         quantityTableColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("statoFarmaco"));
+        statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("medicineStatus"));
         azioniTableColumn.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Medicine, Button>, ObservableValue<Button>>() {
@@ -79,8 +86,9 @@ public class FarmaciController implements Initializable, DataInitializable<User>
                         );
                         return new SimpleObjectProperty<Button>(farmaciButton);
                     }
+
                 });
-    }
+        }
 
     @Override
     public void initializeData(User user) {
