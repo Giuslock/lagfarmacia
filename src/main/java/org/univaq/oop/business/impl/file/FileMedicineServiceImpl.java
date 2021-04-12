@@ -59,7 +59,7 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public void deleteFarmaco(int codice) {
+    public void deleteFarmaco(Long codice) {
 
     }
 

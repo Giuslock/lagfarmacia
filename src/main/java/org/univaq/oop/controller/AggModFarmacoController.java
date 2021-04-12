@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.view.ViewDispatcher;
@@ -24,7 +25,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     private TextField mimimumtext;
 
     @FXML
-    private TextField quantitytext
+    private TextField quantitytext;
 
     @FXML
     private TextField outofstocktext;
@@ -43,8 +44,8 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     public AggModFarmacoController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();
         //farmacoService = new RAMFarmacoServiceImpl();
-        FarmasoftBusinessFactory factory = FarmasoftBusinessFactory.getInstance();
-        farmacoService = factory.getFarmacoService();
+        LagBusinessFactory factory = LagBusinessFactory.getInstance();
+        medicineService = factory.getFarmacoService();
     }
 
     @Override
@@ -57,7 +58,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
         this.nametext.setText(medicine.getName());
         this.descriptiontext.setText(medicine.getDescription());
 
-        this.quantitytext.setText(medicine.getMinimum());
+        this.quantitytext.setText(String.valueOf(medicine.getMinimum());
         this.mimimumtext.setText(String.valueOf(medicine.getMinimum()));
         this.outofstocktext.setText(String.valueOf(medicine.getMedicineStatus()));
     }
@@ -70,7 +71,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
             medicine.setName(nametext.getText());
             medicine.setDescription(descriptiontext.getText());
 
-            medicine.setQuantity(quantitytext.getText());
+            medicine.setQuantity(Integer.parseInt(quantitytext.getText()));
             medicine.setMinimum(Integer.parseInt(mimimumtext.getText()));
             medicine.setOutOfStock(Integer.parseInt(outofstocktext.getText()));
 
@@ -87,7 +88,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     @FXML
     public void eliminaAction(ActionEvent event) throws BusinessException {
-        int id  = medicine.getId();
+        Long id  = medicine.getId();
         medicineService.deleteFarmaco(id);
     }
 }

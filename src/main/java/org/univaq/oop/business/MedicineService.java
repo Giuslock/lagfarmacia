@@ -16,7 +16,7 @@ public interface MedicineService {
 
 	Medicine findFarmacoByCodice(Integer codice) throws BusinessException;
 
-	void deleteFarmaco(int codice);
+	void deleteFarmaco(Long codice);
 
 	void aggiornaQtaFarmaco(Prescription prescrizione) throws BusinessException;//, NonCiSonoAbbastanzaFarmaci, FarmacoNonTrovato;
 
