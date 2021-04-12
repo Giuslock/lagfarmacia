@@ -5,7 +5,9 @@ import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Prescription;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,22 +46,66 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public void addFarmaco(Medicine farmaco) throws BusinessException {
+    public void addFarmaco(Medicine medicine) throws BusinessException {
+        try {
+            FileData fileData = Utility.readAllRows(farmacoFileName);
+         try (PrintWriter writer = new PrintWriter(new File(farmacoFileName))) {
+             long counter = fileData.getContatore();
+             writer.println((counter + 1));
+             for (String[] righe : fileData.getRighe()) {
+                 writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
+             }
+             StringBuilder row = new StringBuilder();
+             row.append(counter);
+             row.append(Utility.SEPARATORE_COLONNA);
+             row.append(medicine.getName().toString());
+             row.append(Utility.SEPARATORE_COLONNA);
+             row.append(medicine.getDescription());
+             row.append(Utility.SEPARATORE_COLONNA);
+             row.append(medicine.getQuantity());
+             row.append(Utility.SEPARATORE_COLONNA);
+             row.append(medicine.getMinimum());
+             writer.println(row.toString());
+         }
+         } catch (IOException e ) {
+             e.printStackTrace();
+             throw new BusinessException(e)
+
+         }
+
+
 
     }
 
     @Override
-    public void updateFarmaco(Medicine farmaco) throws BusinessException {
+    public void updateFarmaco(Medicine medicine) throws BusinessException {
+        try {
+            FileData fileData = Utility.readAllRows(farmacoFileName);
+            try (PrintWriter writer = new PrintWriter(new File(farmacoFileName))) {
+                writer.println(fileData.getContatore());
+                for (String[] righe : fileData.getRighe()) {
+                    if (Long.parseLong(righe[0]) == medicine.getId()) {
+                        StringBuilder row = new StringBuilder();
+                        row.append(medicine.getName());
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(medicine.getDescription().toString());
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(medicine.getQuantity());
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(medicine.getMinimum());
+                        row.append(Utility.SEPARATORE_COLONNA);
 
-    }
+
+                    }
 
     @Override
-    public Medicine findFarmacoByCodice(Integer codice) throws BusinessException {
+    public Medicine findMedicinebyid(Long id) throws BusinessException {
+
         return null;
     }
 
     @Override
-    public void deleteFarmaco(Long codice) {
+    public void deleteFarmaco(Long ) {
 
     }
 
