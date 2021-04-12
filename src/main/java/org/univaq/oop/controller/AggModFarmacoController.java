@@ -43,7 +43,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     public AggModFarmacoController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();
-        //farmacoService = new RAMFarmacoServiceImpl();
+
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         medicineService = factory.getFarmacoService();
     }
@@ -58,7 +58,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
         this.nametext.setText(medicine.getName());
         this.descriptiontext.setText(medicine.getDescription());
 
-        this.quantitytext.setText(String.valueOf(medicine.getMinimum());
+        this.quantitytext.setText(String.valueOf(medicine.getMinimum()));
         this.mimimumtext.setText(String.valueOf(medicine.getMinimum()));
         this.outofstocktext.setText(String.valueOf(medicine.getMedicineStatus()));
     }
@@ -73,10 +73,10 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
             medicine.setQuantity(Integer.parseInt(quantitytext.getText()));
             medicine.setMinimum(Integer.parseInt(mimimumtext.getText()));
-            medicine.setOutOfStock(Integer.parseInt(outofstocktext.getText()));
+            //medicine.setOutOfStock(Integer.parseInt(outofstocktext.getText()));
 
             if( medicine.getId() == null) {
-                MedicineService.addFarmaco(medicine);
+                //MedicineService.addFarmaco(medicine);
             }
             else {
                 medicineService.updateFarmaco(medicine);
@@ -93,4 +93,4 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     }
 }
 
-}
+
