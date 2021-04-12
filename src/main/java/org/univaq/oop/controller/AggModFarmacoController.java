@@ -70,14 +70,18 @@ public class AggModFarmacoController implements Initializable, DataInitializable
         try {
             medicine.setName(nametext.getText());
             medicine.setDescription(descriptiontext.getText());
+           //System.out.println("cavallo");
 
             medicine.setQuantity(Integer.parseInt(quantitytext.getText()));
+           // System.out.println("cavallo");
             medicine.setMinimum(Integer.parseInt(mimimumtext.getText()));
             medicine.setOutOfStock();
+           // System.out.println("cavallo");
             medicine.setStatoFarmaco();
             if( medicine.getId() == null) {
                 medicineService.addFarmaco(medicine);
             }
+
             else {
                 medicineService.updateFarmaco(medicine);
             }
