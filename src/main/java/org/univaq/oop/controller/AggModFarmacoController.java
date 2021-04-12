@@ -58,7 +58,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
         this.nametext.setText(medicine.getName());
         this.descriptiontext.setText(medicine.getDescription());
 
-        this.quantitytext.setText(String.valueOf(medicine.getMinimum());
+        this.quantitytext.setText(String.valueOf(medicine.getMinimum()));
         this.mimimumtext.setText(String.valueOf(medicine.getMinimum()));
         this.outofstocktext.setText(String.valueOf(medicine.getMedicineStatus()));
     }
@@ -66,17 +66,17 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     //al click del tasto salva
     @FXML
-    public void salvaAction(ActionEvent event) throws ViewException {
+    public void salvaAction(ActionEvent event)  {
         try {
             medicine.setName(nametext.getText());
             medicine.setDescription(descriptiontext.getText());
 
             medicine.setQuantity(Integer.parseInt(quantitytext.getText()));
             medicine.setMinimum(Integer.parseInt(mimimumtext.getText()));
-            medicine.setOutOfStock(Integer.parseInt(outofstocktext.getText()));
-
+            medicine.setOutOfStock();
+            medicine.setStatoFarmaco();
             if( medicine.getId() == null) {
-                MedicineService.addFarmaco(medicine);
+                medicineService.addFarmaco(medicine);
             }
             else {
                 medicineService.updateFarmaco(medicine);
@@ -93,4 +93,4 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     }
 }
 
-}
+

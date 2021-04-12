@@ -69,7 +69,7 @@ public class FileMedicineServiceImpl implements MedicineService {
          }
          } catch (IOException e ) {
              e.printStackTrace();
-             throw new BusinessException(e)
+             throw new BusinessException(e);
 
          }
 
@@ -110,7 +110,7 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public void aggiornaQtaFarmaco(Prescription prescrizione) throws BusinessException {
+    public void aggiornaQtaFarmaco(Prescription prescription) throws BusinessException {
 
     }
 
