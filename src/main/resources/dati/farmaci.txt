@@ -1,4 +1,4 @@
-16
+12
 4,buff,buffone,5,10
 5,cavallo,aa,1,2
 6,cavallo,aa,1,2
@@ -6,8 +6,5 @@
 8,aaaazz,saadsd,5,4
 9,asdsda,sdasda,5,10
 10,aazz,ddssd,2,10
-11,pof,pof,10,12
-12,cavallo,layout,2,10
-13,pof,poooooooffete,2,1
-14,aaaaa,dsdsdsdssd,2,4
-15,sdaasdasd,dfsafdsfds,4,2
+11,cavallo,layout,2,10
+12,pof,poooooooffete,2,1

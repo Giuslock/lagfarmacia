@@ -116,6 +116,28 @@ public class FileMedicineServiceImpl implements MedicineService {
 
     @Override
     public void deleteFarmaco(Long codice) {
+        try {
+        FileData fileData = Utility.readAllRows(farmacoFileName);
+        try (PrintWriter writer = new PrintWriter(new File(farmacoFileName))) {
+            //decremento contatore e scrivo il nuovo numero
+            writer.println(fileData.getContatore()-1);
+            //uso una variabile booleana per sapere se ho trovato la riga da eliminare e poi scrivo le righe con il numero aggiornato
+            boolean trovato = false;
+            for (String[] colonne : fileData.getRighe()) {
+
+                if (colonne[0].equals(String.valueOf(codice))) {
+                    trovato = true;
+                    continue;
+                }
+                if (trovato) {
+                    colonne[0] = Integer.toString(Integer.parseInt(colonne[0]) - 1);
+                }
+                writer.println(String.join(Utility.SEPARATORE_COLONNA, colonne));
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 
     }
 
