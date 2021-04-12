@@ -6,7 +6,9 @@ import org.univaq.oop.business.UserService;
 import org.univaq.oop.domain.Role;
 import org.univaq.oop.domain.User;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -45,9 +47,8 @@ public class FileUtenteServiceImpl implements UserService {
                     }
                     if (utente != null) {
                         utente.setId((long) Integer.parseInt(colonne[0]));
-                        utente.setUsername(username); //colonne[1]
-                        utente.setPassword(password); //colonne[2]
-                        //in colonne[3] c'è il ruolo
+                        utente.setUsername(username);
+                        utente.setPassword(password);
                         utente.setName(colonne[1]);
                         utente.setSurname(colonne[2]);
                         utente.setFiscalCode(colonne[6]);
@@ -76,6 +77,43 @@ public class FileUtenteServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) throws BusinessException {
+
+        try{
+            FileData fileData = Utility.readAllRows(userFileName);
+            try (PrintWriter writer = new PrintWriter(new File(userFileName))){
+                long contatore = fileData.getContatore();
+                writer.println((contatore + 1));
+                for (String[] righe : fileData.getRighe()) {
+                    writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
+                }
+                StringBuilder row = new StringBuilder();
+                row.append(contatore);
+                row.append(Utility.SEPARATORE_COLONNA);
+                row.append(user.getName());
+                row.append(Utility.SEPARATORE_COLONNA);
+                row.append(user.getSurname());
+                row.append(Utility.SEPARATORE_COLONNA);
+                row.append(user.getUsername());
+                row.append(Utility.SEPARATORE_COLONNA);
+                row.append(user.getPassword());
+                row.append(Utility.SEPARATORE_COLONNA);
+                if(user.getRole().equals(Role.ADMIN)) row.append("ADMIN");
+                if(user.getRole().equals(Role.PHARMACIST)) row.append("PHARMACIST");
+                if(user.getRole().equals(Role.PATIENT)) row.append("PATIENT");
+                if(user.getRole().equals(Role.DOCTOR)) row.append("DOCTOR");
+                row.append(Utility.SEPARATORE_COLONNA);
+                row.append(user.getFiscalCode());
+                row.append(Utility.SEPARATORE_COLONNA);
+
+
+
+                writer.println(row.toString());
+            } //chiude try interno
+        }catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException(e);
+        }
+
 
     }
 
