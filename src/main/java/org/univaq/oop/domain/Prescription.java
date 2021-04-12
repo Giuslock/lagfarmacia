@@ -4,7 +4,13 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Prescription implements Serializable {
-
+    // una volta che ha cliccato su una prescrizione ti devi andare a cercare tutti i farmaci
+    // nel file prescrizione_farmaco.txt che hanno come idPrescrizione la prescrizione selezionata
+    // prescrizione_farmaco.txt
+    // id, idPrescrizione, idMedicinale, quantita'
+    // 1. Prendi gli id dei medicinali della prescrizione selezionata
+    // 2. iteri sugli id dei medicinali e ti vai a prendere le info complete dal file medicinali.txt
+    // 3. popoli la mappa medicines
     private Long id;
 
     private boolean evaded;

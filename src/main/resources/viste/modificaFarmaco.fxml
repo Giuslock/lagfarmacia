@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.AggModFarmacoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.AggModFarmacoController">
    <children>
       <Label prefHeight="44.0" prefWidth="205.0" text="      Medicine" textAlignment="CENTER">
          <font>
@@ -52,21 +56,16 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="17.0" prefWidth="180.0" text="    Out of Stock: " GridPane.rowIndex="4">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
                   <TextField fx:id="nametext" GridPane.columnIndex="1" />
                   <TextField fx:id="descriptiontext" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="mimimumtext" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="outofstocktext" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Button fx:id="salvaButton" mnemonicParsing="false" onAction="#salvaAction" onMouseClicked="#salvaAction" prefHeight="25.0" prefWidth="90.0" text="Salva" GridPane.rowIndex="5">
+
+                  <Button fx:id="salvaButton" mnemonicParsing="false" onAction="#salvaAction"   prefHeight="25.0" prefWidth="90.0" text="Salva" GridPane.rowIndex="5">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="eliminaButton" mnemonicParsing="false" onAction="#eliminaAction" onMouseClicked="#eliminaAction" prefHeight="30.0" prefWidth="82.0" text="Elimina" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Button fx:id="eliminaButton" mnemonicParsing="false" onAction="#eliminaAction"  prefHeight="30.0" prefWidth="82.0" text="Elimina" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font size="13.0" />
                      </font>

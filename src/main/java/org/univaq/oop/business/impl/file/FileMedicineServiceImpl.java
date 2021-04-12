@@ -58,14 +58,14 @@ public class FileMedicineServiceImpl implements MedicineService {
                 StringBuilder row = new StringBuilder();
                 row.append(counter);
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(medicine.getName().toString());
+                row.append(medicine.getName());
                 row.append(Utility.SEPARATORE_COLONNA);
                 row.append(medicine.getDescription());
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(medicine.getQuantity());
-                row.append(Utility.SEPARATORE_COLONNA);
                 row.append(medicine.getMinimum());
-                writer.println(row.toString());
+                row.append(Utility.SEPARATORE_COLONNA);
+                row.append(medicine.getQuantity());
+                writer.println(row);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,16 +87,17 @@ public class FileMedicineServiceImpl implements MedicineService {
                     if (Long.parseLong(righe[0]) == medicine.getId())
                     {
                         StringBuilder row = new StringBuilder();
+                        row.append(medicine.getId());
+                        row.append(Utility.SEPARATORE_COLONNA);
                         row.append(medicine.getName());
                         row.append(Utility.SEPARATORE_COLONNA);
                         row.append(medicine.getDescription());
-
                         row.append(Utility.SEPARATORE_COLONNA);
                         row.append(medicine.getQuantity());
                         row.append(Utility.SEPARATORE_COLONNA);
-                        System.out.println("cavallo");
                         row.append(medicine.getMinimum());
                         row.append(Utility.SEPARATORE_COLONNA);
+                        writer.println(row);
                     } else {
                         writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
                     }

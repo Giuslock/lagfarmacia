@@ -2,9 +2,11 @@ package org.univaq.oop.business.impl.file;
 
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.PrescriptionService;
+import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Prescription;
 
 import java.util.List;
+import java.util.Map;
 
 public class FilePrescriptionServiceImpl implements PrescriptionService {
 
@@ -47,5 +49,10 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
     @Override
     public void deletePrescrizione(int codice) {
 
+    }
+
+    @Override
+    public Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId) {
+        return null;
     }
 }
