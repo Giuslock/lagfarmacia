@@ -81,8 +81,8 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
 
     }
 
-    public void evadiAction(ActionEvent event) {
-        Medicine farmacoVuoto = new Medicine();
+    public void evadiAction() {
+        farmacoPrescrizioneService.evadePrescription(prescription);
         dispatcher.renderView("modificaFarmaco", farmacoVuoto);
     }
 }

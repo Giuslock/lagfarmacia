@@ -2,6 +2,7 @@ package org.univaq.oop.business.impl.file;
 
 import org.univaq.oop.business.FarmacoPrescrizioneService;
 import org.univaq.oop.domain.Medicine;
+import org.univaq.oop.domain.Prescription;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -48,4 +49,9 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
             e.printStackTrace();
         }
     return result;}
+
+    @Override
+    public void evadePrescription(Prescription prescription) {
+
+    }
 }
