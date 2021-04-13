@@ -96,10 +96,10 @@ public class FileMedicineServiceImpl implements MedicineService {
                         row.append(Utility.SEPARATORE_COLONNA);
                         row.append(medicine.getDescription());
                         row.append(Utility.SEPARATORE_COLONNA);
-                        row.append(medicine.getQuantity());
-                        row.append(Utility.SEPARATORE_COLONNA);
                         row.append(medicine.getMinimum());
                         row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(medicine.getQuantity());
+                        
                         writer.println(row);
                     } else {
                         writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
