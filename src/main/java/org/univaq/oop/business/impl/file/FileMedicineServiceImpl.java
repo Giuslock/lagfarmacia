@@ -99,7 +99,6 @@ public class FileMedicineServiceImpl implements MedicineService {
                         row.append(medicine.getMinimum());
                         row.append(Utility.SEPARATORE_COLONNA);
                         row.append(medicine.getQuantity());
-                        
                         writer.println(row);
                     } else {
                         writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
@@ -137,6 +136,7 @@ public class FileMedicineServiceImpl implements MedicineService {
                 }
                 writer.println(String.join(Utility.SEPARATORE_COLONNA, colonne));
             }
+
         }
     } catch (IOException e) {
         e.printStackTrace();

@@ -22,7 +22,7 @@ public interface PrescriptionService {
 
 	void deletePrescrizione(int codice);
 
-	Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId);
+
 
 	//Prescription findPrescrizioneByNumeroEMedico(int num, int id) throws BusinessException, PrescrizioneNonTrovata;
 
