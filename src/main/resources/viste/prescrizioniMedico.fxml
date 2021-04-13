@@ -4,14 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.farmasoft.controller.PrescrizioniMedicoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
    <children>
       <Label prefHeight="65.0" prefWidth="268.0" text="  Elenco Prescrizioni:">
          <font>
@@ -31,8 +30,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="cercaButton" mnemonicParsing="false" onAction="#cercaPrescrizioneAction" onMouseClicked="#cercaPrescrizioneAction" text="Cerca" GridPane.rowIndex="1" />
-            <TextField fx:id="cercaText" promptText="codice..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="errorLab" prefHeight="19.0" prefWidth="357.0" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font size="13.0" />
@@ -43,13 +40,10 @@
       <TableView fx:id="elencoPrescrizioniTable" prefHeight="402.0" prefWidth="700.0">
         <columns>
           <TableColumn fx:id="numeroTableColumn" prefWidth="54.33333206176758" text="Numero" visible="false" />
-          <TableColumn fx:id="dataTableColumn" prefWidth="89.66666793823242" text="Data" />
-            <TableColumn fx:id="farmaco1TableColumn" prefWidth="87.0" text="Farmaco" />
-            <TableColumn fx:id="qta1TableColumn" prefWidth="63.0" text="Q.tà" />
-            <TableColumn fx:id="farmaco2TableColumn" prefWidth="98.33334350585938" text="Farmaco" />
-            <TableColumn fx:id="qta2TableColumn" prefWidth="122.66665649414062" text="Q.tà" />
+            <TableColumn fx:id="idTableColumn" prefWidth="89.66666793823242" text="Numero" />
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="145.0" text="Descrizione" />
             <TableColumn fx:id="pazienteTableColumn" prefWidth="91.33331298828125" text="Paziente" />
-            <TableColumn fx:id="azioniTableColumn" prefWidth="145.0" text="Azioni" />
+            <TableColumn fx:id="azioniTableColumn1" prefWidth="145.0" text="Azioni" />
         </columns>
       </TableView>
       <GridPane prefHeight="32.0" prefWidth="694.0">
