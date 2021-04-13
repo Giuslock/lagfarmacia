@@ -9,6 +9,8 @@ public class MedicinePrescription {
 
     private int quantity;
 
+    public MedicinePrescription() {
+    }
 
     public MedicinePrescription(Long id, String name, int quantity) {
         this.id = id;

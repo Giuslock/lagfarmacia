@@ -71,8 +71,5 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
 
     }
 
-    @Override
-    public Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId) {
-        return null;
-    }
+
 }

@@ -95,6 +95,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     public void eliminaAction() throws BusinessException {
         Long id  = medicine.getId();
         medicineService.deleteFarmaco(id);
+        dispatcher.renderView("elencoFarmaci",utente);
     }
 }
 

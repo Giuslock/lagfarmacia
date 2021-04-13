@@ -13,5 +13,7 @@ public abstract class LagBusinessFactory {
     public abstract UserService getUtenteService();
     public abstract PrescriptionService getPrescrizioneService();
     public abstract MedicineService getFarmacoService();
+    public abstract FarmacoPrescrizioneService getFarmacoPrescrizioneService();
+
 
 }
