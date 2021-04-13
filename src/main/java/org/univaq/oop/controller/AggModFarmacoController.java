@@ -56,6 +56,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
         this.medicine = medicine;
         this.nametext.setText(medicine.getName());
         this.descriptiontext.setText(medicine.getDescription());
+
         this.quantitytext.setText(String.valueOf(medicine.getQuantity()));
         this.mimimumtext.setText(String.valueOf(medicine.getMinimum()));
 
@@ -76,6 +77,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
             if( medicine.getId() == null) {
                 medicineService.addFarmaco(medicine);
+
             }
 
             else {

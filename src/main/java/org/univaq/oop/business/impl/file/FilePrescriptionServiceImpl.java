@@ -5,6 +5,10 @@ import org.univaq.oop.business.PrescriptionService;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Prescription;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +22,23 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public List<Prescription> findAllPrescrizioni() throws BusinessException {
-        return null;
+        List<Prescription> result = new ArrayList<>();
+        try{
+            FileData fileData = Utility.readAllRows(prescrizioniFileName);
+            for(String[] colonne : fileData.getRighe()){
+                Prescription prescrizione = new Prescription();
+                prescrizione.setId((long) Integer.parseInt(colonne[0]));
+                prescrizione.setEvaded(false);
+                prescrizione.setDescription(colonne[2]);
+                prescrizione.setDoctorId(Integer.parseInt(colonne[3]));
+                prescrizione.setUserId(Integer.parseInt(colonne[4]));
+                result.add(prescrizione);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+            throw new BusinessException(e);
+        }
+        return result;
     }
 
     @Override

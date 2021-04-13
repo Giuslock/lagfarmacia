@@ -7,7 +7,10 @@ import org.univaq.oop.domain.Prescription;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.io.PrintWriter;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,7 +161,26 @@ public class FileMedicineServiceImpl implements MedicineService {
 
     @Override
     public List<Medicine> findFarmaciInEsaurimento() throws BusinessException {
-        return null;
+        List<Medicine> result = new ArrayList<>();
+        try{
+            FileData fileData = Utility.readAllRows(farmacoFileName);
+            for(String[] colonne : fileData.getRighe()){
+                Medicine farmaco = new Medicine();
+                farmaco.setId((long) Integer.parseInt(colonne[0]));
+                farmaco.setName(colonne[1]);
+                farmaco.setDescription(colonne[2]);
+                farmaco.setMinimum(Integer.parseInt(colonne[3]));
+                farmaco.setQuantity(Integer.parseInt(colonne[4]));
+                farmaco.setOutOfStock();
+                farmaco.setStatoFarmaco();
+                if (farmaco.getMedicineStatus().equals("RUNNING OUT"))
+                    result.add(farmaco);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+            throw new BusinessException(e);
+        }
+        return result;
     }
 }
 

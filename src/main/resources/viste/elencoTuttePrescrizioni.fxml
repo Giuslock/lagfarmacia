@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univaq.disim.oop.farmasoft.controller.PrescrizioniFarmacistaController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniFarmacistaController">
    <children>
       <Label prefHeight="65.0" prefWidth="268.0" text="Prescrizioni:">
          <font>
@@ -16,16 +20,13 @@
       <TableView fx:id="elencoPrescrizioniTable" prefHeight="359.0" prefWidth="622.0">
         <columns>
           <TableColumn fx:id="numeroTableColumn" prefWidth="59.0" text="Numero" />
-          <TableColumn fx:id="dataTableColumn" prefWidth="87.0" text="Data" />
-            <TableColumn fx:id="farmaco1TableColumn" prefWidth="77.0" text="Farmaco" />
-            <TableColumn fx:id="qta1TableColumn" prefWidth="65.0" text="Q.tà" />
-            <TableColumn fx:id="farmaco2TableColumn" prefWidth="81.0" text="Farmaco" />
-            <TableColumn fx:id="qta2TableColumn" prefWidth="61.0" text="Q.tà" />
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="112.0" text="Description" />
             <TableColumn fx:id="medicoTableColumn" prefWidth="103.0" text="Medico" />
             <TableColumn fx:id="pazienteTableColumn" text="Paziente" />
             <TableColumn fx:id="azioniTableColumn" prefWidth="86.0" text="Azioni" />
         </columns>
       </TableView>
+      <Button fx:id="dettagliButton" mnemonicParsing="false" text="Button" />
       <Label fx:id="errorText" prefHeight="79.0" prefWidth="316.0" textAlignment="CENTER" textFill="RED">
          <font>
             <Font size="13.0" />
