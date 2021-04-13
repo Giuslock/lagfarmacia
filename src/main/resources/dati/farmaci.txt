@@ -1,6 +1,10 @@
-6
-1,oki,malditesta,5,10
-2,kestine,malditesta,10,5
-3,tachipirina,paracetamolo,11,23
-4,Sinopol forte,mioinositolo,20,11
-5,neoduplamox,amoxicillina,43,10
+12
+4,buff,buffone,5,10
+5,cavallo,aa,1,2
+6,cavallo,aa,1,2
+7,cavallo,aa,1,2
+8,aaaazz,saadsd,5,4
+9,asdsda,sdasda,5,10
+10,aazz,ddssd,2,10
+11,cavallo,layout,2,10
+12,pof,poooooooffete,2,1

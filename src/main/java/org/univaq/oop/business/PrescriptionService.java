@@ -1,9 +1,11 @@
 package org.univaq.oop.business;
 
 
+import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Prescription;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PrescriptionService {
 	List<Prescription> findAllPrescrizioni() throws BusinessException;
@@ -19,6 +21,8 @@ public interface PrescriptionService {
 	void evadiPrescrizione(Prescription prescrizione);
 
 	void deletePrescrizione(int codice);
+
+	Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId);
 
 	//Prescription findPrescrizioneByNumeroEMedico(int num, int id) throws BusinessException, PrescrizioneNonTrovata;
 
