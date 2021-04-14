@@ -22,7 +22,8 @@
       <TableView fx:id="elencoFarmaciTable" prefHeight="370.0" prefWidth="700.0">
          <columns>
             <TableColumn fx:id="nomeTableColumn" prefWidth="137.0" text="Nome" />
-            <TableColumn fx:id="descriptionTableColumn" prefWidth="555.0" text="Descrizione" />
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="349.0" text="Descrizione" />
+            <TableColumn fx:id="azioniTableColumn" prefWidth="109.0" text="Column X" />
          </columns>
       </TableView>
       <Button fx:id="schedaButton" mnemonicParsing="false" text="Scheda Farmaco" />
