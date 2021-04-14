@@ -42,8 +42,26 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public List<Prescription> findPrescrizioniByPaziente(int id) throws BusinessException {
-        return null;
+    public List<Prescription> findPrescrizioniByPatient(int id) throws BusinessException {
+
+        List<Prescription> result = new ArrayList<>();
+        try{
+            FileData fileData = Utility.readAllRows(prescrizioniFileName);
+            for(String[] colonne : fileData.getRighe()){
+                if(Integer.parseInt(colonne[4]) == id) {
+                    Prescription prescrizione = new Prescription();
+                    prescrizione.setId(Long.parseLong(colonne[0]));
+                    prescrizione.setDoctorId(Integer.parseInt(colonne[3]));
+                   ;
+                    result.add(prescrizione);
+                }
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+            throw new BusinessException(e);
+        }
+        return result;
+
     }
 
     @Override

@@ -25,7 +25,7 @@ public class LayoutController implements Initializable, DataInitializable<User>{
 															   new MenuElement("In esaurimento", "esaurimento")};
 	private static final MenuElement MENU_FARMACISTI = new MenuElement("Prescrizioni", "elencoTuttePrescrizioni");
 	
-	private static final MenuElement[] MENU_PAZIENTI ={ new MenuElement("Prescrizioni", "elencoPrescrizioni"), 
+	private static final MenuElement[] MENU_PAZIENTI ={ new MenuElement("Prescrizioni", "prescrizioniPaziente"),
 													    new MenuElement("Farmaci", "elencoFarmaciPaziente")};
 	
 	private static final MenuElement MENU_MEDICI = new MenuElement("Prescrizioni", "prescrizioniMedico");
