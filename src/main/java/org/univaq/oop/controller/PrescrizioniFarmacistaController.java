@@ -33,7 +33,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
     private TableColumn<Prescription, String> numeroTableColumn;
 
     @FXML
-    private TableColumn<Prescription, LocalDate> descriptionTableColumn;
+    private TableColumn<Prescription, String> descriptionTableColumn;
 
     @FXML
     private TableColumn<Prescription, User> medicoTableColumn;
