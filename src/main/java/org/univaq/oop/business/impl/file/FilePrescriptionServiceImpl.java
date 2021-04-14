@@ -50,9 +50,14 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
             for(String[] colonne : fileData.getRighe()){
                 if(Integer.parseInt(colonne[4]) == id) {
                     Prescription prescrizione = new Prescription();
-                    prescrizione.setId(Long.parseLong(colonne[0]));
+
+
+                    prescrizione.setId((long) Integer.parseInt(colonne[0]));
+                    prescrizione.setEvaded(Boolean.parseBoolean(colonne[1]));
+                    prescrizione.setDescription(colonne[2]);
                     prescrizione.setDoctorId(Integer.parseInt(colonne[3]));
-                   ;
+                    prescrizione.setUserId(Integer.parseInt(colonne[4]));
+                    prescrizione.setState();
                     result.add(prescrizione);
                 }
             }

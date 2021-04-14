@@ -23,6 +23,8 @@ public class Prescription implements Serializable {
 
     private int userId;
 
+    private  String state;
+
     public Prescription() {
     }
 
@@ -98,6 +100,14 @@ public class Prescription implements Serializable {
         this.userId = userId;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState() {
+        if (isEvaded()==true){this.state="evaded";}
+        else{this.state="not evaded";}
+    }
 
     @Override
     public String toString() {
@@ -123,3 +133,4 @@ public class Prescription implements Serializable {
         return Objects.hash(getId());
     }
 }
+
