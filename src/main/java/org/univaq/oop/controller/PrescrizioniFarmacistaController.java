@@ -54,6 +54,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
     private ViewDispatcher dispatcher;
     private PrescriptionService prescrizioneService;
     private MedicineService farmacoService;
+    private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
     public PrescrizioniFarmacistaController() {
 
@@ -83,32 +84,24 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
         medicoTableColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
         pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
         azioniTableColumn.setStyle("-fx-alignment: CENTER;");
-        //azioniTableColumn.setCellValueFactory(
-                //new Callback<TableColumn.CellDataFeatures<Prescription, Button>, ObservableValue<Button>>() {
-                 //   @Override
-                  //  public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescription, Button> param) {
-                   //     final Button evadiButton = new Button("Evadi");
+        azioniTableColumn.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Prescription, Button>, ObservableValue<Button>>() {
+                    @Override
+                    public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescription, Button> param) {
+                        final Button evadiButton = new Button("Evadi");
 
-                   //     evadiButton.setOnAction(new EventHandler<ActionEvent>() {
-                     //       @Override
-                       //     public void handle(ActionEvent event) {
-                         //       try {
-                           //         farmacoService.aggiornaQtaFarmaco(param.getValue());
-                             //       prescrizioneService.evadiPrescrizione(param.getValue());
-                               //     elencoPrescrizioniTable.getItems().remove(param.getValue());
-
-                                //} catch (NonCiSonoAbbastanzaFarmaci e) {
-                                  //  errorText.setText("Non ci sono abbastanza farmaci");
-                                //} catch (FarmacoNonTrovato e) {
-                                 //   errorText.setText("Farmaco non trovato" );
-                                //} catch (BusinessException e) {
-                                  //  e.printStackTrace();
-          //                      }
-            //                }
-              //          });
-                //        return new SimpleObjectProperty<Button>(evadiButton);
-                  //  }
-               // });
+                        evadiButton.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+//                                Map<Medicine, Integer> dettaglio = new HashMap<>();
+//                                dettaglio = farmacoPrescrizioneService.getMedicineFromPrescription(Long.parseLong(numeroTableColumn.getText()));
+//                               MedicinePrescription azz = new MedicinePrescription();
+                                dispatcher.renderView("dettaglioPrescrizione", param.getValue());
+                            }
+                        });
+                        return new SimpleObjectProperty<Button>(evadiButton);
+                    }
+                });
 
 
     }
