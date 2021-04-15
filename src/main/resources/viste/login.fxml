@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -14,27 +9,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="482.0" style="-fx-background-color: #FFFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.LoginController">
    <children>
-      <ImageView fitHeight="390.0" fitWidth="595.0" layoutX="-24.0" layoutY="-109.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="281.0" fitWidth="488.0" layoutX="34.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@sfondo.jpg" />
+            <Image url="@farmaci.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="90.0" fitWidth="88.0" layoutX="380.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@logo.png" />
-         </image>
-      </ImageView>
-      <Label id="titolo" layoutX="144.0" layoutY="14.0" prefHeight="69.0" prefWidth="194.0" styleClass="titolo" stylesheets="@labeltitolo.css" text="Farmasoft" textAlignment="CENTER">
+      <Label id="titolo" layoutX="13.0" prefHeight="69.0" prefWidth="194.0" styleClass="titolo" stylesheets="@labeltitolo.css" text="Pharmapp" textAlignment="CENTER">
          <font>
             <Font name="Segoe Script" size="37.0" />
          </font>
       </Label>
-      <TextField id="usernameText" fx:id="usernameText" layoutX="165.0" layoutY="128.0" promptText="username..." />
-      <Button id="loginButton" fx:id="loginButton" layoutX="165.0" layoutY="208.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="35.0" prefWidth="75.0" styleClass="Button" stylesheets="@loginButton.css" text="Accedi" textFill="#1b0505" />
-      <Label id="labelErrorLogin" fx:id="labelErrorLogin" layoutX="134.0" layoutY="89.0" prefHeight="26.0" prefWidth="216.0" styleClass="titolo" stylesheets="@labeltitolo.css" />
-      <Button id="iscrivitiButton" fx:id="iscrivitiButton" layoutX="242.0" layoutY="208.0" mnemonicParsing="false" onAction="#iscrivitiAction" onMouseClicked="#iscrivitiAction" prefHeight="35.0" prefWidth="75.0" styleClass="Button" stylesheets="@loginButton.css" text="Iscriviti" textFill="#1b0505" />
-      <PasswordField id="passwordText" fx:id="passwordText" layoutX="165.0" layoutY="166.0" prefHeight="25.0" prefWidth="149.0" promptText="password..." />
+      <TextField id="usernameText" fx:id="usernameText" layoutX="14.0" layoutY="95.0" promptText="username..." />
+      <Button id="loginButton" fx:id="loginButton" layoutX="14.0" layoutY="168.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="35.0" prefWidth="75.0" styleClass="Button" stylesheets="@loginButton.css" text="Accedi" textFill="#1b0505" />
+      <Label id="labelErrorLogin" fx:id="labelErrorLogin" layoutX="14.0" layoutY="62.0" prefHeight="26.0" prefWidth="216.0" styleClass="titolo" stylesheets="@labeltitolo.css" />
+      <Button id="iscrivitiButton" fx:id="iscrivitiButton" layoutX="100.0" layoutY="168.0" mnemonicParsing="false" onAction="#iscrivitiAction" onMouseClicked="#iscrivitiAction" prefHeight="35.0" prefWidth="75.0" styleClass="Button" stylesheets="@loginButton.css" text="Iscriviti" textFill="#1b0505" />
+      <PasswordField id="passwordText" fx:id="passwordText" layoutX="14.0" layoutY="128.0" prefHeight="27.0" prefWidth="161.0" promptText="password..." />
    </children>
 </AnchorPane>

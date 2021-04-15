@@ -13,17 +13,17 @@
    <top>
       <HBox prefHeight="115.0" prefWidth="227.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="135.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="128.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@croce1.jpg" />
+                  <Image url="@logo.png" />
                </image>
             </ImageView>
-            <Label prefHeight="128.0" prefWidth="1500.0" style="-fx-background-color: forestgreen;" text="PHARMAPP" textFill="WHITE">
+            <Separator opacity="0.0" prefHeight="104.0" prefWidth="584.0" />
+            <Label prefHeight="128.0" prefWidth="1500.0" style="-fx-background-color: forestgreen;" text="                                                                PHARMAPP" textFill="WHITE">
                <font>
-                  <Font name="Hiragino Sans W5" size="31.0" />
+                  <Font name="Waseem Regular" size="50.0" />
                </font>
             </Label>
-            <Separator opacity="0.0" prefHeight="104.0" prefWidth="584.0" />
             <ImageView fx:id="esciButton" fitHeight="53.0" fitWidth="66.0" onMouseClicked="#esciAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@exit.png" />
@@ -33,6 +33,13 @@
       </HBox>
    </top>
    <left>
-      <VBox fx:id="menuBar" prefHeight="537.0" prefWidth="128.0" style="-fx-background-color: forestgreen;" BorderPane.alignment="CENTER" />
+      <VBox fx:id="menuBar" prefHeight="537.0" prefWidth="138.0" style="-fx-background-color: forestgreen;" BorderPane.alignment="CENTER" />
    </left>
+   <center>
+      <ImageView fx:id="sfondo" fitHeight="536.0" fitWidth="743.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@sfondoLayout.jpg" />
+         </image>
+      </ImageView>
+   </center>
 </BorderPane>

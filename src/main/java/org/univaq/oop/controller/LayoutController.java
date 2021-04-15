@@ -1,5 +1,6 @@
 package org.univaq.oop.controller;
 
+import javafx.scene.image.ImageView;
 import org.univaq.oop.domain.*;
 import org.univaq.oop.view.ViewDispatcher;
 import org.univaq.oop.view.ViewException;
@@ -17,32 +18,34 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LayoutController implements Initializable, DataInitializable<User>{
-	
+
 	//creazione degli elementi che faranno parte del menu per ogni utente
 	private static final MenuElement MENU_HOME = new MenuElement("Home", "home");
 
 	private static final MenuElement[] MENU_AMMINISTRATORI = { new MenuElement("Farmaci", "elencoFarmaci"),
 															   new MenuElement("In esaurimento", "esaurimento")};
 	private static final MenuElement MENU_FARMACISTI = new MenuElement("Prescrizioni", "elencoTuttePrescrizioni");
-	
-	private static final MenuElement[] MENU_PAZIENTI ={ new MenuElement("Prescrizioni", "elencoPrescrizioni"), 
+
+	private static final MenuElement[] MENU_PAZIENTI ={ new MenuElement("Prescrizioni", "elencoPrescrizioni"),
 													    new MenuElement("Farmaci", "elencoFarmaciPaziente")};
-	
+
 	private static final MenuElement MENU_MEDICI = new MenuElement("Prescrizioni", "prescrizioniMedico");
 	private User utente;
-	
+	@FXML
+    private ImageView sfondo;
+
 	@FXML
 	private VBox menuBar;
-	
+
 	private ViewDispatcher dispatcher;
-	
+
 	public LayoutController() {
 		dispatcher = ViewDispatcher.getInstance();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {}
-	
+
 	//crea il menu in base all'utente
 	@Override
 	public void initializeData(User utente) {
@@ -67,12 +70,12 @@ public class LayoutController implements Initializable, DataInitializable<User>{
 			menuBar.getChildren().add(createButton(MENU_MEDICI));
 		}
 	}
-	
+
 	//torna al login
 	@FXML
 	public void esciAction(MouseEvent event) throws ViewException {
 		dispatcher.logout();
-		
+
 	}
 
 	//crea i bottoni per ogni voce del menu

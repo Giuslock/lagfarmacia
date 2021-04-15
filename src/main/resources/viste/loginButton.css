@@ -1,6 +1,6 @@
 .Button{
-	-fx-background-color: #ffffff;
+	-fx-background-color: #33cc33;
 	-fx-font-family: System;
-	-fx-text-fill: green;
+	-fx-text-fill: white;
 	-fx-border-radius: 50;
 }
