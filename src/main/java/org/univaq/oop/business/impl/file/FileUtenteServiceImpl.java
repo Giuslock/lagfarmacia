@@ -103,11 +103,7 @@ public class FileUtenteServiceImpl implements UserService {
                 if(user.getRole().equals(Role.DOCTOR)) row.append("DOCTOR");
                 row.append(Utility.SEPARATORE_COLONNA);
                 row.append(user.getFiscalCode());
-                row.append(Utility.SEPARATORE_COLONNA);
-
-
-
-                writer.println(row.toString());
+                writer.println(row);
             } //chiude try interno
         }catch (IOException e) {
             e.printStackTrace();

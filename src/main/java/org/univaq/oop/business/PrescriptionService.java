@@ -10,6 +10,8 @@ import java.util.Map;
 public interface PrescriptionService {
 	List<Prescription> findAllPrescrizioni() throws BusinessException;
 
+	List<Prescription> findToEvadePrescriptions() throws BusinessException;
+
 	List<Prescription> findPrescrizioniByPatient(int id) throws BusinessException;
 
 	List<Prescription> findPrescrizioniByMedico(int id) throws BusinessException;

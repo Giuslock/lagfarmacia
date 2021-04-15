@@ -2,22 +2,21 @@ package org.univaq.oop.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.univaq.oop.business.FarmacoPrescrizioneService;
-import org.univaq.oop.business.LagBusinessFactory;
-import org.univaq.oop.business.MedicineService;
-import org.univaq.oop.business.PrescriptionService;
+import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.MedicinePrescription;
 import org.univaq.oop.domain.Prescription;
 import org.univaq.oop.view.ViewDispatcher;
+import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +38,9 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     private TableColumn<MedicinePrescription, Integer> quantityTableColumn;
 
     @FXML
+    private TextField farmpreTextField;
+
+    @FXML
     private Button evadiButton;
 
     private ViewDispatcher dispatcher;
@@ -46,6 +48,8 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     private PrescriptionService prescriptionService;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
     private Map<Medicine, Integer> farmaciWithQuantityMap;
+
+
 
     public DettaglioPrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
@@ -59,7 +63,11 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     @Override
     public void initializeData(Prescription prescription) {
         Long id = prescription.getId();
-        farmaciWithQuantityMap = farmacoPrescrizioneService.getMedicineFromPrescription(id);
+        try {
+            farmaciWithQuantityMap = farmacoPrescrizioneService.getMedicineFromPrescription(id);
+        } catch (org.univaq.oop.business.BusinessException e) {
+            e.printStackTrace();
+        }
         List<MedicinePrescription> listaFarmaciWithQuantity = farmaciWithQuantityMap.entrySet().stream().map(entry -> new MedicinePrescription(
                 entry.getKey().getId(),
                 entry.getKey().getName(),
@@ -69,6 +77,7 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
                 .collect(Collectors.toList());
         ObservableList<MedicinePrescription> farmaciData = FXCollections.observableArrayList(listaFarmaciWithQuantity);
         dettaglioPrescrizioneTable.setItems(farmaciData);
+        this.farmpreTextField.setText(String.valueOf(prescription.getId()));
     }
 
     @Override
@@ -81,9 +90,12 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
 
     }
 
-    public void evadiAction() {
-        //farmacoPrescrizioneService.evadePrescription(prescription);
-       // dispatcher.renderView("modificaFarmaco", farmacoVuoto);
+    public void evadiAction() throws BusinessException {
+        int id = Integer.parseInt(farmpreTextField.getText());
+
+            farmacoPrescrizioneService.evadePrescription(id);
+
+        // dispatcher.renderView("modificaFarmaco", farmacoVuoto);
 
     }
 }

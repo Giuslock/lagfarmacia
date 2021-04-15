@@ -19,6 +19,7 @@
             <Font size="25.0" />
          </font>
       </Label>
+      <TextField fx:id="farmpreTextField" />
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
       <TableView fx:id="dettaglioPrescrizioneTable" prefHeight="370.0" prefWidth="700.0">
          <columns>
