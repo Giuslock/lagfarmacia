@@ -103,7 +103,7 @@ public class PrescrizioniPazienteController  implements DataInitializable<User>,
 //                              Map<Medicine, Integer> dettaglio = new HashMap<>();
 //                                dettaglio = farmacoPrescrizioneService.getMedicineFromPrescription(Long.parseLong(numeroTableColumn.getText()));
 //                               MedicinePrescription azz = new MedicinePrescription();
- //                               dispatcher.renderView("dettaglioPrescrizione", param.getValue());
+                                dispatcher.renderView("dettaglioPrescrizionePaziente", param.getValue());
                             }
                         });
                         return new SimpleObjectProperty<Button>(dettaglioButton);
