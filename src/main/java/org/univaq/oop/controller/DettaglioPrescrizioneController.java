@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -32,7 +33,7 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     private TableColumn<MedicinePrescription, String> nomeTableColumn;
 
     @FXML
-    private TableColumn<MedicinePrescription, String> codiceTableColumn;
+    private TableColumn<MedicinePrescription, Long> codiceTableColumn;
 
     @FXML
     private TableColumn<MedicinePrescription, Integer> quantityTableColumn;
@@ -48,6 +49,7 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     private PrescriptionService prescriptionService;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
     private Map<Medicine, Integer> farmaciWithQuantityMap;
+    private  Medicine medicine = new Medicine();
 
 
 
@@ -92,10 +94,27 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
 
     public void evadiAction() throws BusinessException {
         int id = Integer.parseInt(farmpreTextField.getText());
+        List<Long> columnData = new ArrayList<>();
+        for (MedicinePrescription item : dettaglioPrescrizioneTable.getItems()) {
+            columnData.add(codiceTableColumn.getCellObservableValue(item).getValue());
+        }
 
-            farmacoPrescrizioneService.evadePrescription(id);
+        List<Integer> columnData2 = new ArrayList<>();
+        for (MedicinePrescription item2 : dettaglioPrescrizioneTable.getItems()) {
+            columnData2.add(quantityTableColumn.getCellObservableValue(item2).getValue());
+        }
+        int cont = 0;
+        for (Long fid: columnData) {
+            medicine = farmacoService.findFarmacoByCodice(Math.toIntExact(fid));
+            int cavallo = columnData2.get(cont);
+            int test = medicine.getQuantity();
+            medicine.setQuantity(test - cavallo);
+            farmacoService.updateFarmaco(medicine);
+            cont++;
 
-        // dispatcher.renderView("modificaFarmaco", farmacoVuoto);
+
+
+        }
 
     }
 }

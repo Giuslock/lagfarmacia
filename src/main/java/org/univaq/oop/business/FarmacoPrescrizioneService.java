@@ -8,6 +8,6 @@ public interface FarmacoPrescrizioneService {
 
     Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId) throws BusinessException;
 
-    void evadePrescription(int id) throws BusinessException;
+    Medicine evadePrescription(int id) throws BusinessException;
 
 }

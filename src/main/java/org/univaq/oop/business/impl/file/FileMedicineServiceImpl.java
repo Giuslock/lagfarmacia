@@ -113,8 +113,28 @@ public class FileMedicineServiceImpl implements MedicineService {
 
     @Override
     public Medicine findFarmacoByCodice(Integer codice) throws BusinessException {
-        return null;
+        Medicine far = new Medicine();
+        try {
+            FileData fileData = Utility.readAllRows(farmacoFileName);
+            for (String[] colonne : fileData.getRighe()) {
+                if (Integer.parseInt(colonne[0]) == codice) {
+                    far.setId((long) Integer.parseInt(colonne[0]));
+                    far.setName(colonne[1]);
+                    far.setDescription(colonne[2]);
+                    far.setMinimum(Integer.parseInt(colonne[3]));
+                    far.setQuantity(Integer.parseInt(colonne[4]));
+                    far.setOutOfStock();
+                    far.setStatoFarmaco();
+
+                }
+            }
+            } catch(IOException e){
+                e.printStackTrace();
+                throw new BusinessException(e);
+            }
+        return far;
     }
+
 
     @Override
     public void deleteFarmaco(Long codice) {
