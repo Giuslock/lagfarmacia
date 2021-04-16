@@ -13,18 +13,17 @@ import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.MedicinePrescription;
 import org.univaq.oop.domain.Prescription;
+import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
-import org.w3c.dom.Text;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class DettaglioPrescrizioneController implements Initializable,DataInitializable<Prescription> {
+public class DettaglioPrescrizioneController implements Initializable, DataInitializable<Prescription> {
 
     @FXML
     private TableView<MedicinePrescription> dettaglioPrescrizioneTable;
@@ -49,8 +48,9 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     private PrescriptionService prescriptionService;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
     private Map<Medicine, Integer> farmaciWithQuantityMap;
-    private  Medicine medicine = new Medicine();
-
+    private Medicine medicine = new Medicine();
+    private Prescription prescription;
+    private User utente;
 
 
     public DettaglioPrescrizioneController() {
@@ -65,6 +65,8 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     @Override
     public void initializeData(Prescription prescription) {
         Long id = prescription.getId();
+        this.prescription = prescription;
+
         try {
             farmaciWithQuantityMap = farmacoPrescrizioneService.getMedicineFromPrescription(id);
         } catch (org.univaq.oop.business.BusinessException e) {
@@ -89,32 +91,30 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
         quantityTableColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
 
-
     }
 
     public void evadiAction() throws BusinessException {
-        int id = Integer.parseInt(farmpreTextField.getText());
-        List<Long> columnData = new ArrayList<>();
-        for (MedicinePrescription item : dettaglioPrescrizioneTable.getItems()) {
-            columnData.add(codiceTableColumn.getCellObservableValue(item).getValue());
-        }
 
-        List<Integer> columnData2 = new ArrayList<>();
-        for (MedicinePrescription item2 : dettaglioPrescrizioneTable.getItems()) {
-            columnData2.add(quantityTableColumn.getCellObservableValue(item2).getValue());
-        }
-        int cont = 0;
-        for (Long fid: columnData) {
-            medicine = farmacoService.findFarmacoByCodice(Math.toIntExact(fid));
-            int cavallo = columnData2.get(cont);
-            int test = medicine.getQuantity();
-            medicine.setQuantity(test - cavallo);
-            farmacoService.updateFarmaco(medicine);
-            cont++;
+        boolean evadable = farmaciWithQuantityMap.entrySet().stream().allMatch(entry -> {
+            try {
+                medicine = farmacoService.findFarmacoByCodice((entry.getKey().getId().intValue()));
+            } catch (BusinessException e) {
+                e.printStackTrace();
+            }
+            return (medicine.getQuantity() - entry.getValue()) > 0;
+        });
 
+        if (evadable) {
+            for (Map.Entry<Medicine, Integer> entry : farmaciWithQuantityMap.entrySet()) {
+                medicine = farmacoService.findFarmacoByCodice((entry.getKey().getId().intValue()));
+                medicine.setQuantity(medicine.getQuantity() - entry.getValue());
+                farmacoService.updateFarmaco(medicine);
+            }
+            prescription.setEvaded(evadable);
+            prescriptionService.updatePrescrizione(prescription);
+            dispatcher.renderView("elencoTuttePrescrizioni", utente);
+        } // settare una label che da' errore e una che dice tutto a posto
 
-
-        }
 
     }
 }

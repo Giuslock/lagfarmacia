@@ -105,7 +105,7 @@ public class Prescription implements Serializable {
     }
 
     public void setState() {
-        if (isEvaded()==true){this.state="evaded";}
+        if (isEvaded()){this.state="evaded";}
         else{this.state="not evaded";}
     }
 

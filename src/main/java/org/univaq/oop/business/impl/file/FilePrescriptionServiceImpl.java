@@ -6,6 +6,7 @@ import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Prescription;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
             FileData fileData = Utility.readAllRows(prescrizioniFileName);
             for(String[] colonne : fileData.getRighe()){
                 Prescription prescrizione = new Prescription();
-                if (Boolean.parseBoolean(colonne[1]) == false) {
+                if (!Boolean.parseBoolean(colonne[1])) {
                     prescrizione.setId((long) Integer.parseInt(colonne[0]));
                     prescrizione.setEvaded(Boolean.parseBoolean(colonne[1]));
                     prescrizione.setDescription(colonne[2]);
@@ -74,8 +75,6 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
             for(String[] colonne : fileData.getRighe()){
                 if(Integer.parseInt(colonne[4]) == id) {
                     Prescription prescrizione = new Prescription();
-
-
                     prescrizione.setId((long) Integer.parseInt(colonne[0]));
                     prescrizione.setEvaded(Boolean.parseBoolean(colonne[1]));
                     prescrizione.setDescription(colonne[2]);
@@ -105,7 +104,33 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public void updatePrescrizione(Prescription prescrizione) throws BusinessException {
-
+        try {
+            FileData fileData = Utility.readAllRows(prescrizioniFileName);
+            try (PrintWriter writer = new PrintWriter(prescrizioniFileName)) {
+                writer.println(fileData.getContatore());
+                for (String[] righe : fileData.getRighe()) {
+                    if (Long.parseLong(righe[0]) == prescrizione.getId())
+                    {
+                        StringBuilder row = new StringBuilder();
+                        row.append(prescrizione.getId());
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(prescrizione.isEvaded());
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(prescrizione.getDescription());
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(prescrizione.getDoctorId());
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(prescrizione.getUserId());
+                        writer.println(row);
+                    } else {
+                        writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException(e);
+        }
     }
 
     @Override

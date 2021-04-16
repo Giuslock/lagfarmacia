@@ -81,10 +81,9 @@ public class FileMedicineServiceImpl implements MedicineService {
 
     @Override
     public void updateFarmaco(Medicine medicine) throws BusinessException {
-        //System.out.println("cavallo");
         try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
-            try (PrintWriter writer = new PrintWriter(new File(farmacoFileName))) {
+            try (PrintWriter writer = new PrintWriter(farmacoFileName)) {
                 writer.println(fileData.getContatore());
                 for (String[] righe : fileData.getRighe()) {
                     if (Long.parseLong(righe[0]) == medicine.getId())
