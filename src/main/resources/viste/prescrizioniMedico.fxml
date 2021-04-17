@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
    <children>
       <Label prefHeight="65.0" prefWidth="268.0" text="  Elenco Prescrizioni:">
          <font>
@@ -90,10 +90,10 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="modificaButton" mnemonicParsing="false" onAction="#modificaCercataAction" onMouseClicked="#modificaCercataAction" prefHeight="25.0" prefWidth="86.0" text="Modifica" GridPane.columnIndex="6" />
+            <Button fx:id="modificaButton" mnemonicParsing="false" onAction="#modificaCercataAction" onMouseClicked="#modificaCercataAction" prefHeight="25.0" prefWidth="86.0" styleClass="Button" stylesheets="@loginButton.css" text="Modifica" GridPane.columnIndex="6" />
          </children>
       </GridPane>
-      <Button fx:id="aggiungiButton" mnemonicParsing="false" onAction="#aggiungiAction" onMouseClicked="#aggiungiAction" prefHeight="25.0" prefWidth="89.0" text="Aggiungi">
+      <Button fx:id="aggiungiButton" mnemonicParsing="false" onAction="#aggiungiAction" onMouseClicked="#aggiungiAction" prefHeight="25.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Aggiungi">
          <font>
             <Font size="14.0" />
          </font>
