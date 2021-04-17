@@ -83,8 +83,7 @@ public class Medicine implements Serializable {
     }
 
     public void setOutOfStock() {
-        if (quantity <= minimum) this.outOfStock = true;
-        else this.outOfStock = false;
+        this.outOfStock = quantity <= minimum;
     }
 
     public void setStatoFarmaco() {
@@ -95,7 +94,7 @@ public class Medicine implements Serializable {
     public String getMedicineStatus() {
         return this.medicineStatus;
     }
-    
+
     @Override
     public String toString() {
         return "Farmaco{" +

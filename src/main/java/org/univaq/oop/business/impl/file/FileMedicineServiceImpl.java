@@ -111,7 +111,7 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public Medicine findFarmacoByCodice(Integer codice) throws BusinessException {
+    public Medicine findMedicineById(Integer codice) throws BusinessException {
         Medicine far = new Medicine();
         try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
@@ -139,10 +139,8 @@ public class FileMedicineServiceImpl implements MedicineService {
     public void deleteFarmaco(Long codice) {
         try {
         FileData fileData = Utility.readAllRows(farmacoFileName);
-        try (PrintWriter writer = new PrintWriter(new File(farmacoFileName))) {
-            //decremento contatore e scrivo il nuovo numero
+        try (PrintWriter writer = new PrintWriter(farmacoFileName)) {
             writer.println(fileData.getContatore()-1);
-            //uso una variabile booleana per sapere se ho trovato la riga da eliminare e poi scrivo le righe con il numero aggiornato
             boolean trovato = false;
             for (String[] colonne : fileData.getRighe()) {
 
@@ -202,42 +200,4 @@ public class FileMedicineServiceImpl implements MedicineService {
         return result;
     }
 }
-
-
-
-
-
-
-
-
-   // @Override
-/*    public Medicine findMedicinebyid(Long id) throws BusinessException {
-
-        return null;
-    }
-
-    @Override
-    public void deleteFarmaco(Long ) {
-
-    }
-
-    @Override
-    public void aggiornaQtaFarmaco(Prescription prescription) throws BusinessException {
-
-    }
-
-    @Override
-    public List<String> findAllFarmaciByNome() throws BusinessException {
-        return null;
-    }
-
-    @Override
-    public Medicine findFarmacoByName(String string) throws BusinessException {
-        return null;
-    }
-
-    @Override
-    public List<Medicine> findFarmaciInEsaurimento() throws BusinessException {
-        return null;
-    }*/
 

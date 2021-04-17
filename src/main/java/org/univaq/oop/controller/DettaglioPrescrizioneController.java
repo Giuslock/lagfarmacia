@@ -15,9 +15,7 @@ import org.univaq.oop.domain.MedicinePrescription;
 import org.univaq.oop.domain.Prescription;
 import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
-
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -43,10 +41,10 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
     @FXML
     private Button evadiButton;
 
-    private ViewDispatcher dispatcher;
-    private MedicineService farmacoService;
-    private PrescriptionService prescriptionService;
-    private FarmacoPrescrizioneService farmacoPrescrizioneService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
+    private final PrescriptionService prescriptionService;
+    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
     private Map<Medicine, Integer> farmaciWithQuantityMap;
     private Medicine medicine = new Medicine();
     private Prescription prescription;
@@ -97,7 +95,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
 
         boolean evadable = farmaciWithQuantityMap.entrySet().stream().allMatch(entry -> {
             try {
-                medicine = farmacoService.findFarmacoByCodice((entry.getKey().getId().intValue()));
+                medicine = farmacoService.findMedicineById((entry.getKey().getId().intValue()));
             } catch (BusinessException e) {
                 e.printStackTrace();
             }
@@ -106,7 +104,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
 
         if (evadable) {
             for (Map.Entry<Medicine, Integer> entry : farmaciWithQuantityMap.entrySet()) {
-                medicine = farmacoService.findFarmacoByCodice((entry.getKey().getId().intValue()));
+                medicine = farmacoService.findMedicineById((entry.getKey().getId().intValue()));
                 medicine.setQuantity(medicine.getQuantity() - entry.getValue());
                 farmacoService.updateFarmaco(medicine);
             }
