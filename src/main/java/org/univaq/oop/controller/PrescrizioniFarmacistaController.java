@@ -33,7 +33,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
     private TableColumn<Prescription, String> numeroTableColumn;
 
     @FXML
-    private TableColumn<Prescription, LocalDate> descriptionTableColumn;
+    private TableColumn<Prescription, String> descriptionTableColumn;
 
     @FXML
     private TableColumn<Prescription, User> medicoTableColumn;
@@ -69,7 +69,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
     @Override
     public void initializeData(User user) {
         try {
-            List<Prescription> prescrizioni = prescrizioneService.findAllPrescrizioni();
+            List<Prescription> prescrizioni = prescrizioneService.findToEvadePrescriptions();
             ObservableList<Prescription> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
             elencoPrescrizioniTable.setItems(prescrizioniData);
         } catch (BusinessException e) {
@@ -93,10 +93,9 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
                         evadiButton.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-//                                Map<Medicine, Integer> dettaglio = new HashMap<>();
-//                                dettaglio = farmacoPrescrizioneService.getMedicineFromPrescription(Long.parseLong(numeroTableColumn.getText()));
-//                               MedicinePrescription azz = new MedicinePrescription();
+
                                 dispatcher.renderView("dettaglioPrescrizione", param.getValue());
+
                             }
                         });
                         return new SimpleObjectProperty<Button>(evadiButton);

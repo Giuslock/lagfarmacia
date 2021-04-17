@@ -28,7 +28,7 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
             for(String[] colonne : fileData.getRighe()){
                 Prescription prescrizione = new Prescription();
                 prescrizione.setId((long) Integer.parseInt(colonne[0]));
-                prescrizione.setEvaded(false);
+                prescrizione.setEvaded(Boolean.parseBoolean(colonne[1]));
                 prescrizione.setDescription(colonne[2]);
                 prescrizione.setDoctorId(Integer.parseInt(colonne[3]));
                 prescrizione.setUserId(Integer.parseInt(colonne[4]));
@@ -40,6 +40,30 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
         }
         return result;
     }
+
+    @Override
+    public List<Prescription> findToEvadePrescriptions() throws BusinessException {
+        List<Prescription> result = new ArrayList<>();
+        try{
+            FileData fileData = Utility.readAllRows(prescrizioniFileName);
+            for(String[] colonne : fileData.getRighe()){
+                Prescription prescrizione = new Prescription();
+                if (Boolean.parseBoolean(colonne[1]) == false) {
+                    prescrizione.setId((long) Integer.parseInt(colonne[0]));
+                    prescrizione.setEvaded(Boolean.parseBoolean(colonne[1]));
+                    prescrizione.setDescription(colonne[2]);
+                    prescrizione.setDoctorId(Integer.parseInt(colonne[3]));
+                    prescrizione.setUserId(Integer.parseInt(colonne[4]));
+                    result.add(prescrizione);
+                }
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+            throw new BusinessException(e);
+        }
+        return result;
+    }
+
 
     @Override
     public List<Prescription> findPrescrizioniByPatient(int id) throws BusinessException {

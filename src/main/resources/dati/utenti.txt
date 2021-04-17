@@ -1,6 +1,8 @@
-6
+8
 1,gianni,cavallo,patient,secret,PATIENT,gnncvll111
 2,ammi,nistra,admin,secret,ADMIN,admn222
 3,med,ico,doctor,secret,DOCTOR,dctr333
 4,farma,cista,pharmacist,secret,PHARMACIST,phrmcst444
-5,a,s,ddas,asdf,DOCTOR,dasdas,
+5,a,s,ddas,asdf,DOCTOR,dasdas
+6,ssss,qqqq,q,q,PHARMACIST,dsagasfgasfgas
+7,cavallo,cavallo,cavallo,cavallo,PATIENT,cavallo

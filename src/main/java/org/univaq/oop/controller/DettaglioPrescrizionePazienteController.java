@@ -8,10 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.univaq.oop.business.FarmacoPrescrizioneService;
-import org.univaq.oop.business.LagBusinessFactory;
-import org.univaq.oop.business.MedicineService;
-import org.univaq.oop.business.PrescriptionService;
+import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.MedicinePrescription;
 import org.univaq.oop.domain.Prescription;
@@ -59,7 +56,11 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
     @Override
     public void initializeData(Prescription prescription) {
         Long id = prescription.getId();
-        farmaciWithQuantityMap = farmacoPrescrizioneService.getMedicineFromPrescription(id);
+        try {
+            farmaciWithQuantityMap = farmacoPrescrizioneService.getMedicineFromPrescription(id);
+        } catch (BusinessException e) {
+            e.printStackTrace();
+        }
         List<MedicinePrescription> listaFarmaciWithQuantity = farmaciWithQuantityMap.entrySet().stream().map(entry -> new MedicinePrescription(
                 entry.getKey().getId(),
                 entry.getKey().getName(),
