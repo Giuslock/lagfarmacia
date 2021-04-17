@@ -14,7 +14,7 @@ public interface MedicineService {
 
 	void updateFarmaco(Medicine farmaco) throws BusinessException;
 
-	Medicine findFarmacoByCodice(Integer codice) throws BusinessException;
+	Medicine findMedicineById(Integer codice) throws BusinessException;
 
 	void deleteFarmaco(Long codice);
 

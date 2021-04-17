@@ -13,17 +13,15 @@ import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.MedicinePrescription;
 import org.univaq.oop.domain.Prescription;
+import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class DettaglioPrescrizioneController implements Initializable,DataInitializable<Prescription> {
+public class DettaglioPrescrizioneController implements Initializable, DataInitializable<Prescription> {
 
     @FXML
     private TableView<MedicinePrescription> dettaglioPrescrizioneTable;
@@ -32,7 +30,7 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     private TableColumn<MedicinePrescription, String> nomeTableColumn;
 
     @FXML
-    private TableColumn<MedicinePrescription, String> codiceTableColumn;
+    private TableColumn<MedicinePrescription, Long> codiceTableColumn;
 
     @FXML
     private TableColumn<MedicinePrescription, Integer> quantityTableColumn;
@@ -43,11 +41,15 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     @FXML
     private Button evadiButton;
 
-    private ViewDispatcher dispatcher;
-    private MedicineService farmacoService;
-    private PrescriptionService prescriptionService;
-    private FarmacoPrescrizioneService farmacoPrescrizioneService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
+    private final PrescriptionService prescriptionService;
+    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
     private Map<Medicine, Integer> farmaciWithQuantityMap;
+    private Medicine medicine = new Medicine();
+    private Prescription prescription;
+    private User utente;
+
 
 
 
@@ -63,6 +65,9 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
     @Override
     public void initializeData(Prescription prescription) {
         Long id = prescription.getId();
+        this.prescription = prescription;
+
+
         try {
             farmaciWithQuantityMap = farmacoPrescrizioneService.getMedicineFromPrescription(id);
         } catch (org.univaq.oop.business.BusinessException e) {
@@ -87,15 +92,30 @@ public class DettaglioPrescrizioneController implements Initializable,DataInitia
         quantityTableColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
 
-
     }
 
     public void evadiAction() throws BusinessException {
-        int id = Integer.parseInt(farmpreTextField.getText());
 
-            farmacoPrescrizioneService.evadePrescription(id);
+        boolean evadable = farmaciWithQuantityMap.entrySet().stream().allMatch(entry -> {
+            try {
+                medicine = farmacoService.findMedicineById((entry.getKey().getId().intValue()));
+            } catch (BusinessException e) {
+                e.printStackTrace();
+            }
+            return (medicine.getQuantity() - entry.getValue()) > 0;
+        });
 
-        // dispatcher.renderView("modificaFarmaco", farmacoVuoto);
+        if (evadable) {
+            for (Map.Entry<Medicine, Integer> entry : farmaciWithQuantityMap.entrySet()) {
+                medicine = farmacoService.findMedicineById((entry.getKey().getId().intValue()));
+                medicine.setQuantity(medicine.getQuantity() - entry.getValue());
+                farmacoService.updateFarmaco(medicine);
+            }
+            prescription.setEvaded(evadable);
+            prescriptionService.updatePrescrizione(prescription);
+            dispatcher.renderView("elencoTuttePrescrizioni", utente);
+        } // settare una label che da' errore e una che dice tutto a posto
+
 
     }
 }
