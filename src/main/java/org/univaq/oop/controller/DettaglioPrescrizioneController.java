@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Medicine;
@@ -40,6 +37,8 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
 
     @FXML
     private Button evadiButton;
+    @FXML
+    private Label labelError;
 
     private final ViewDispatcher dispatcher;
     private final MedicineService farmacoService;
@@ -115,6 +114,10 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
             prescriptionService.updatePrescrizione(prescription);
             dispatcher.renderView("elencoTuttePrescrizioni", utente);
         } // settare una label che da' errore e una che dice tutto a posto
+        else {
+                labelError.setText("Errore");
+                //dispatcher.renderView("dettaglioPrescrizione", utente);
+        }
 
 
     }
