@@ -9,22 +9,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.LayoutController">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.LayoutController">
+
+
    <top>
-      <HBox prefHeight="115.0" prefWidth="227.0" BorderPane.alignment="CENTER">
+      <HBox BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="135.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+
+            <ImageView fitHeight="115.0" fitWidth="166.0" pickOnBounds="true" preserveRatio="true">
+
                <image>
                   <Image url="@croce1.jpg" />
                </image>
             </ImageView>
-            <Label prefHeight="128.0" prefWidth="1500.0" style="-fx-background-color: forestgreen;" text="PHARMAPP" textFill="WHITE">
+
+            <Separator opacity="0.0" prefHeight="104.0" prefWidth="584.0" />
+            <Label prefHeight="128.0" prefWidth="1500.0" style="-fx-background-color: forestgreen;" text="                       PHARMAPP" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Hiragino Sans W5" size="31.0" />
+                  <Font name="Segoe Script" size="30.0" />
+
                </font>
             </Label>
-            <Separator opacity="0.0" prefHeight="104.0" prefWidth="584.0" />
-            <ImageView fx:id="esciButton" fitHeight="53.0" fitWidth="66.0" onMouseClicked="#esciAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="esciButton" fitHeight="119.0" fitWidth="53.0" onMouseClicked="#esciAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@exit.png" />
                </image>
@@ -33,6 +40,8 @@
       </HBox>
    </top>
    <left>
-      <VBox fx:id="menuBar" prefHeight="537.0" prefWidth="128.0" style="-fx-background-color: forestgreen;" BorderPane.alignment="CENTER" />
+
+      <VBox fx:id="menuBar" prefHeight="550.0" prefWidth="125.0" style="-fx-background-color: forestgreen;" BorderPane.alignment="CENTER" />
+
    </left>
 </BorderPane>

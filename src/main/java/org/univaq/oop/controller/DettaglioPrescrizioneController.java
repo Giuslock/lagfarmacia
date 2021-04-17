@@ -51,6 +51,8 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
     private User utente;
 
 
+
+
     public DettaglioPrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
@@ -64,6 +66,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
     public void initializeData(Prescription prescription) {
         Long id = prescription.getId();
         this.prescription = prescription;
+
 
         try {
             farmaciWithQuantityMap = farmacoPrescrizioneService.getMedicineFromPrescription(id);

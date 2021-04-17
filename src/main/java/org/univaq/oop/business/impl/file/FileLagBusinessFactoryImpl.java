@@ -21,6 +21,7 @@ public class FileLagBusinessFactoryImpl extends LagBusinessFactory {
         prescrizioneService = new FilePrescriptionServiceImpl(PRESCRIZIONI_FILE_NAME);
         farmacoPrescrizioneService = new FileFarmacoPrescrizioneImpl(FARMACI_PRESCRIZIONI_FILE_NAME, FARMACI_FILE_NAME, PRESCRIZIONI_FILE_NAME);
 
+
     }
 
     @Override

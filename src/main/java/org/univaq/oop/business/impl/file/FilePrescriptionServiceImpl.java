@@ -53,6 +53,7 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
                     result.add(prescrizione);
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(e);

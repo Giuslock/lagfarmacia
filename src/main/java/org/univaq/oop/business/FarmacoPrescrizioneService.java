@@ -8,4 +8,5 @@ public interface FarmacoPrescrizioneService {
 
     Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId) throws BusinessException;
 
+
 }
