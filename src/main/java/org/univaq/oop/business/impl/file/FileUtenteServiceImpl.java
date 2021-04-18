@@ -6,7 +6,6 @@ import org.univaq.oop.business.UserService;
 import org.univaq.oop.domain.Role;
 import org.univaq.oop.domain.User;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -107,7 +106,6 @@ public class FileUtenteServiceImpl implements UserService {
             e.printStackTrace();
             throw new BusinessException(e);
         }
-
 
     }
 

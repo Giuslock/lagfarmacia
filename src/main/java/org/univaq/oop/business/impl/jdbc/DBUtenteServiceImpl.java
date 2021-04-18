@@ -5,19 +5,15 @@ import org.univaq.oop.business.UserService;
 import org.univaq.oop.domain.Role;
 import org.univaq.oop.domain.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
-import java.util.Optional;
 
 public class DBUtenteServiceImpl implements UserService {
 
     private static final String SELECT_ALL = "select * from utente";
     private static final String SELECT_FROM_UTENTE_WHERE_ID = "select * from utente where id=?";
     private static final String DELETE_FROM_UTENTE_WHERE_ID = "delete from utente where id=?";
-    private static final String CREATE_UTENTE = "insert into utente ( nome,cognome,username,password_,ruolo) values  (?,?,?,?,?) ;";
+    private static final String CREATE_UTENTE = "insert into utente ( nome,cognome,username,password_,ruolo,fiscalcode) values  (?,?,?,?,?,?) ;";
     private static final String UTENTE_WHERE_USERNAME_AND_PASSWORD = "select * from utente where username=? and password_=?";
 
     @Override
@@ -46,6 +42,19 @@ public class DBUtenteServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) throws BusinessException {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+        PreparedStatement statement = connection.prepareStatement(CREATE_UTENTE, Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, user.getName());
+        statement.setString(2, user.getSurname());
+        statement.setString(3, user.getUsername());
+        statement.setString(4, user.getPassword());
+        statement.setString(5, user.getRole().toString());
+        statement.setString(6, user.getFiscalCode());
+        statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
 
     }
 
