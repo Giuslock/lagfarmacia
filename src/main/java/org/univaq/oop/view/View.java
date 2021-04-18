@@ -1,7 +1,7 @@
 package org.univaq.oop.view;
 
-import org.univaq.oop.controller.DataInitializable;
 import javafx.scene.Parent;
+import org.univaq.oop.controller.DataInitializable;
 
 
 public class View<T> {
@@ -18,6 +18,7 @@ public class View<T> {
     public Parent getView() {
         return view;
     }
+
     public void setView(Parent view) {
         this.view = view;
     }
@@ -25,6 +26,7 @@ public class View<T> {
     public DataInitializable<T> getController() {
         return controller;
     }
+
     public void setController(DataInitializable<T> controller) {
         this.controller = controller;
     }

@@ -7,16 +7,13 @@ import org.univaq.oop.domain.Prescription;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.io.PrintWriter;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileMedicineServiceImpl implements MedicineService {
 
-    private String farmacoFileName;
+    private final String farmacoFileName;
 
 
     public FileMedicineServiceImpl(String farmacoFileName) {
@@ -86,8 +83,7 @@ public class FileMedicineServiceImpl implements MedicineService {
             try (PrintWriter writer = new PrintWriter(farmacoFileName)) {
                 writer.println(fileData.getContatore());
                 for (String[] righe : fileData.getRighe()) {
-                    if (Long.parseLong(righe[0]) == medicine.getId())
-                    {
+                    if (Long.parseLong(righe[0]) == medicine.getId()) {
                         StringBuilder row = new StringBuilder();
                         row.append(medicine.getId());
                         row.append(Utility.SEPARATORE_COLONNA);
@@ -127,10 +123,10 @@ public class FileMedicineServiceImpl implements MedicineService {
 
                 }
             }
-            } catch(IOException e){
-                e.printStackTrace();
-                throw new BusinessException(e);
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException(e);
+        }
         return far;
     }
 
@@ -138,26 +134,26 @@ public class FileMedicineServiceImpl implements MedicineService {
     @Override
     public void deleteFarmaco(Long codice) {
         try {
-        FileData fileData = Utility.readAllRows(farmacoFileName);
-        try (PrintWriter writer = new PrintWriter(farmacoFileName)) {
-            writer.println(fileData.getContatore()-1);
-            boolean trovato = false;
-            for (String[] colonne : fileData.getRighe()) {
+            FileData fileData = Utility.readAllRows(farmacoFileName);
+            try (PrintWriter writer = new PrintWriter(farmacoFileName)) {
+                writer.println(fileData.getContatore() - 1);
+                boolean trovato = false;
+                for (String[] colonne : fileData.getRighe()) {
 
-                if (colonne[0].equals(String.valueOf(codice))) {
-                    trovato = true;
-                    continue;
+                    if (colonne[0].equals(String.valueOf(codice))) {
+                        trovato = true;
+                        continue;
+                    }
+                    if (trovato) {
+                        colonne[0] = Integer.toString(Integer.parseInt(colonne[0]) - 1);
+                    }
+                    writer.println(String.join(Utility.SEPARATORE_COLONNA, colonne));
                 }
-                if (trovato) {
-                    colonne[0] = Integer.toString(Integer.parseInt(colonne[0]) - 1);
-                }
-                writer.println(String.join(Utility.SEPARATORE_COLONNA, colonne));
+
             }
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
 
     }
 
@@ -179,9 +175,9 @@ public class FileMedicineServiceImpl implements MedicineService {
     @Override
     public List<Medicine> findFarmaciInEsaurimento() throws BusinessException {
         List<Medicine> result = new ArrayList<>();
-        try{
+        try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
-            for(String[] colonne : fileData.getRighe()){
+            for (String[] colonne : fileData.getRighe()) {
                 Medicine farmaco = new Medicine();
                 farmaco.setId((long) Integer.parseInt(colonne[0]));
                 farmaco.setName(colonne[1]);
@@ -193,7 +189,7 @@ public class FileMedicineServiceImpl implements MedicineService {
                 if (farmaco.getMedicineStatus().equals("RUNNING OUT"))
                     result.add(farmaco);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(e);
         }

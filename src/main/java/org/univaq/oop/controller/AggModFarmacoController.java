@@ -1,16 +1,15 @@
 package org.univaq.oop.controller;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
-import org.univaq.oop.view.ViewException;
 
 import java.net.URL;
 import java.util.ResourceBundle;

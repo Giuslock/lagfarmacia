@@ -14,7 +14,7 @@ import org.univaq.oop.view.ViewDispatcher;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SchedaFarmacoController implements Initializable, DataInitializable <Medicine>{
+public class SchedaFarmacoController implements Initializable, DataInitializable<Medicine> {
     @FXML
     private TextField nametext;
 
@@ -29,8 +29,8 @@ public class SchedaFarmacoController implements Initializable, DataInitializable
 
     private User utente;
     private Medicine medicine;
-    private ViewDispatcher dispatcher;
-    private MedicineService medicineService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService medicineService;
 
     public SchedaFarmacoController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();
@@ -39,8 +39,8 @@ public class SchedaFarmacoController implements Initializable, DataInitializable
     }
 
 
-    public void backAction(){
-        dispatcher.renderView("elencoFarmaciPaziente",utente);
+    public void backAction() {
+        dispatcher.renderView("elencoFarmaciPaziente", utente);
     }
 
 

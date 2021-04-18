@@ -47,8 +47,8 @@ public class RegisterController implements Initializable, DataInitializable<User
     @FXML
     private RadioButton farmacistaRadioButton;
 
-    private ViewDispatcher dispatcher;
-    private UserService utenteService;
+    private final ViewDispatcher dispatcher;
+    private final UserService utenteService;
 
 
     public RegisterController() throws BusinessException {
@@ -69,9 +69,9 @@ public class RegisterController implements Initializable, DataInitializable<User
 
         iscrivitiButton.disableProperty().bind(usernameIscrivitiText.textProperty().isEmpty()
                 .or(passwordIscrivitiText.textProperty().isEmpty()
-                .or(nomeText.textProperty().isEmpty()
-                .or(cognomeText.textProperty().isEmpty()
-                .or(codiceFiscaleText.textProperty().isEmpty())))));
+                        .or(nomeText.textProperty().isEmpty()
+                                .or(cognomeText.textProperty().isEmpty()
+                                        .or(codiceFiscaleText.textProperty().isEmpty())))));
     }
 
     @FXML

@@ -1,6 +1,6 @@
 package org.univaq.oop.view;
 
-public class ViewException extends Exception{
+public class ViewException extends Exception {
 
     public ViewException() {
         super();

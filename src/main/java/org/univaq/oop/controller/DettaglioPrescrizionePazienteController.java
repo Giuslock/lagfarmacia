@@ -1,10 +1,9 @@
 package org.univaq.oop.controller;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,7 +21,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 
-public class DettaglioPrescrizionePazienteController implements DataInitializable<Prescription>,Initializable {
+public class DettaglioPrescrizionePazienteController implements DataInitializable<Prescription>, Initializable {
     @FXML
     private TableView<MedicinePrescription> dettaglioPrescrizioneTable;
 
@@ -36,11 +35,10 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
     private TableColumn<MedicinePrescription, Integer> quantityTableColumn;
 
 
-
-    private ViewDispatcher dispatcher;
-    private MedicineService farmacoService;
-    private PrescriptionService prescriptionService;
-    private FarmacoPrescrizioneService farmacoPrescrizioneService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
+    private final PrescriptionService prescriptionService;
+    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
     private Map<Medicine, Integer> farmaciWithQuantityMap;
     private User utente;
 
@@ -79,13 +77,7 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
         quantityTableColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
 
-
     }
-
-
-
-
-
 
 
 }

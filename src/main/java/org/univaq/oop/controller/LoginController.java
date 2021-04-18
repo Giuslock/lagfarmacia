@@ -36,9 +36,9 @@ public class LoginController implements Initializable {
     @FXML
     private Button iscrivitiButton;
 
-    private ViewDispatcher dispatcher;
+    private final ViewDispatcher dispatcher;
 
-    private UserService utenteService;
+    private final UserService utenteService;
 
     public LoginController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();

@@ -20,7 +20,6 @@ import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -51,9 +50,9 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
     private Button dettagliButton;
 
 
-    private ViewDispatcher dispatcher;
-    private PrescriptionService prescrizioneService;
-    private MedicineService farmacoService;
+    private final ViewDispatcher dispatcher;
+    private final PrescriptionService prescrizioneService;
+    private final MedicineService farmacoService;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
     public PrescrizioniFarmacistaController() {

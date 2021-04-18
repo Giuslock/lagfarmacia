@@ -3,6 +3,7 @@ package org.univaq.oop.business.impl.file;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.PrescriptionService;
 import org.univaq.oop.domain.Prescription;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -94,7 +95,7 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public void addPrescrizione(Prescription prescrizione) throws BusinessException {
+    public Prescription createPrescrizione(Prescription prescrizione) throws BusinessException {
 
         try {
             FileData fileData = Utility.readAllRows(prescrizioniFileName);
@@ -105,7 +106,8 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
                     writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
                 }
                 StringBuilder row = new StringBuilder();
-                row.append(prescrizione.getId());
+                prescrizione.setId(counter);
+                row.append(counter);
                 row.append(Utility.SEPARATORE_COLONNA);
                 row.append(prescrizione.isEvaded());
                 row.append(Utility.SEPARATORE_COLONNA);
@@ -122,6 +124,7 @@ public class FilePrescriptionServiceImpl implements PrescriptionService {
 
         }
 
+        return prescrizione;
     }
 
     @Override

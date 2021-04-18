@@ -14,8 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.business.LagBusinessFactory;
+import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
@@ -50,8 +50,8 @@ public class FarmaciController implements Initializable, DataInitializable<User>
     @FXML
     private Button aggiungiButton;
 
-    private ViewDispatcher dispatcher;
-    private MedicineService farmacoService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
 
 
     public FarmaciController() {
@@ -59,7 +59,6 @@ public class FarmaciController implements Initializable, DataInitializable<User>
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
     }
-
 
 
     @Override
@@ -88,7 +87,7 @@ public class FarmaciController implements Initializable, DataInitializable<User>
                     }
 
                 });
-        }
+    }
 
     @Override
     public void initializeData(User user) {
@@ -100,7 +99,6 @@ public class FarmaciController implements Initializable, DataInitializable<User>
             dispatcher.renderError(e);
         }
     }
-
 
 
     public void aggiungiAction(ActionEvent event) {

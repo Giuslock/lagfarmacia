@@ -1,6 +1,6 @@
 package org.univaq.oop.business;
 
-public class FarmacoNonTrovato extends Exception{
+public class FarmacoNonTrovato extends Exception {
     public FarmacoNonTrovato() {
         super();
     }
@@ -20,7 +20,6 @@ public class FarmacoNonTrovato extends Exception{
     public FarmacoNonTrovato(Throwable cause) {
         super(cause);
     }
-
 
 
 }

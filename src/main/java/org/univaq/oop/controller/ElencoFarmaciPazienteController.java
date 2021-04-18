@@ -24,9 +24,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ElencoFarmaciPazienteController implements DataInitializable<User>, Initializable
-
-{
+public class ElencoFarmaciPazienteController implements DataInitializable<User>, Initializable {
     @FXML
     private TableView<Medicine> elencoFarmaciTable;
 
@@ -43,8 +41,8 @@ public class ElencoFarmaciPazienteController implements DataInitializable<User>,
     private Button schedaButton;
 
 
-    private ViewDispatcher dispatcher;
-    private MedicineService farmacoService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
 
 
     public ElencoFarmaciPazienteController() {

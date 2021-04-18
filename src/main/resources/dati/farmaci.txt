@@ -1,8 +1,8 @@
 8
-1,asff,sdada,3,335
-2,odod,cavallo,3,383
-3,gaang,ooppela,4,385
-4,asdsda,sdasda,10,100
-5,aazz,ddssd,2,100
-6,pof,poooooooffete,1,100
-7,benvenuto,gol,2,100
+1,asff,sdada,3,320
+2,odod,cavallo,3,382
+3,gaang,ooppela,4,380
+4,asdsda,sdasda,10,9
+5,aazz,ddssd,2,88
+6,pof,poooooooffete,1,96
+7,benvenuto,gol,2,98

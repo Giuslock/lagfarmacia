@@ -39,7 +39,6 @@ public class FarmaciEsaurimentoController implements Initializable, DataInitiali
     private TableColumn<Medicine, String> statoTableColumn;
 
 
-
     @FXML
     private TableColumn<Medicine, String> disponibilitaTableColumn;
 
@@ -50,8 +49,8 @@ public class FarmaciEsaurimentoController implements Initializable, DataInitiali
     private TableColumn<Medicine, Button> azioniTableColumn;
 
 
-    private ViewDispatcher dispatcher;
-    private MedicineService farmacoService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
 
 
     public FarmaciEsaurimentoController() {

@@ -3,14 +3,13 @@ package org.univaq.oop.business.impl.file;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.UserNotFoundException;
 import org.univaq.oop.business.UserService;
+import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Role;
 import org.univaq.oop.domain.User;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class FileUtenteServiceImpl implements UserService {
@@ -22,7 +21,7 @@ public class FileUtenteServiceImpl implements UserService {
     }
 
     @Override
-    public User authenticate(String username, String password) throws UserNotFoundException, BusinessException {
+    public User authenticate(String username, String password) throws BusinessException {
         try {
             FileData fileData = Utility.readAllRows(userFileName);
             for (String[] colonne : fileData.getRighe()) {
@@ -78,9 +77,9 @@ public class FileUtenteServiceImpl implements UserService {
     @Override
     public void addUser(User user) throws BusinessException {
 
-        try{
+        try {
             FileData fileData = Utility.readAllRows(userFileName);
-            try (PrintWriter writer = new PrintWriter(new File(userFileName))){
+            try (PrintWriter writer = new PrintWriter(new File(userFileName))) {
                 long contatore = fileData.getContatore();
                 writer.println((contatore + 1));
                 for (String[] righe : fileData.getRighe()) {
@@ -97,15 +96,15 @@ public class FileUtenteServiceImpl implements UserService {
                 row.append(Utility.SEPARATORE_COLONNA);
                 row.append(user.getPassword());
                 row.append(Utility.SEPARATORE_COLONNA);
-                if(user.getRole().equals(Role.ADMIN)) row.append("ADMIN");
-                if(user.getRole().equals(Role.PHARMACIST)) row.append("PHARMACIST");
-                if(user.getRole().equals(Role.PATIENT)) row.append("PATIENT");
-                if(user.getRole().equals(Role.DOCTOR)) row.append("DOCTOR");
+                if (user.getRole().equals(Role.ADMIN)) row.append("ADMIN");
+                if (user.getRole().equals(Role.PHARMACIST)) row.append("PHARMACIST");
+                if (user.getRole().equals(Role.PATIENT)) row.append("PATIENT");
+                if (user.getRole().equals(Role.DOCTOR)) row.append("DOCTOR");
                 row.append(Utility.SEPARATORE_COLONNA);
                 row.append(user.getFiscalCode());
                 writer.println(row);
             } //chiude try interno
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(e);
         }
@@ -120,7 +119,27 @@ public class FileUtenteServiceImpl implements UserService {
 
     @Override
     public User findPatientByFiscalCode(String fiscalCode) throws BusinessException {
-        return null;
+
+        try {
+            FileData fileData = Utility.readAllRows(userFileName);
+            for (String[] colonne : fileData.getRighe()) {
+                if (colonne[6].equals(fiscalCode)) {
+                    User user = new User();
+                    user.setId((long) Integer.parseInt(colonne[0]));
+                    user.setName(colonne[1]);
+                    user.setSurname(colonne[2]);
+                    user.setUsername(colonne[3]);
+                    user.setPassword(colonne[4]);
+                    user.setRole(Role.valueOf(colonne[5]));
+                    user.setFiscalCode(colonne[6]);
+                    return user;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException(e);
+        }
+        throw new UserNotFoundException();
     }
 
     @Override

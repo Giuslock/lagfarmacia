@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -9,34 +13,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.AggModDettaglioPrescrizione">
    <children>
       <Label layoutX="14.0" prefHeight="121.0" prefWidth="816.0" stylesheets="@layout.css" text="Modifica Prescrizione">
          <font>
             <Font name="Segoe Script" size="35.0" />
          </font>
       </Label>
-      <TableView layoutY="127.0" prefHeight="422.0" prefWidth="203.0">
+      <TableView fx:id="tabellaFarmaci" layoutY="127.0" prefHeight="422.0" prefWidth="203.0">
 
         <columns>
-          <TableColumn fx:id="farmacitablecolumn" prefWidth="123.20003968477249" text="Farmaci" />
-            <TableColumn fx:id="quantitàtablecolumn" prefWidth="75.0" text="Quantità" />
+          <TableColumn fx:id="t1_id" prefWidth="123.20003968477249" text="Id" />
+            <TableColumn fx:id="t1_nome" prefWidth="75.0" text="Nome" />
         </columns>
       </TableView>
 
-      <TableView layoutX="256.0" layoutY="127.0" prefHeight="422.0" prefWidth="218.0">
+      <TableView fx:id="tabellaFarmaciInPrescrizione" layoutX="256.0" layoutY="127.0" prefHeight="422.0" prefWidth="218.0">
 
         <columns>
-          <TableColumn fx:id="farmaciselezionatitablecolumn" prefWidth="137.5999755859375" text="Farmaci Selezionati" />
-            <TableColumn fx:id="quantitàselezionatatablecolumn" prefWidth="75.0" text="Quantità" />
+          <TableColumn fx:id="t2_nome" prefWidth="137.5999755859375" text="Farmaci Selezionati" />
+            <TableColumn fx:id="t2_quantity" prefWidth="75.0" text="Quantità" />
         </columns>
       </TableView>
 
       <TextField fx:id="codicetextfield" alignment="TOP_CENTER" layoutX="573.0" layoutY="127.0" prefHeight="26.0" prefWidth="203.0" promptText="Codice Fiscale" />
-      <TextArea fx:id="descrizionitext" layoutX="573.0" layoutY="163.0" prefHeight="385.0" prefWidth="203.0" promptText="Descrizione" />
-      <Button layoutX="609.0" layoutY="564.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" styleClass="Button" stylesheets="@loginButton.css" text="Salva" />
-      <Button fx:id="aggiungibutton" layoutX="57.0" layoutY="571.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="aggiungi" />
-      <Button fx:id="rimuovibutton" layoutX="320.0" layoutY="571.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="rimuovi" />
+      <TextArea fx:id="descrizione" layoutX="573.0" layoutY="163.0" prefHeight="385.0" prefWidth="203.0" promptText="Descrizione" />
+      <Button fx:id="salvaButton" layoutX="609.0" layoutY="564.0" mnemonicParsing="false" onAction="#creaPrescrizione" prefHeight="40.0" prefWidth="131.0" styleClass="Button" stylesheets="@loginButton.css" text="Salva" />
+      <Button fx:id="aggiungifarmaco" layoutX="57.0" layoutY="571.0" mnemonicParsing="false" onAction="#aggiungifarmaco" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="aggiungi" />
+      <Button fx:id="deleteBtnT2" layoutX="320.0" layoutY="571.0" mnemonicParsing="false" onAction="#rimuoviFarmacoDallaPrescrizione" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="rimuovi" />
 
    </children>
 </AnchorPane>

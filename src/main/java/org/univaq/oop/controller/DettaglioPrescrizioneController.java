@@ -15,6 +15,7 @@ import org.univaq.oop.domain.MedicinePrescription;
 import org.univaq.oop.domain.Prescription;
 import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
+
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -23,35 +24,27 @@ import java.util.stream.Collectors;
 
 public class DettaglioPrescrizioneController implements Initializable, DataInitializable<Prescription> {
 
-    @FXML
-    private TableView<MedicinePrescription> dettaglioPrescrizioneTable;
-
-    @FXML
-    private TableColumn<MedicinePrescription, String> nomeTableColumn;
-
-    @FXML
-    private TableColumn<MedicinePrescription, Long> codiceTableColumn;
-
-    @FXML
-    private TableColumn<MedicinePrescription, Integer> quantityTableColumn;
-
-    @FXML
-    private TextField farmpreTextField;
-
-    @FXML
-    private Button evadiButton;
 
     private final ViewDispatcher dispatcher;
     private final MedicineService farmacoService;
     private final PrescriptionService prescriptionService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
+    @FXML
+    private TableView<MedicinePrescription> dettaglioPrescrizioneTable;
+    @FXML
+    private TableColumn<MedicinePrescription, String> nomeTableColumn;
+    @FXML
+    private TableColumn<MedicinePrescription, Long> codiceTableColumn;
+    @FXML
+    private TableColumn<MedicinePrescription, Integer> quantityTableColumn;
+    @FXML
+    private TextField farmpreTextField;
+    @FXML
+    private Button evadiButton;
     private Map<Medicine, Integer> farmaciWithQuantityMap;
     private Medicine medicine = new Medicine();
     private Prescription prescription;
     private User utente;
-
-
-
 
     public DettaglioPrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();

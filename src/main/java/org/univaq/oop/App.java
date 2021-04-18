@@ -6,7 +6,6 @@ import org.univaq.oop.view.ViewDispatcher;
 import org.univaq.oop.view.ViewException;
 
 
-
 /**
  * JavaFX App
  */
@@ -25,8 +24,6 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
-
-
 
 
 }

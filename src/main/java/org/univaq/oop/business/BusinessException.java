@@ -1,6 +1,6 @@
 package org.univaq.oop.business;
 
-public class BusinessException extends Exception{
+public class BusinessException extends Exception {
 
     public BusinessException() {
         super();

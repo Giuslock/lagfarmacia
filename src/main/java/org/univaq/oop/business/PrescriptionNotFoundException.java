@@ -1,8 +1,9 @@
 package org.univaq.oop.business;
 
-public class PrescriptionNotFoundException extends BusinessException{
-    public PrescriptionNotFoundException(){
+public class PrescriptionNotFoundException extends BusinessException {
+    public PrescriptionNotFoundException() {
     }
+
     public PrescriptionNotFoundException(String message, Throwable cause, boolean enableSuppression,
                                          boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);

@@ -20,12 +20,11 @@ import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class PrescrizioniPazienteController  implements DataInitializable<User>, Initializable {
+public class PrescrizioniPazienteController implements DataInitializable<User>, Initializable {
     @FXML
     private TableView<Prescription> elencoPrescrizioniTable;
 
@@ -33,7 +32,7 @@ public class PrescrizioniPazienteController  implements DataInitializable<User>,
     private TableColumn<Prescription, String> numeroTableColumn;
 
     @FXML
-    private TableColumn<Prescription,String> descriptionTableColumn;
+    private TableColumn<Prescription, String> descriptionTableColumn;
 
     @FXML
     private TableColumn<Prescription, User> medicoTableColumn;
@@ -48,7 +47,6 @@ public class PrescrizioniPazienteController  implements DataInitializable<User>,
     private TableColumn<?, ?> statoTableColumn;
 
 
-
     @FXML
     private Label errorText;
 
@@ -56,9 +54,9 @@ public class PrescrizioniPazienteController  implements DataInitializable<User>,
     private Button dettagliButton;
 
 
-    private ViewDispatcher dispatcher;
-    private PrescriptionService prescrizioneService;
-    private MedicineService farmacoService;
+    private final ViewDispatcher dispatcher;
+    private final PrescriptionService prescrizioneService;
+    private final MedicineService farmacoService;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
     public PrescrizioniPazienteController() {
