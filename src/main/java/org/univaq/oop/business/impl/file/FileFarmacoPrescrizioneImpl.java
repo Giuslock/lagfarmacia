@@ -125,5 +125,39 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
         }
     }
 
+    @Override
+    public void updateFarmacoQuantityInFarmacoPrescrizione(Long farmacoId, Long prescrizioneId, int newQuantity) {
+        try {
+            FileData fileData = Utility.readAllRows(farmacoPrescrizioneFileName);
+            try (PrintWriter writer = new PrintWriter(farmacoPrescrizioneFileName)) {
+                writer.println(fileData.getContatore());
+                for (String[] righe : fileData.getRighe()) {
+                    if (Long.parseLong(righe[1]) == farmacoId && Long.parseLong(righe[2]) == prescrizioneId) {
+                        StringBuilder row = new StringBuilder();
+                        String temp = righe[0];
+                        row.append(temp);
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(farmacoId);
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(prescrizioneId);
+                        row.append(Utility.SEPARATORE_COLONNA);
+                        row.append(newQuantity);
+                        writer.println(row);
+                    } else {
+                        writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    @Override
+    public MedicinePrescription farmacoSingoloInFarmacoPrescrizione(Medicine f) {
+        return new MedicinePrescription(f.getId(), f.getName(), 1);
+    }
+
 
 }

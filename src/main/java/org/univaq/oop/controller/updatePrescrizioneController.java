@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.univaq.oop.App;
 import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.MedicinePrescription;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class AggModDettaglioPrescrizione implements Initializable, DataInitializable<User>{
+public class updatePrescrizioneController implements Initializable,DataInitializable<Prescription> {
 
     @FXML
     public TableView<Medicine> tabellaFarmaci;
@@ -39,7 +38,7 @@ public class AggModDettaglioPrescrizione implements Initializable, DataInitializ
     @FXML
     public Button deleteBtnT2;
     @FXML
-    public Button creaBtn;
+    public Button salva;
     @FXML
     private TextField codicetextfield;
     @FXML
@@ -49,30 +48,28 @@ public class AggModDettaglioPrescrizione implements Initializable, DataInitializ
     private MedicineService farmacoService;
     private PrescriptionService prescriptionService;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
-    private Map<Medicine, Integer> farmaciWithQuantityMap;
-    private Prescription prescription;
+    private Prescription prescrizione;
     private ObservableList<MedicinePrescription> listaFarmaciNellaPrescrizione;
     private Map<Medicine, Integer> farmaciNellaPrescrizione;
     private UserService userService;
     private User user;
 
-    public AggModDettaglioPrescrizione() {
+    public updatePrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
         prescriptionService = factory.getPrescrizioneService();
         userService = factory.getUtenteService();
         farmacoPrescrizioneService = factory.getFarmacoPrescrizioneService();
-        this.farmaciWithQuantityMap = new HashMap<>();
         this.farmaciNellaPrescrizione = new HashMap<>();
-        this.prescription = new Prescription();
+
+
 
     }
 
     @Override
-    public void initializeData(User user) {
-        this.user = user;
-
+    public void initializeData(Prescription prescription) {
+        this.prescrizione = prescription;
         try {
             List<Medicine> farmaci = null;
             farmaci = farmacoService.findAllFarmaci();
@@ -81,11 +78,15 @@ public class AggModDettaglioPrescrizione implements Initializable, DataInitializ
         } catch (BusinessException e) {
             e.printStackTrace();
         }
+
+        try {
+            this.farmaciNellaPrescrizione = this.farmacoPrescrizioneService.getMedicineFromPrescription(prescrizione.getId());
+        } catch (BusinessException e) {
+            e.printStackTrace();
+        }
         List<MedicinePrescription> farmacoPrescrizioneList = farmacoPrescrizioneService.mapToFarmacoPrescrizione(this.farmaciNellaPrescrizione);
-//        ObservableList<MedicinePrescription> medicinePrescriptions = FXCollections.observableArrayList(farmacoPrescrizioneList);
         this.listaFarmaciNellaPrescrizione = FXCollections.observableArrayList(farmacoPrescrizioneList);
         this.tabellaFarmaciInPrescrizione.setItems(this.listaFarmaciNellaPrescrizione);
-
     }
 
     @Override
@@ -102,45 +103,42 @@ public class AggModDettaglioPrescrizione implements Initializable, DataInitializ
     public void aggiungifarmaco() {
         Medicine f = this.tabellaFarmaci.getSelectionModel().getSelectedItem();
 
-        if(this.farmaciNellaPrescrizione.containsKey(f)) {
+        if (this.farmaciNellaPrescrizione.containsKey(f)) {
             int quantity = this.farmaciNellaPrescrizione.get(f) + 1;
             this.farmaciNellaPrescrizione.replace(f, quantity);
+            this.listaFarmaciNellaPrescrizione.setAll(
+                    farmacoPrescrizioneService.mapToFarmacoPrescrizione(this.farmaciNellaPrescrizione)
+            );
+            this.farmacoPrescrizioneService.updateFarmacoQuantityInFarmacoPrescrizione(f.getId(), prescrizione.getId(), quantity);
         } else {
-            this.farmaciNellaPrescrizione.put(f,1);
+            this.farmaciNellaPrescrizione.put(f, 1);
+            this.listaFarmaciNellaPrescrizione.add(farmacoPrescrizioneService.farmacoSingoloInFarmacoPrescrizione(f));
+            this.farmacoPrescrizioneService.insertFarmacoInPrescrizione(f.getId(), prescrizione.getId(), 1);
+        }
+    }
+
+        @FXML
+        public void salva(){
+            dispatcher.renderView("prescrizioniMedico",user);
         }
 
-        this.listaFarmaciNellaPrescrizione.setAll(
-                farmacoPrescrizioneService.mapToFarmacoPrescrizione(farmaciNellaPrescrizione)
-        );
-    }
 
+        @FXML
+        public void rimuoviFarmacoDallaPrescrizione() {
+            MedicinePrescription fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
+            this.farmacoPrescrizioneService.deleteFarmacoFromPrescrizione(fp.getId(), prescrizione.getId());
 
-    @FXML
-    public void rimuoviFarmacoDallaPrescrizione() {
-        MedicinePrescription fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
-        Long prescrizione_id = this.prescription.getId();
-        this.farmacoPrescrizioneService.deleteFarmacoFromPrescrizione(fp.getId(), prescrizione_id);
-        this.listaFarmaciNellaPrescrizione.remove(fp);
-    }
+            // Devo rimuovere anche dalla lista non solo dall'observable
+            // mi rendera' piu' facile l'eliminazione e/o aggiunta del farmaco nell'observable
+            Medicine toDelete = null;
+            for(Medicine f: farmaciNellaPrescrizione.keySet()) {
+                if(f.getId().equals(fp.getId())) toDelete = f;
+            }
+            this.farmaciNellaPrescrizione.remove(toDelete);
 
-    @FXML
-    public void creaPrescrizione() throws BusinessException {
-        User prova;
-        prova = userService.findPatientByFiscalCode(codicetextfield.getText());
-        this.prescription.setUserId(Math.toIntExact(prova.getId()));
+            this.listaFarmaciNellaPrescrizione.remove(fp);
+        }
 
-        this.prescription.setDoctorId(user.getId().intValue());
-        this.prescription.setDescription(this.descrizione.getText());
-        Prescription prescrizioneInserita = this.prescriptionService.createPrescrizione(this.prescription);
-
-        farmaciNellaPrescrizione.forEach((farmaco, quantity) -> this.farmacoPrescrizioneService.insertFarmacoInPrescrizione(
-                farmaco.getId(),
-                prescrizioneInserita.getId(),
-                quantity
-        ));
-    dispatcher.renderView("prescrizioniMedico",user);
-
-    }
 
 
 }

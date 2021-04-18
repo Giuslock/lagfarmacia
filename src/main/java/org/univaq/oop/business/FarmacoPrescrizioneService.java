@@ -17,4 +17,8 @@ public interface FarmacoPrescrizioneService {
 
     void insertFarmacoInPrescrizione(Long farmacoId, Long prescrizioneId, int quantity);
 
+    void updateFarmacoQuantityInFarmacoPrescrizione(Long farmacoId, Long prescrizioneId, int newQuantity);
+
+    MedicinePrescription farmacoSingoloInFarmacoPrescrizione(Medicine f);
+
 }

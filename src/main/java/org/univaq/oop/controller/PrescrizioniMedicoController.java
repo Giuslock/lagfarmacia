@@ -1,8 +1,12 @@
 package org.univaq.oop.controller;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,10 +14,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.business.PrescriptionService;
+import org.univaq.oop.domain.MedicinePrescription;
 import org.univaq.oop.domain.Prescription;
 import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
@@ -40,7 +46,7 @@ public class PrescrizioniMedicoController implements DataInitializable<User>, In
     private TableColumn<?, ?> descriptionTableColumn;
 
     @FXML
-    private TableColumn<?, ?> azioniTableColumn1;
+    private TableColumn<Prescription, Button> azioniTableColumn1;
 
     @FXML
     private TableColumn<?, ?> pazienteTableColumn;
@@ -88,12 +94,29 @@ public class PrescrizioniMedicoController implements DataInitializable<User>, In
         pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
         azioniTableColumn1.setCellValueFactory(new PropertyValueFactory<>("userId"));
         azioniTableColumn1.setStyle("-fx-alignment: CENTER;");
+        azioniTableColumn1.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Prescription, Button>, ObservableValue<Button>>() {
+                    @Override
+                    public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescription, Button> param) {
+                        final Button updateButton = new Button("Modifica");
+
+                        updateButton.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                dispatcher.renderView("modificaPrescrizione", param.getValue());
+
+                            }
+                        });
+                        return new SimpleObjectProperty<Button>(updateButton);
+                    }
+                });
     }
 
     @FXML
     public void aggiungiAction() {
         Prescription voidPrescription = new Prescription();
-        dispatcher.renderView("modificaDettaglioPrescrizione", utente);
+        dispatcher.renderView("CreaPrescrizione", utente);
     }
 
 
