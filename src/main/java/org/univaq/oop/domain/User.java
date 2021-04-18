@@ -34,13 +34,14 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public User(Long id, String name, String surname, String username, String password, Role role) {
+    public User(Long id, String name, String surname, String username, String password, Role role, String fiscalCode) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.fiscalCode = fiscalCode;
     }
 
     public List<Prescription> getPrescriptions() {
