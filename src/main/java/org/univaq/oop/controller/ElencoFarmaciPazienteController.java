@@ -25,24 +25,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ElencoFarmaciPazienteController implements DataInitializable<User>, Initializable {
-    @FXML
-    private TableView<Medicine> elencoFarmaciTable;
-
-    @FXML
-    private TableColumn<Medicine, String> nomeTableColumn;
-
-    @FXML
-    private TableColumn<Medicine, String> descriptionTableColumn;
-
-    @FXML
-    private TableColumn<Medicine, Button> azioniTableColumn;
-
-    @FXML
-    private Button schedaButton;
-
-
     private final ViewDispatcher dispatcher;
     private final MedicineService farmacoService;
+    @FXML
+    private TableView<Medicine> elencoFarmaciTable;
+    @FXML
+    private TableColumn<Medicine, String> nomeTableColumn;
+    @FXML
+    private TableColumn<Medicine, String> descriptionTableColumn;
+    @FXML
+    private TableColumn<Medicine, Button> azioniTableColumn;
+    @FXML
+    private Button schedaButton;
 
 
     public ElencoFarmaciPazienteController() {

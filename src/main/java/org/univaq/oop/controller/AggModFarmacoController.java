@@ -14,7 +14,7 @@ import org.univaq.oop.view.ViewDispatcher;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AggModFarmacoController implements Initializable, DataInitializable <Medicine> {
+public class AggModFarmacoController implements Initializable, DataInitializable<Medicine> {
 
     @FXML
     private TextField nametext;
@@ -37,8 +37,8 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     private User utente;
     private Medicine medicine;
-    private ViewDispatcher dispatcher;
-    private MedicineService medicineService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService medicineService;
 
     public AggModFarmacoController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();
@@ -47,7 +47,8 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
     //vengono caricati i dati dei farmaci nelle textfield
     @Override
@@ -61,11 +62,8 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     }
 
-    // id, data, idFarmaco1, qtyFarmaco2, idFaramco2....
-
-    //al click del tasto salva
     @FXML
-    public void salvaAction()  {
+    public void salvaAction() {
         try {
             medicine.setName(nametext.getText());
             medicine.setDescription(descriptiontext.getText());
@@ -74,16 +72,14 @@ public class AggModFarmacoController implements Initializable, DataInitializable
             medicine.setOutOfStock();
             medicine.setStatoFarmaco();
 
-            if( medicine.getId() == null) {
+            if (medicine.getId() == null) {
                 medicineService.addFarmaco(medicine);
 
-            }
-
-            else {
+            } else {
                 medicineService.updateFarmaco(medicine);
             }
 
-            dispatcher.renderView("elencoFarmaci",utente);
+            dispatcher.renderView("elencoFarmaci", utente);
         } catch (BusinessException e) {
 
             dispatcher.renderError(e);
@@ -92,9 +88,9 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     @FXML
     public void eliminaAction() throws BusinessException {
-        Long id  = medicine.getId();
+        Long id = medicine.getId();
         medicineService.deleteFarmaco(id);
-        dispatcher.renderView("elencoFarmaci",utente);
+        dispatcher.renderView("elencoFarmaci", utente);
     }
 }
 

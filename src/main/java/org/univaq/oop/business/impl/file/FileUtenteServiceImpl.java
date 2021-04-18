@@ -3,7 +3,6 @@ package org.univaq.oop.business.impl.file;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.UserNotFoundException;
 import org.univaq.oop.business.UserService;
-import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Role;
 import org.univaq.oop.domain.User;
 
@@ -79,7 +78,7 @@ public class FileUtenteServiceImpl implements UserService {
 
         try {
             FileData fileData = Utility.readAllRows(userFileName);
-            try (PrintWriter writer = new PrintWriter(new File(userFileName))) {
+            try (PrintWriter writer = new PrintWriter(userFileName)) {
                 long contatore = fileData.getContatore();
                 writer.println((contatore + 1));
                 for (String[] righe : fileData.getRighe()) {
@@ -103,7 +102,7 @@ public class FileUtenteServiceImpl implements UserService {
                 row.append(Utility.SEPARATORE_COLONNA);
                 row.append(user.getFiscalCode());
                 writer.println(row);
-            } //chiude try interno
+            }
         } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(e);

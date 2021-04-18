@@ -25,34 +25,25 @@ import java.util.ResourceBundle;
 
 public class PrescrizioniFarmacistaController implements DataInitializable<User>, Initializable {
 
-    @FXML
-    private TableView<Prescription> elencoPrescrizioniTable;
-
-    @FXML
-    private TableColumn<Prescription, String> numeroTableColumn;
-
-    @FXML
-    private TableColumn<Prescription, String> descriptionTableColumn;
-
-    @FXML
-    private TableColumn<Prescription, User> medicoTableColumn;
-
-    @FXML
-    private TableColumn<Prescription, User> pazienteTableColumn;
-
-    @FXML
-    private TableColumn<Prescription, Button> azioniTableColumn;
-
-    @FXML
-    private Label errorText;
-
-    @FXML
-    private Button dettagliButton;
-
-
     private final ViewDispatcher dispatcher;
     private final PrescriptionService prescrizioneService;
     private final MedicineService farmacoService;
+    @FXML
+    private TableView<Prescription> elencoPrescrizioniTable;
+    @FXML
+    private TableColumn<Prescription, String> numeroTableColumn;
+    @FXML
+    private TableColumn<Prescription, String> descriptionTableColumn;
+    @FXML
+    private TableColumn<Prescription, User> medicoTableColumn;
+    @FXML
+    private TableColumn<Prescription, User> pazienteTableColumn;
+    @FXML
+    private TableColumn<Prescription, Button> azioniTableColumn;
+    @FXML
+    private Label errorText;
+    @FXML
+    private Button dettagliButton;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
     public PrescrizioniFarmacistaController() {

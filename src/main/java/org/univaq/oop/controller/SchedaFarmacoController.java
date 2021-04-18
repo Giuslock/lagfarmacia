@@ -15,22 +15,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SchedaFarmacoController implements Initializable, DataInitializable<Medicine> {
-    @FXML
-    private TextField nametext;
-
-    @FXML
-    private TextField descriptiontext;
-
-    @FXML
-    private TextField statusText;
-
-    @FXML
-    private Button backButton;
-
-    private User utente;
-    private Medicine medicine;
     private final ViewDispatcher dispatcher;
     private final MedicineService medicineService;
+    @FXML
+    private TextField nametext;
+    @FXML
+    private TextField descriptiontext;
+    @FXML
+    private TextField statusText;
+    @FXML
+    private Button backButton;
+    private User utente;
+    private Medicine medicine;
 
     public SchedaFarmacoController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class updatePrescrizioneController implements Initializable,DataInitializable<Prescription> {
+public class updatePrescrizioneController implements Initializable, DataInitializable<Prescription> {
 
     @FXML
     public TableView<Medicine> tabellaFarmaci;
@@ -44,14 +44,14 @@ public class updatePrescrizioneController implements Initializable,DataInitializ
     @FXML
     private TextArea descrizione;
 
-    private ViewDispatcher dispatcher;
-    private MedicineService farmacoService;
-    private PrescriptionService prescriptionService;
-    private FarmacoPrescrizioneService farmacoPrescrizioneService;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
+    private final PrescriptionService prescriptionService;
+    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
     private Prescription prescrizione;
     private ObservableList<MedicinePrescription> listaFarmaciNellaPrescrizione;
     private Map<Medicine, Integer> farmaciNellaPrescrizione;
-    private UserService userService;
+    private final UserService userService;
     private User user;
 
     public updatePrescrizioneController() {
@@ -62,7 +62,6 @@ public class updatePrescrizioneController implements Initializable,DataInitializ
         userService = factory.getUtenteService();
         farmacoPrescrizioneService = factory.getFarmacoPrescrizioneService();
         this.farmaciNellaPrescrizione = new HashMap<>();
-
 
 
     }
@@ -117,28 +116,27 @@ public class updatePrescrizioneController implements Initializable,DataInitializ
         }
     }
 
-        @FXML
-        public void salva(){
-            dispatcher.renderView("prescrizioniMedico",user);
+    @FXML
+    public void salva() {
+        dispatcher.renderView("prescrizioniMedico", user);
+    }
+
+
+    @FXML
+    public void rimuoviFarmacoDallaPrescrizione() {
+        MedicinePrescription fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
+        this.farmacoPrescrizioneService.deleteFarmacoFromPrescrizione(fp.getId(), prescrizione.getId());
+
+        // Devo rimuovere anche dalla lista non solo dall'observable
+        // mi rendera' piu' facile l'eliminazione e/o aggiunta del farmaco nell'observable
+        Medicine toDelete = null;
+        for (Medicine f : farmaciNellaPrescrizione.keySet()) {
+            if (f.getId().equals(fp.getId())) toDelete = f;
         }
+        this.farmaciNellaPrescrizione.remove(toDelete);
 
-
-        @FXML
-        public void rimuoviFarmacoDallaPrescrizione() {
-            MedicinePrescription fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
-            this.farmacoPrescrizioneService.deleteFarmacoFromPrescrizione(fp.getId(), prescrizione.getId());
-
-            // Devo rimuovere anche dalla lista non solo dall'observable
-            // mi rendera' piu' facile l'eliminazione e/o aggiunta del farmaco nell'observable
-            Medicine toDelete = null;
-            for(Medicine f: farmaciNellaPrescrizione.keySet()) {
-                if(f.getId().equals(fp.getId())) toDelete = f;
-            }
-            this.farmaciNellaPrescrizione.remove(toDelete);
-
-            this.listaFarmaciNellaPrescrizione.remove(fp);
-        }
-
+        this.listaFarmaciNellaPrescrizione.remove(fp);
+    }
 
 
 }

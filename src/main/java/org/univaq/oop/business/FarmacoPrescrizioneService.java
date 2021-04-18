@@ -5,7 +5,6 @@ import org.univaq.oop.domain.MedicinePrescription;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public interface FarmacoPrescrizioneService {
 

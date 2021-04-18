@@ -30,13 +30,10 @@ public class LayoutController implements Initializable, DataInitializable<User> 
             new MenuElement("Farmaci", "elencoFarmaciPaziente")};
 
     private static final MenuElement MENU_MEDICI = new MenuElement("Prescrizioni", "prescrizioniMedico");
+    private final ViewDispatcher dispatcher;
     private User utente;
-
-
     @FXML
     private VBox menuBar;
-
-    private final ViewDispatcher dispatcher;
 
     public LayoutController() {
         dispatcher = ViewDispatcher.getInstance();

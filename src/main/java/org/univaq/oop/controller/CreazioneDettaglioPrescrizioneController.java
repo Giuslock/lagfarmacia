@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.univaq.oop.App;
 import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.MedicinePrescription;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class CreazioneDettaglioPrescrizioneController implements Initializable, DataInitializable<User>{
+public class CreazioneDettaglioPrescrizioneController implements Initializable, DataInitializable<User> {
 
     @FXML
     public TableView<Medicine> tabellaFarmaci;
@@ -45,14 +44,14 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @FXML
     private TextArea descrizione;
 
-    private ViewDispatcher dispatcher;
-    private MedicineService farmacoService;
-    private PrescriptionService prescriptionService;
-    private FarmacoPrescrizioneService farmacoPrescrizioneService;
-    private Prescription prescription;
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
+    private final PrescriptionService prescriptionService;
+    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
+    private final Prescription prescription;
     private ObservableList<MedicinePrescription> listaFarmaciNellaPrescrizione;
-    private Map<Medicine, Integer> farmaciNellaPrescrizione;
-    private UserService userService;
+    private final Map<Medicine, Integer> farmaciNellaPrescrizione;
+    private final UserService userService;
     private User user;
 
     public CreazioneDettaglioPrescrizioneController() {
@@ -99,11 +98,11 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     public void aggiungifarmaco() {
         Medicine f = this.tabellaFarmaci.getSelectionModel().getSelectedItem();
 
-        if(this.farmaciNellaPrescrizione.containsKey(f)) {
+        if (this.farmaciNellaPrescrizione.containsKey(f)) {
             int quantity = this.farmaciNellaPrescrizione.get(f) + 1;
             this.farmaciNellaPrescrizione.replace(f, quantity);
         } else {
-            this.farmaciNellaPrescrizione.put(f,1);
+            this.farmaciNellaPrescrizione.put(f, 1);
         }
 
         this.listaFarmaciNellaPrescrizione.setAll(
@@ -122,7 +121,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
 
     @FXML
     public void creaPrescrizione() throws BusinessException {
-         this.prescription.setUserId(Math.toIntExact(userService.findPatientByFiscalCode(codicetextfield.getText()).getId()));
+        this.prescription.setUserId(Math.toIntExact(userService.findPatientByFiscalCode(codicetextfield.getText()).getId()));
 
         this.prescription.setDoctorId(user.getId().intValue());
         this.prescription.setDescription(this.descrizione.getText());
@@ -133,7 +132,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
                 prescrizioneInserita.getId(),
                 quantity
         ));
-    dispatcher.renderView("prescrizioniMedico",user);
+        dispatcher.renderView("prescrizioniMedico", user);
 
     }
 

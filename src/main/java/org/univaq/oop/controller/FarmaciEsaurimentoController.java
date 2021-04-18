@@ -26,31 +26,22 @@ import java.util.ResourceBundle;
 
 public class FarmaciEsaurimentoController implements Initializable, DataInitializable<User> {
 
-    @FXML
-    private TableView<Medicine> elencoFarmaciTable;
-
-    @FXML
-    private TableColumn<Medicine, String> nomeTableColumn;
-
-    @FXML
-    private TableColumn<Medicine, String> codiceTableColumn;
-
-    @FXML
-    private TableColumn<Medicine, String> statoTableColumn;
-
-
-    @FXML
-    private TableColumn<Medicine, String> disponibilitaTableColumn;
-
-    @FXML
-    private TableColumn<Medicine, String> qtaMinimaTableColumn;
-
-    @FXML
-    private TableColumn<Medicine, Button> azioniTableColumn;
-
-
     private final ViewDispatcher dispatcher;
     private final MedicineService farmacoService;
+    @FXML
+    private TableView<Medicine> elencoFarmaciTable;
+    @FXML
+    private TableColumn<Medicine, String> nomeTableColumn;
+    @FXML
+    private TableColumn<Medicine, String> codiceTableColumn;
+    @FXML
+    private TableColumn<Medicine, String> statoTableColumn;
+    @FXML
+    private TableColumn<Medicine, String> disponibilitaTableColumn;
+    @FXML
+    private TableColumn<Medicine, String> qtaMinimaTableColumn;
+    @FXML
+    private TableColumn<Medicine, Button> azioniTableColumn;
 
 
     public FarmaciEsaurimentoController() {

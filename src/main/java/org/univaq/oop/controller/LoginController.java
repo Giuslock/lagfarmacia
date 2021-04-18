@@ -21,24 +21,18 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
+    private final ViewDispatcher dispatcher;
+    private final UserService utenteService;
     @FXML
     private Label labelErrorLogin;
-
     @FXML
     private TextField usernameText;
-
     @FXML
     private TextField passwordText;
-
     @FXML
     private Button loginButton;
-
     @FXML
     private Button iscrivitiButton;
-
-    private final ViewDispatcher dispatcher;
-
-    private final UserService utenteService;
 
     public LoginController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();

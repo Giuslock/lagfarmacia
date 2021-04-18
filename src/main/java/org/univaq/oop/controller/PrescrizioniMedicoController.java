@@ -5,7 +5,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +18,6 @@ import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.business.PrescriptionService;
-import org.univaq.oop.domain.MedicinePrescription;
 import org.univaq.oop.domain.Prescription;
 import org.univaq.oop.domain.User;
 import org.univaq.oop.view.ViewDispatcher;
@@ -30,39 +28,29 @@ import java.util.ResourceBundle;
 
 public class PrescrizioniMedicoController implements DataInitializable<User>, Initializable {
 
-    @FXML
-    private Label errorLab;
-
-    @FXML
-    private TableView<Prescription> elencoPrescrizioniTable;
-
-    @FXML
-    private TableColumn<?, ?> numeroTableColumn;
-
-    @FXML
-    private TableColumn<?, ?> idTableColumn;
-
-    @FXML
-    private TableColumn<?, ?> descriptionTableColumn;
-
-    @FXML
-    private TableColumn<Prescription, Button> azioniTableColumn1;
-
-    @FXML
-    private TableColumn<?, ?> pazienteTableColumn;
-
-
-    @FXML
-    private Label pazienteLab;
-
-    @FXML
-    private Button modificaButton;
-
-    @FXML
-    private Button aggiungiButton;
     private final ViewDispatcher dispatcher;
     private final PrescriptionService prescrizioneService;
     private final MedicineService farmacoService;
+    @FXML
+    private Label errorLab;
+    @FXML
+    private TableView<Prescription> elencoPrescrizioniTable;
+    @FXML
+    private TableColumn<?, ?> numeroTableColumn;
+    @FXML
+    private TableColumn<?, ?> idTableColumn;
+    @FXML
+    private TableColumn<?, ?> descriptionTableColumn;
+    @FXML
+    private TableColumn<Prescription, Button> azioniTableColumn1;
+    @FXML
+    private TableColumn<?, ?> pazienteTableColumn;
+    @FXML
+    private Label pazienteLab;
+    @FXML
+    private Button modificaButton;
+    @FXML
+    private Button aggiungiButton;
     private User utente;
 
     public PrescrizioniMedicoController() {
@@ -72,7 +60,6 @@ public class PrescrizioniMedicoController implements DataInitializable<User>, In
         prescrizioneService = factory.getPrescrizioneService();
         farmacoService = factory.getFarmacoService();
     }
-
 
 
     @Override

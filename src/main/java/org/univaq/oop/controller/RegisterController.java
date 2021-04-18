@@ -17,38 +17,28 @@ import java.util.ResourceBundle;
 
 public class RegisterController implements Initializable, DataInitializable<User> {
 
-    @FXML
-    private TextField nomeText;
-
-    @FXML
-    private TextField cognomeText;
-
-    @FXML
-    private TextField codiceFiscaleText;
-
-    @FXML
-    private TextField usernameIscrivitiText;
-
-    @FXML
-    private PasswordField passwordIscrivitiText;
-
-    @FXML
-    private Button iscrivitiButton;
-
-    @FXML
-    private Button HomeButton;
-
-    @FXML
-    private RadioButton medicoRadioButton;
-
-    @FXML
-    private RadioButton pazienteRadioButton;
-
-    @FXML
-    private RadioButton farmacistaRadioButton;
-
     private final ViewDispatcher dispatcher;
     private final UserService utenteService;
+    @FXML
+    private TextField nomeText;
+    @FXML
+    private TextField cognomeText;
+    @FXML
+    private TextField codiceFiscaleText;
+    @FXML
+    private TextField usernameIscrivitiText;
+    @FXML
+    private PasswordField passwordIscrivitiText;
+    @FXML
+    private Button iscrivitiButton;
+    @FXML
+    private Button HomeButton;
+    @FXML
+    private RadioButton medicoRadioButton;
+    @FXML
+    private RadioButton pazienteRadioButton;
+    @FXML
+    private RadioButton farmacistaRadioButton;
 
 
     public RegisterController() throws BusinessException {

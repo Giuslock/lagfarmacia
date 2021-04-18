@@ -22,23 +22,18 @@ import java.util.stream.Collectors;
 
 
 public class DettaglioPrescrizionePazienteController implements DataInitializable<Prescription>, Initializable {
-    @FXML
-    private TableView<MedicinePrescription> dettaglioPrescrizioneTable;
-
-    @FXML
-    private TableColumn<MedicinePrescription, String> nomeTableColumn;
-
-    @FXML
-    private TableColumn<MedicinePrescription, String> codiceTableColumn;
-
-    @FXML
-    private TableColumn<MedicinePrescription, Integer> quantityTableColumn;
-
-
     private final ViewDispatcher dispatcher;
     private final MedicineService farmacoService;
     private final PrescriptionService prescriptionService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
+    @FXML
+    private TableView<MedicinePrescription> dettaglioPrescrizioneTable;
+    @FXML
+    private TableColumn<MedicinePrescription, String> nomeTableColumn;
+    @FXML
+    private TableColumn<MedicinePrescription, String> codiceTableColumn;
+    @FXML
+    private TableColumn<MedicinePrescription, Integer> quantityTableColumn;
     private Map<Medicine, Integer> farmaciWithQuantityMap;
     private User utente;
 
