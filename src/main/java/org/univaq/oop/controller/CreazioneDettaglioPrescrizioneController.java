@@ -48,7 +48,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     private final MedicineService farmacoService;
     private final PrescriptionService prescriptionService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
-    private final Prescription prescription;
+    private Prescription prescription;
     private ObservableList<MedicinePrescription> listaFarmaciNellaPrescrizione;
     private final Map<Medicine, Integer> farmaciNellaPrescrizione;
     private final UserService userService;
@@ -113,16 +113,28 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
 
     @FXML
     public void rimuoviFarmacoDallaPrescrizione() {
+
         MedicinePrescription fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
-        Long prescrizione_id = this.prescription.getId();
-        this.farmacoPrescrizioneService.deleteFarmacoFromPrescrizione(fp.getId(), prescrizione_id);
+        long idMedicinale = fp.getId();
+
+        // Optional e' come una scatola, all'interno puoi avere qualcosa oppure no
+        var entryDaDeletare = this.farmaciNellaPrescrizione
+                            .keySet()
+                            .stream()
+                            .filter(medicine -> medicine.getId().equals(idMedicinale))
+                            .findFirst();
+       
+                            
+                            
+
+        this.farmaciNellaPrescrizione.remove(entryDaDeletare.get());                            
+
         this.listaFarmaciNellaPrescrizione.remove(fp);
     }
 
     @FXML
     public void creaPrescrizione() throws BusinessException {
         this.prescription.setUserId(Math.toIntExact(userService.findPatientByFiscalCode(codicetextfield.getText()).getId()));
-
         this.prescription.setDoctorId(user.getId().intValue());
         this.prescription.setDescription(this.descrizione.getText());
         Prescription prescrizioneInserita = this.prescriptionService.createPrescrizione(this.prescription);

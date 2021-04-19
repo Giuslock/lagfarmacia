@@ -1,20 +1,19 @@
 package org.univaq.oop.business.impl.jdbc;
 
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.PrescriptionNotFoundException;
 import org.univaq.oop.business.PrescriptionService;
 import org.univaq.oop.domain.Prescription;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBPrescrizioneServiceImpl implements PrescriptionService {
     private static final String GET_USER_PRESCRIZIONI = "select * from prescrizione where utente_id=?";
     private static final String GET_MEDICO_PRESCRIZIONI = "select * from prescrizione where medico_id=? and f_evaso=false";
-    private static final String SELECT_ALL = "select * from prescrizione where f_evaso=false";
+    private static final String GET_PRESCRIZIONI_DA_EVADERE = "select * from prescrizione where f_evaso=false";
+    private static final String SELECT_ALL = "select * from prescrizione";
     private static final String PRESCRIZIONE_WITH_FARMACI = "select * from farmaco_prescrizione where prescrizione_id=?";
     private static final String SELECT_FROM_PRESCRIZIONE_WHERE_ID = "select * from prescrizione where id=?";
     private static final String CREATE_PRESCRIZIONE ="insert into prescrizione (descrizione, medico_id, utente_id) values (?,?,?)";
@@ -26,12 +25,37 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
 
     @Override
     public List<Prescription> findAllPrescrizioni() throws BusinessException {
-        return null;
+        List<Prescription> prescrizioni = new ArrayList<>();
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()) {
+                prescrizioni.add(mapTo(resultSet));
+            }
+
+        } catch (SQLException throwables) {
+            throw new PrescriptionNotFoundException();
+        }
+        return prescrizioni;
     }
 
     @Override
     public List<Prescription> findToEvadePrescriptions() throws BusinessException {
-        return null;
+        List<Prescription> prescrizioni = new ArrayList<>();
+
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(GET_PRESCRIZIONI_DA_EVADERE);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()) {
+                prescrizioni.add(mapTo(resultSet));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return prescrizioni;
     }
 
     @Override
@@ -61,12 +85,34 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
 
     @Override
     public Prescription createPrescrizione(Prescription prescrizione) throws BusinessException {
-        return null;
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(CREATE_PRESCRIZIONE, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, prescrizione.getDescription());
+            statement.setInt(2,prescrizione.getDoctorId());
+            statement.setInt(3,prescrizione.getUserId());
+            statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                prescrizione.setId(rs.getLong(1));
+            }
+
+        }catch (SQLException throwables){
+            throw new PrescriptionNotFoundException();
+        }
+
+        return prescrizione;
     }
 
     @Override
     public void updatePrescrizione(Prescription prescrizione) throws BusinessException {
-
+        try(Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(UPDATE_PRESCRIZIONE);
+            statement.setInt(1, prescrizione.getId().intValue());
+            statement.executeUpdate();
+        }catch (SQLException throwables){
+            throw new PrescriptionNotFoundException();
+        }
     }
 
     @Override

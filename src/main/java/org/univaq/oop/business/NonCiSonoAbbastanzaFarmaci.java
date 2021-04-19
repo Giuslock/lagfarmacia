@@ -1,6 +1,6 @@
 package org.univaq.oop.business;
 
-public class NonCiSonoAbbastanzaFarmaci extends Exception {
+public class NonCiSonoAbbastanzaFarmaci extends BusinessException {
 
     public NonCiSonoAbbastanzaFarmaci() {
         super();

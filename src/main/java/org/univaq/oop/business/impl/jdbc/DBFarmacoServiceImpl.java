@@ -83,6 +83,7 @@ public class DBFarmacoServiceImpl implements MedicineService {
         Medicine medicine = new Medicine();
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SELECT_FARMACO);
+            statement.setInt(1,codice);
             ResultSet rs = statement.executeQuery();
             if(rs.next()){
             medicine.setId(rs.getLong("id"));
@@ -105,7 +106,7 @@ public class DBFarmacoServiceImpl implements MedicineService {
     }
 
     @Override
-    public void deleteFarmaco(Long codice) throws FarmacoInPrescrizioneException {
+    public void deleteFarmaco(Long codice) throws BusinessException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(DESTROY_FARMACO);
             statement.setLong(1, codice);

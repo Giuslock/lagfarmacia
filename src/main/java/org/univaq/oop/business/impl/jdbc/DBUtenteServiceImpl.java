@@ -1,8 +1,10 @@
 package org.univaq.oop.business.impl.jdbc;
 
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.FarmacoNonTrovato;
 import org.univaq.oop.business.UserNotFoundException;
 import org.univaq.oop.business.UserService;
+import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Role;
 import org.univaq.oop.domain.User;
 
@@ -13,6 +15,7 @@ public class DBUtenteServiceImpl implements UserService {
 
     private static final String SELECT_ALL = "select * from utente";
     private static final String SELECT_FROM_UTENTE_WHERE_ID = "select * from utente where id=?";
+    private static final String SELECT_FROM_UTENTE_WHERE_FISCALCODE = "select * from utente where fiscalCode=?";
     private static final String DELETE_FROM_UTENTE_WHERE_ID = "delete from utente where id=?";
     private static final String CREATE_UTENTE = "insert into utente ( name,surname,username,password_,role,fiscalcode) values  (?,?,?,?,?,?) ;";
     private static final String UTENTE_WHERE_USERNAME_AND_PASSWORD = "select * from utente where username=? and password_=?";
@@ -66,7 +69,26 @@ public class DBUtenteServiceImpl implements UserService {
 
     @Override
     public User findPatientByFiscalCode(String fiscalCode) throws BusinessException {
-        return null;
+        User utente = new User();
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(SELECT_FROM_UTENTE_WHERE_FISCALCODE);
+            statement.setString(1,fiscalCode);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()){
+                utente.setId(rs.getLong("id"));
+                utente.setName(rs.getString("name"));
+                utente.setSurname(rs.getString("surname"));
+                utente.setUsername(rs.getString("username"));
+                utente.setPassword(rs.getString("password_"));
+                utente.setFiscalCode(rs.getString("fiscalCode"));
+            }
+            else{
+                throw new UserNotFoundException();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return utente;
     }
 
     @Override
