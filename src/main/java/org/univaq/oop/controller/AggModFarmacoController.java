@@ -18,32 +18,24 @@ import java.util.ResourceBundle;
 
 public class AggModFarmacoController implements Initializable, DataInitializable<Medicine> {
 
-    @FXML
-    private TextField nametext;
-
-    @FXML
-    private TextField descriptiontext;
-
-
-    @FXML
-    private TextField mimimumtext;
-
-    @FXML
-    private TextField quantitytext;
-
-    @FXML
-    private Button salvaButton;
-
-    @FXML
-    private Button eliminaButton;
-
-    @FXML
-    public Label errorMessage;
-
-    private User utente;
-    private Medicine medicine;
     private final ViewDispatcher dispatcher;
     private final MedicineService medicineService;
+    @FXML
+    public Label errorMessage;
+    @FXML
+    private TextField nametext;
+    @FXML
+    private TextField descriptiontext;
+    @FXML
+    private TextField mimimumtext;
+    @FXML
+    private TextField quantitytext;
+    @FXML
+    private Button salvaButton;
+    @FXML
+    private Button eliminaButton;
+    private User utente;
+    private Medicine medicine;
 
     public AggModFarmacoController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();
@@ -97,7 +89,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
         try {
             medicineService.deleteFarmaco(id);
             dispatcher.renderView("elencoFarmaci", utente);
-        }catch (FarmacoInPrescrizioneException e){
+        } catch (FarmacoInPrescrizioneException e) {
             this.errorMessage.setText("Il farmaco e' presente in una prescrizione e non e' possibile eliminarlo");
         }
 

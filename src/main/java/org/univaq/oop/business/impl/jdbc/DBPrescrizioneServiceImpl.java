@@ -16,8 +16,8 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
     private static final String SELECT_ALL = "select * from prescrizione";
     private static final String PRESCRIZIONE_WITH_FARMACI = "select * from farmaco_prescrizione where prescrizione_id=?";
     private static final String SELECT_FROM_PRESCRIZIONE_WHERE_ID = "select * from prescrizione where id=?";
-    private static final String CREATE_PRESCRIZIONE ="insert into prescrizione (descrizione, medico_id, utente_id) values (?,?,?)";
-    private static final String UPDATE_PRESCRIZIONE ="update prescrizione set f_evaso=true where id=?";
+    private static final String CREATE_PRESCRIZIONE = "insert into prescrizione (descrizione, medico_id, utente_id) values (?,?,?)";
+    private static final String UPDATE_PRESCRIZIONE = "update prescrizione set f_evaso=true where id=?";
     private static final String DELETE_PRESCRIZIONE = "delete from prescrizione where id=?";
     private static final String DELETE_FARMACO_FROM_PRESCRIZIONE = "delete from farmaco_prescrizione where farmaco_id=? and prescrizione_id=?";
     private static final String INSERT_FARMACO_IN_PRESCRIZIONE = "insert into farmaco_prescrizione(farmaco_id, prescrizione_id, quantity) values (?, ?, ?)";
@@ -26,11 +26,11 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
     @Override
     public List<Prescription> findAllPrescrizioni() throws BusinessException {
         List<Prescription> prescrizioni = new ArrayList<>();
-        try(Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
             ResultSet resultSet = statement.executeQuery();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 prescrizioni.add(mapTo(resultSet));
             }
 
@@ -44,11 +44,11 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
     public List<Prescription> findToEvadePrescriptions() throws BusinessException {
         List<Prescription> prescrizioni = new ArrayList<>();
 
-        try(Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(GET_PRESCRIZIONI_DA_EVADERE);
             ResultSet resultSet = statement.executeQuery();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 prescrizioni.add(mapTo(resultSet));
             }
 
@@ -62,12 +62,12 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
     public List<Prescription> findPrescrizioniByPatient(int id) throws BusinessException {
         List<Prescription> prescrizioni = new ArrayList<>();
 
-        try(Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(GET_USER_PRESCRIZIONI);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 prescrizioni.add(mapTo(resultSet));
             }
 
@@ -85,11 +85,11 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
 
     @Override
     public Prescription createPrescrizione(Prescription prescrizione) throws BusinessException {
-        try(Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(CREATE_PRESCRIZIONE, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, prescrizione.getDescription());
-            statement.setInt(2,prescrizione.getDoctorId());
-            statement.setInt(3,prescrizione.getUserId());
+            statement.setInt(2, prescrizione.getDoctorId());
+            statement.setInt(3, prescrizione.getUserId());
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -97,7 +97,7 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
                 prescrizione.setId(rs.getLong(1));
             }
 
-        }catch (SQLException throwables){
+        } catch (SQLException throwables) {
             throw new PrescriptionNotFoundException();
         }
 
@@ -106,11 +106,11 @@ public class DBPrescrizioneServiceImpl implements PrescriptionService {
 
     @Override
     public void updatePrescrizione(Prescription prescrizione) throws BusinessException {
-        try(Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_PRESCRIZIONE);
             statement.setInt(1, prescrizione.getId().intValue());
             statement.executeUpdate();
-        }catch (SQLException throwables){
+        } catch (SQLException throwables) {
             throw new PrescriptionNotFoundException();
         }
     }

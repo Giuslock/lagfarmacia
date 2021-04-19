@@ -3,10 +3,10 @@ package org.univaq.oop.business.impl.jdbc;
 import org.univaq.oop.business.*;
 
 public class DBLagBusinessFactoryImpl extends LagBusinessFactory {
-    private UserService utenteService;
-    private MedicineService farmacoService;
-    private PrescriptionService prescrizioneService;
-    private FarmacoPrescrizioneService farmacoPrescrizioneService;
+    private final UserService utenteService;
+    private final MedicineService farmacoService;
+    private final PrescriptionService prescrizioneService;
+    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
 
     public DBLagBusinessFactoryImpl() {
         this.utenteService = new DBUtenteServiceImpl();

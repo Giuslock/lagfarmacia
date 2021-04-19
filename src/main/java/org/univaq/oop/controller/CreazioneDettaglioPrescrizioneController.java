@@ -21,6 +21,12 @@ import java.util.ResourceBundle;
 
 public class CreazioneDettaglioPrescrizioneController implements Initializable, DataInitializable<User> {
 
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
+    private final PrescriptionService prescriptionService;
+    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
+    private final Map<Medicine, Integer> farmaciNellaPrescrizione;
+    private final UserService userService;
     @FXML
     public TableView<Medicine> tabellaFarmaci;
     @FXML
@@ -43,15 +49,8 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     private TextField codicetextfield;
     @FXML
     private TextArea descrizione;
-
-    private final ViewDispatcher dispatcher;
-    private final MedicineService farmacoService;
-    private final PrescriptionService prescriptionService;
-    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
-    private Prescription prescription;
+    private final Prescription prescription;
     private ObservableList<MedicinePrescription> listaFarmaciNellaPrescrizione;
-    private final Map<Medicine, Integer> farmaciNellaPrescrizione;
-    private final UserService userService;
     private User user;
 
     public CreazioneDettaglioPrescrizioneController() {
@@ -119,15 +118,13 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
 
         // Optional e' come una scatola, all'interno puoi avere qualcosa oppure no
         var entryDaDeletare = this.farmaciNellaPrescrizione
-                            .keySet()
-                            .stream()
-                            .filter(medicine -> medicine.getId().equals(idMedicinale))
-                            .findFirst();
-       
-                            
-                            
+                .keySet()
+                .stream()
+                .filter(medicine -> medicine.getId().equals(idMedicinale))
+                .findFirst();
 
-        this.farmaciNellaPrescrizione.remove(entryDaDeletare.get());                            
+
+        this.farmaciNellaPrescrizione.remove(entryDaDeletare.get());
 
         this.listaFarmaciNellaPrescrizione.remove(fp);
     }

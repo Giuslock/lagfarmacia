@@ -7,7 +7,10 @@ import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Prescription;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +72,7 @@ public class DBFarmacoServiceImpl implements MedicineService {
             statement.setString(2, farmaco.getDescription());
             statement.setInt(3, farmaco.getMinimum());
             statement.setInt(4, farmaco.getQuantity());
-            statement.setLong(5,farmaco.getId());
+            statement.setLong(5, farmaco.getId());
             statement.executeUpdate();
 
         } catch (SQLException throwables) {
@@ -83,19 +86,18 @@ public class DBFarmacoServiceImpl implements MedicineService {
         Medicine medicine = new Medicine();
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SELECT_FARMACO);
-            statement.setInt(1,codice);
+            statement.setInt(1, codice);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()){
-            medicine.setId(rs.getLong("id"));
-            medicine.setName(rs.getString("nome"));
-            medicine.setDescription(rs.getString("descrizione"));
-            medicine.setQuantity(rs.getInt("quantity"));
-            medicine.setMinimum(rs.getInt("q_min"));
-            medicine.setOutOfStock();
-            medicine.setStatoFarmaco();
-            }
-            else{
-            throw new FarmacoNonTrovato();
+            if (rs.next()) {
+                medicine.setId(rs.getLong("id"));
+                medicine.setName(rs.getString("nome"));
+                medicine.setDescription(rs.getString("descrizione"));
+                medicine.setQuantity(rs.getInt("quantity"));
+                medicine.setMinimum(rs.getInt("q_min"));
+                medicine.setOutOfStock();
+                medicine.setStatoFarmaco();
+            } else {
+                throw new FarmacoNonTrovato();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -114,7 +116,7 @@ public class DBFarmacoServiceImpl implements MedicineService {
         } catch (SQLException throwables) {
             throw new FarmacoInPrescrizioneException();
 
-    }
+        }
     }
 
     @Override

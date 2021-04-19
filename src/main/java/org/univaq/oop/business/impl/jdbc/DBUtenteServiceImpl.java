@@ -1,10 +1,8 @@
 package org.univaq.oop.business.impl.jdbc;
 
 import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.FarmacoNonTrovato;
 import org.univaq.oop.business.UserNotFoundException;
 import org.univaq.oop.business.UserService;
-import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Role;
 import org.univaq.oop.domain.User;
 
@@ -30,8 +28,9 @@ public class DBUtenteServiceImpl implements UserService {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 user = mapTo(resultSet);
-            } else{
-                throw new UserNotFoundException(); }
+            } else {
+                throw new UserNotFoundException();
+            }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -47,14 +46,14 @@ public class DBUtenteServiceImpl implements UserService {
     @Override
     public void addUser(User user) throws BusinessException {
         try (Connection connection = DatabaseConnection.getConnection()) {
-        PreparedStatement statement = connection.prepareStatement(CREATE_UTENTE, Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, user.getName());
-        statement.setString(2, user.getSurname());
-        statement.setString(3, user.getUsername());
-        statement.setString(4, user.getPassword());
-        statement.setString(5, user.getRole().toString());
-        statement.setString(6, user.getFiscalCode());
-        statement.executeUpdate();
+            PreparedStatement statement = connection.prepareStatement(CREATE_UTENTE, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getSurname());
+            statement.setString(3, user.getUsername());
+            statement.setString(4, user.getPassword());
+            statement.setString(5, user.getRole().toString());
+            statement.setString(6, user.getFiscalCode());
+            statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -72,17 +71,16 @@ public class DBUtenteServiceImpl implements UserService {
         User utente = new User();
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SELECT_FROM_UTENTE_WHERE_FISCALCODE);
-            statement.setString(1,fiscalCode);
+            statement.setString(1, fiscalCode);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 utente.setId(rs.getLong("id"));
                 utente.setName(rs.getString("name"));
                 utente.setSurname(rs.getString("surname"));
                 utente.setUsername(rs.getString("username"));
                 utente.setPassword(rs.getString("password_"));
                 utente.setFiscalCode(rs.getString("fiscalCode"));
-            }
-            else{
+            } else {
                 throw new UserNotFoundException();
             }
         } catch (SQLException throwables) {

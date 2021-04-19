@@ -21,6 +21,11 @@ import java.util.ResourceBundle;
 
 public class updatePrescrizioneController implements Initializable, DataInitializable<Prescription> {
 
+    private final ViewDispatcher dispatcher;
+    private final MedicineService farmacoService;
+    private final PrescriptionService prescriptionService;
+    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
+    private final UserService userService;
     @FXML
     public TableView<Medicine> tabellaFarmaci;
     @FXML
@@ -43,15 +48,9 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     private TextField codicetextfield;
     @FXML
     private TextArea descrizione;
-
-    private final ViewDispatcher dispatcher;
-    private final MedicineService farmacoService;
-    private final PrescriptionService prescriptionService;
-    private final FarmacoPrescrizioneService farmacoPrescrizioneService;
     private Prescription prescrizione;
     private ObservableList<MedicinePrescription> listaFarmaciNellaPrescrizione;
     private Map<Medicine, Integer> farmaciNellaPrescrizione;
-    private final UserService userService;
     private User user;
 
     public updatePrescrizioneController() {
