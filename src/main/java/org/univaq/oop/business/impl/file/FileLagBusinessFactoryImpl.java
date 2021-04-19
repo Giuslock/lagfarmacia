@@ -18,7 +18,7 @@ public class FileLagBusinessFactoryImpl extends LagBusinessFactory {
 
     public FileLagBusinessFactoryImpl() {
         utenteService = new FileUtenteServiceImpl(UTENTI_FILE_NAME);
-        farmacoService = new FileMedicineServiceImpl(FARMACI_FILE_NAME);
+        farmacoService = new FileMedicineServiceImpl(FARMACI_FILE_NAME,FARMACI_PRESCRIZIONI_FILE_NAME);
         prescrizioneService = new FilePrescriptionServiceImpl(PRESCRIZIONI_FILE_NAME);
         farmacoPrescrizioneService = new FileFarmacoPrescrizioneImpl(FARMACI_PRESCRIZIONI_FILE_NAME, FARMACI_FILE_NAME, PRESCRIZIONI_FILE_NAME);
 

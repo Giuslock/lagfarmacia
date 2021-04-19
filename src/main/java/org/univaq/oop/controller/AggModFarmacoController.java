@@ -3,8 +3,10 @@ package org.univaq.oop.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.FarmacoInPrescrizioneException;
 import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.domain.Medicine;
@@ -34,6 +36,9 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     @FXML
     private Button eliminaButton;
+
+    @FXML
+    public Label errorMessage;
 
     private User utente;
     private Medicine medicine;
@@ -89,8 +94,13 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     @FXML
     public void eliminaAction() throws BusinessException {
         Long id = medicine.getId();
-        medicineService.deleteFarmaco(id);
-        dispatcher.renderView("elencoFarmaci", utente);
+        try {
+            medicineService.deleteFarmaco(id);
+            dispatcher.renderView("elencoFarmaci", utente);
+        }catch (FarmacoInPrescrizioneException e){
+            this.errorMessage.setText("Il farmaco e' presente in una prescrizione e non e' possibile eliminarlo");
+        }
+
     }
 }
 

@@ -1,6 +1,7 @@
 package org.univaq.oop.business.impl.file;
 
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.FarmacoInPrescrizioneException;
 import org.univaq.oop.business.MedicineService;
 import org.univaq.oop.domain.Medicine;
 import org.univaq.oop.domain.Prescription;
@@ -14,10 +15,12 @@ import java.util.List;
 public class FileMedicineServiceImpl implements MedicineService {
 
     private final String farmacoFileName;
+    private final String farmacoPrescrizioneFileName;
 
 
-    public FileMedicineServiceImpl(String farmacoFileName) {
+    public FileMedicineServiceImpl(String farmacoFileName, String farmacoPrescrizioneFileName) {
         this.farmacoFileName = farmacoFileName;
+        this.farmacoPrescrizioneFileName = farmacoPrescrizioneFileName;
     }
 
     @Override
@@ -132,8 +135,19 @@ public class FileMedicineServiceImpl implements MedicineService {
 
 
     @Override
-    public void deleteFarmaco(Long codice) {
+    public void deleteFarmaco(Long codice) throws FarmacoInPrescrizioneException {
+
+        FileData prescrizioni = null;
         try {
+            prescrizioni = Utility.readAllRows(farmacoPrescrizioneFileName);
+            for (String[] colonne : prescrizioni.getRighe()) {
+                if(Long.parseLong(colonne[1]) == codice) {
+                    throw new FarmacoInPrescrizioneException();} }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+            try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
             try (PrintWriter writer = new PrintWriter(farmacoFileName)) {
                 writer.println(fileData.getContatore() - 1);

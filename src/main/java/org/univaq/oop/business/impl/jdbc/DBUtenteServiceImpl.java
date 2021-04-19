@@ -1,6 +1,7 @@
 package org.univaq.oop.business.impl.jdbc;
 
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.UserNotFoundException;
 import org.univaq.oop.business.UserService;
 import org.univaq.oop.domain.Role;
 import org.univaq.oop.domain.User;
@@ -13,7 +14,7 @@ public class DBUtenteServiceImpl implements UserService {
     private static final String SELECT_ALL = "select * from utente";
     private static final String SELECT_FROM_UTENTE_WHERE_ID = "select * from utente where id=?";
     private static final String DELETE_FROM_UTENTE_WHERE_ID = "delete from utente where id=?";
-    private static final String CREATE_UTENTE = "insert into utente ( nome,cognome,username,password_,ruolo,fiscalcode) values  (?,?,?,?,?,?) ;";
+    private static final String CREATE_UTENTE = "insert into utente ( name,surname,username,password_,role,fiscalcode) values  (?,?,?,?,?,?) ;";
     private static final String UTENTE_WHERE_USERNAME_AND_PASSWORD = "select * from utente where username=? and password_=?";
 
     @Override
@@ -24,10 +25,10 @@ public class DBUtenteServiceImpl implements UserService {
             statement.setString(1, username);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
-
             if (resultSet.next()) {
                 user = mapTo(resultSet);
-            }
+            } else{
+                throw new UserNotFoundException(); }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,6 +1,6 @@
 package org.univaq.oop.business;
 
-public class FarmacoNonTrovato extends Exception {
+public class FarmacoNonTrovato extends BusinessException {
     public FarmacoNonTrovato() {
         super();
     }

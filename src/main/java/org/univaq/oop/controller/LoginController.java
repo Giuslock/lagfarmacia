@@ -58,6 +58,7 @@ public class LoginController implements Initializable {
         } catch (BusinessException e) {
             dispatcher.renderError(e);
         }
+
     }
 
     //al click del tasto iscriviti
