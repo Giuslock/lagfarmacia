@@ -38,3 +38,5 @@ target
 farmaci.txt
 utenti.txt
 prescrizioni.txt
+
+*.DS_Store
