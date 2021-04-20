@@ -10,13 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
    <children>
       <Label prefHeight="65.0" prefWidth="268.0" text="  Elenco Prescrizioni:">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
+      <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="258.0" />
       <GridPane prefHeight="34.0" prefWidth="684.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="109.0" />

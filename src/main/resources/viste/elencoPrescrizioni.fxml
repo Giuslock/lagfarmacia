@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniPazienteController">
+<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniPazienteController">
    <children>
       <Label prefHeight="105.0" prefWidth="268.0" text="Prescrizioni:">
          <font>
@@ -23,7 +23,7 @@
             <TableColumn fx:id="statoTableColumn" prefWidth="172.7999267578125" resizable="false" text="Stato" />
         </columns>
       </TableView>
-      <Label fx:id="errorText" prefHeight="79.0" prefWidth="316.0" textAlignment="CENTER" textFill="RED">
+      <Label fx:id="errorlabel" prefHeight="79.0" prefWidth="316.0" textAlignment="CENTER" textFill="RED">
          <font>
             <Font size="13.0" />
          </font>
