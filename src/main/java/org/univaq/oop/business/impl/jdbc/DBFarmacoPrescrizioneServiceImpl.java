@@ -2,7 +2,7 @@ package org.univaq.oop.business.impl.jdbc;
 
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.DatabaseException;
-import org.univaq.oop.business.FarmacoNonTrovato;
+import org.univaq.oop.business.FarmacoNonTrovatoException;
 import org.univaq.oop.business.FarmacoPrescrizioneService;
 import org.univaq.oop.domain.Farmaco;
 import org.univaq.oop.domain.FarmacoPrescrizione;
@@ -50,7 +50,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
                         f.setInEsaurimento();
                         f.setStatoFarmaco();
                     } else {
-                        throw new FarmacoNonTrovato();
+                        throw new FarmacoNonTrovatoException();
                     }
                 } catch (SQLException throwables) {
                     throw new DatabaseException();

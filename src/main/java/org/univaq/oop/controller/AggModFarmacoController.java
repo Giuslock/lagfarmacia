@@ -83,7 +83,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
             dispatcher.renderView("elencoFarmaci", utente);
         } catch (BusinessException e) {
-            errorMessage.setText("Problemi di connessione al Database");
+            errorMessage.setText("Errore nell'aggiunta dei farmaci");
             dispatcher.renderError(e);
         }
     }

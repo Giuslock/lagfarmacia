@@ -2,7 +2,7 @@ package org.univaq.oop.business.impl.file;
 
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.CodiceFiscaleException;
-import org.univaq.oop.business.UtenteNonTrovato;
+import org.univaq.oop.business.UtenteNonTrovatoException;
 import org.univaq.oop.business.UtenteService;
 import org.univaq.oop.domain.Ruolo;
 import org.univaq.oop.domain.Utente;
@@ -25,7 +25,6 @@ public class FileUtenteServiceImpl implements UtenteService {
             for (String[] colonne : fileData.getRighe()) {
                 if (colonne[3].equals(username) && colonne[4].equals(password)) {
                     Utente utente = new Utente();
-                    // colonna[3] identifica il ruolo
                     switch (colonne[5]) {
                         case "AMMINISTRATORE":
                             utente.setRuolo(Ruolo.AMMINISTRATORE);
@@ -51,14 +50,11 @@ public class FileUtenteServiceImpl implements UtenteService {
                         utente.setCodiceFiscale(colonne[6]);
 
 
-                    } else {
-                        throw new BusinessException("Errore nella lettura del file");
                     }
-
                     return utente;
                 }
             }
-            throw new UtenteNonTrovato();
+            throw new UtenteNonTrovatoException();
         } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(e);
@@ -111,7 +107,6 @@ public class FileUtenteServiceImpl implements UtenteService {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            throw new BusinessException(e);
         }
 
     }
@@ -133,12 +128,12 @@ public class FileUtenteServiceImpl implements UtenteService {
                     utente.setCodiceFiscale(colonne[6]);
                     return utente;
                 }
-            }
+            } throw new UtenteNonTrovatoException();
+
         } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(e);
         }
-        throw new UtenteNonTrovato();
     }
 
 }
