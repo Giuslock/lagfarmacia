@@ -50,7 +50,7 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     private TextArea descrizione;
     @FXML
     private Label errorlabel;
-    
+
     private Prescrizione prescrizione;
     private ObservableList<FarmacoPrescrizione> listaFarmaciNellaPrescrizione;
     private Map<Farmaco, Integer> farmaciNellaPrescrizione;
