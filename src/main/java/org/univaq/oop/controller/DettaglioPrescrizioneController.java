@@ -65,8 +65,9 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
         try {
             mappaFarmaciEQuantita = farmacoPrescrizioneService.ottieniFarmaciDallaPrescrizione(id);
         } catch (BusinessException e) {
-            e.printStackTrace();
+            errorLabel.setText("Errore nella ricerca dei farmaci dalla prescrizione");
         }
+
         List<FarmacoPrescrizione> listaFarmaciWithQuantity = mappaFarmaciEQuantita.entrySet().stream().map(entry -> new FarmacoPrescrizione(
                 entry.getKey().getId(),
                 entry.getKey().getNome(),
@@ -94,7 +95,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
             try {
                 farmaco = farmacoService.trovaFarmacoDaId((entry.getKey().getId().intValue()));
             } catch (BusinessException e) {
-                e.printStackTrace();
+                errorLabel.setText("Errore nella ricerca del farmaco da id");
             }
             return (farmaco.getQuantita() - entry.getValue()) > 0;
         });
@@ -108,7 +109,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
             prescrizione.setEvasa(evadable);
             prescrizioneService.aggiornaPrescrizione(prescrizione);
             dispatcher.renderView("elencoTuttePrescrizioni", utente);
-        } // settare una label che da' errore e una che dice tutto a posto
+        }
 
 
     }

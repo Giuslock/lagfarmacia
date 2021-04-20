@@ -42,6 +42,7 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
     private Label errorlabel;
 
 
+
     public ElencoFarmaciPazienteController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
@@ -55,7 +56,7 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             elencoFarmaciTable.setItems(farmaciData);
         } catch (BusinessException e) {
-            dispatcher.renderError(e);
+            errorLabel.setText("Errore nella ricerca dei farmaci");
         }
 
     }

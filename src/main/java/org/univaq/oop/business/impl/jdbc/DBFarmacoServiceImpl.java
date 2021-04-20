@@ -100,7 +100,7 @@ public class DBFarmacoServiceImpl implements FarmacoService {
                 throw new FarmacoNonTrovato();
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new DatabaseException();
         }
         return farmaco;
 
