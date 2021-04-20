@@ -21,7 +21,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
     @FXML
-    public Label errorMessage;
+    private Label errorMessage;
     @FXML
     private TextField nametext;
     @FXML

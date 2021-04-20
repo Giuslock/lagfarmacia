@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Farmaco;
@@ -41,6 +38,8 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
     private TextField farmpreTextField;
     @FXML
     private Button evadiButton;
+    @FXML
+    private Label errorLabel;
     private Map<Farmaco, Integer> mappaFarmaciEQuantita;
     private Farmaco farmaco = new Farmaco();
     private Prescrizione prescrizione;
@@ -63,7 +62,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
 
         try {
             mappaFarmaciEQuantita = farmacoPrescrizioneService.ottieniFarmaciDallaPrescrizione(id);
-        } catch (org.univaq.oop.business.BusinessException e) {
+        } catch (BusinessException e) {
             e.printStackTrace();
         }
         List<FarmacoPrescrizione> listaFarmaciWithQuantity = mappaFarmaciEQuantita.entrySet().stream().map(entry -> new FarmacoPrescrizione(
