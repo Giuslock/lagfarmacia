@@ -1,23 +1,23 @@
 package org.univaq.oop.business;
 
-import org.univaq.oop.domain.Medicine;
-import org.univaq.oop.domain.MedicinePrescription;
+import org.univaq.oop.domain.Farmaco;
+import org.univaq.oop.domain.FarmacoPrescrizione;
 
 import java.util.List;
 import java.util.Map;
 
 public interface FarmacoPrescrizioneService {
 
-    Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId) throws BusinessException;
+    Map<Farmaco, Integer> ottieniFarmaciDallaPrescrizione(Long prescriptionId) throws BusinessException;
 
-    List<MedicinePrescription> mapToFarmacoPrescrizione(Map<Medicine, Integer> mappaFarmaci);
+    List<FarmacoPrescrizione> mappaFarmacoPrescrizione(Map<Farmaco, Integer> mappaFarmaci);
 
-    void deleteFarmacoFromPrescrizione(Long id, Long prescrizione_id);
+    void eliminaFarmacoDallaPrescrizione(Long id, Long prescrizione_id);
 
-    void insertFarmacoInPrescrizione(Long farmacoId, Long prescrizioneId, int quantity);
+    void inserisciFarmacoNellaPrescrizione(Long farmacoId, Long prescrizioneId, int quantity);
 
-    void updateFarmacoQuantityInFarmacoPrescrizione(Long farmacoId, Long prescrizioneId, int newQuantity);
+    void aggiornaQuantitaFarmacoInFarmacoPrescrizione(Long farmacoId, Long prescrizioneId, int newQuantity);
 
-    MedicinePrescription farmacoSingoloInFarmacoPrescrizione(Medicine f);
+    FarmacoPrescrizione farmacoSingoloInFarmacoPrescrizione(Farmaco f);
 
 }

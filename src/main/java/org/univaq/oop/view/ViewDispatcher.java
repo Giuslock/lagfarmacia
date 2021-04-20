@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.univaq.oop.controller.DataInitializable;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.domain.Utente;
 
 import java.io.IOException;
 
@@ -50,10 +50,10 @@ public class ViewDispatcher {
     }
 
     //metodo che carica la home page layout
-    public void loggedIn(User utente) {
+    public void loggedIn(Utente utente) {
         try {
-            View<User> layoutView = loadView("layout");
-            DataInitializable<User> layoutController = layoutView.getController();
+            View<Utente> layoutView = loadView("layout");
+            DataInitializable<Utente> layoutController = layoutView.getController();
             layoutController.initializeData(utente);
             layout = (BorderPane) layoutView.getView();
             renderView("home", utente);

@@ -8,18 +8,18 @@ import javafx.scene.control.TextField;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.FarmacoInPrescrizioneException;
 import org.univaq.oop.business.LagBusinessFactory;
-import org.univaq.oop.business.MedicineService;
-import org.univaq.oop.domain.Medicine;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.business.FarmacoService;
+import org.univaq.oop.domain.Farmaco;
+import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AggModFarmacoController implements Initializable, DataInitializable<Medicine> {
+public class AggModFarmacoController implements Initializable, DataInitializable<Farmaco> {
 
     private final ViewDispatcher dispatcher;
-    private final MedicineService medicineService;
+    private final FarmacoService farmacoService;
     @FXML
     public Label errorMessage;
     @FXML
@@ -34,13 +34,13 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     private Button salvaButton;
     @FXML
     private Button eliminaButton;
-    private User utente;
-    private Medicine medicine;
+    private Utente utente;
+    private Farmaco farmaco;
 
     public AggModFarmacoController() throws BusinessException {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
-        medicineService = factory.getFarmacoService();
+        farmacoService = factory.getFarmacoService();
     }
 
     @Override
@@ -49,31 +49,31 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     //vengono caricati i dati dei farmaci nelle textfield
     @Override
-    public void initializeData(Medicine medicine) {
-        this.medicine = medicine;
-        this.nametext.setText(medicine.getName());
-        this.descriptiontext.setText(medicine.getDescription());
+    public void initializeData(Farmaco farmaco) {
+        this.farmaco = farmaco;
+        this.nametext.setText(farmaco.getNome());
+        this.descriptiontext.setText(farmaco.getDescrizione());
 
-        this.quantitytext.setText(String.valueOf(medicine.getQuantity()));
-        this.mimimumtext.setText(String.valueOf(medicine.getMinimum()));
+        this.quantitytext.setText(String.valueOf(farmaco.getQuantita()));
+        this.mimimumtext.setText(String.valueOf(farmaco.getMinimo()));
 
     }
 
     @FXML
     public void salvaAction() {
         try {
-            medicine.setName(nametext.getText());
-            medicine.setDescription(descriptiontext.getText());
-            medicine.setQuantity(Integer.parseInt(quantitytext.getText()));
-            medicine.setMinimum(Integer.parseInt(mimimumtext.getText()));
-            medicine.setOutOfStock();
-            medicine.setStatoFarmaco();
+            farmaco.setNome(nametext.getText());
+            farmaco.setDescrizione(descriptiontext.getText());
+            farmaco.setQuantita(Integer.parseInt(quantitytext.getText()));
+            farmaco.setMinimo(Integer.parseInt(mimimumtext.getText()));
+            farmaco.setOutOfStock();
+            farmaco.setStatoFarmaco();
 
-            if (medicine.getId() == null) {
-                medicineService.addFarmaco(medicine);
+            if (farmaco.getId() == null) {
+                farmacoService.aggiungiFarmaco(farmaco);
 
             } else {
-                medicineService.updateFarmaco(medicine);
+                farmacoService.aggiornaFarmaco(farmaco);
             }
 
             dispatcher.renderView("elencoFarmaci", utente);
@@ -85,9 +85,9 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     @FXML
     public void eliminaAction() throws BusinessException {
-        Long id = medicine.getId();
+        Long id = farmaco.getId();
         try {
-            medicineService.deleteFarmaco(id);
+            farmacoService.eliminaFarmaco(id);
             dispatcher.renderView("elencoFarmaci", utente);
         } catch (FarmacoInPrescrizioneException e) {
             this.errorMessage.setText("Il farmaco e' presente in una prescrizione e non e' possibile eliminarlo");

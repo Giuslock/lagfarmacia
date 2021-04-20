@@ -1,16 +1,16 @@
 package org.univaq.oop.business.impl.file;
 
 import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.UserNotFoundException;
-import org.univaq.oop.business.UserService;
-import org.univaq.oop.domain.Role;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.business.UtenteNonTrovato;
+import org.univaq.oop.business.UtenteService;
+import org.univaq.oop.domain.Ruolo;
+import org.univaq.oop.domain.Utente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class FileUtenteServiceImpl implements UserService {
+public class FileUtenteServiceImpl implements UtenteService {
 
     String userFileName;
 
@@ -19,25 +19,25 @@ public class FileUtenteServiceImpl implements UserService {
     }
 
     @Override
-    public User authenticate(String username, String password) throws BusinessException {
+    public Utente autenticazione(String username, String password) throws BusinessException {
         try {
             FileData fileData = Utility.readAllRows(userFileName);
             for (String[] colonne : fileData.getRighe()) {
                 if (colonne[3].equals(username) && colonne[4].equals(password)) {
-                    User utente = new User();
+                    Utente utente = new Utente();
                     // colonna[3] identifica il ruolo
                     switch (colonne[5]) {
                         case "ADMIN":
-                            utente.setRole(Role.ADMIN);
+                            utente.setRuolo(Ruolo.AMMINISTRATORE);
                             break;
                         case "PHARMACIST":
-                            utente.setRole(Role.PHARMACIST);
+                            utente.setRuolo(Ruolo.FARMACISTA);
                             break;
                         case "PATIENT":
-                            utente.setRole(Role.PATIENT);
+                            utente.setRuolo(Ruolo.PAZIENTE);
                             break;
                         case "DOCTOR":
-                            utente.setRole(Role.DOCTOR);
+                            utente.setRuolo(Ruolo.DOTTORE);
                             break;
                         default:
                             break;
@@ -46,9 +46,9 @@ public class FileUtenteServiceImpl implements UserService {
                         utente.setId((long) Integer.parseInt(colonne[0]));
                         utente.setUsername(username);
                         utente.setPassword(password);
-                        utente.setName(colonne[1]);
-                        utente.setSurname(colonne[2]);
-                        utente.setFiscalCode(colonne[6]);
+                        utente.setNome(colonne[1]);
+                        utente.setCognome(colonne[2]);
+                        utente.setCodiceFiscale(colonne[6]);
 
 
                     } else {
@@ -58,7 +58,7 @@ public class FileUtenteServiceImpl implements UserService {
                     return utente;
                 }
             }
-            throw new UserNotFoundException();
+            throw new UtenteNonTrovato();
         } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(e);
@@ -68,12 +68,12 @@ public class FileUtenteServiceImpl implements UserService {
 
 
     @Override
-    public List<User> userslist() {
+    public List<Utente> userslist() {
         return null;
     }
 
     @Override
-    public void addUser(User user) throws BusinessException {
+    public void aggiungiUtente(Utente utente) throws BusinessException {
 
         try {
             FileData fileData = Utility.readAllRows(userFileName);
@@ -86,20 +86,20 @@ public class FileUtenteServiceImpl implements UserService {
                 StringBuilder row = new StringBuilder();
                 row.append(contatore);
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(user.getName());
+                row.append(utente.getNome());
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(user.getSurname());
+                row.append(utente.getCognome());
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(user.getUsername());
+                row.append(utente.getUsername());
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(user.getPassword());
+                row.append(utente.getPassword());
                 row.append(Utility.SEPARATORE_COLONNA);
-                if (user.getRole().equals(Role.ADMIN)) row.append("ADMIN");
-                if (user.getRole().equals(Role.PHARMACIST)) row.append("PHARMACIST");
-                if (user.getRole().equals(Role.PATIENT)) row.append("PATIENT");
-                if (user.getRole().equals(Role.DOCTOR)) row.append("DOCTOR");
+                if (utente.getRuolo().equals(Ruolo.AMMINISTRATORE)) row.append("ADMIN");
+                if (utente.getRuolo().equals(Ruolo.FARMACISTA)) row.append("PHARMACIST");
+                if (utente.getRuolo().equals(Ruolo.PAZIENTE)) row.append("PATIENT");
+                if (utente.getRuolo().equals(Ruolo.DOTTORE)) row.append("DOCTOR");
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(user.getFiscalCode());
+                row.append(utente.getCodiceFiscale());
                 writer.println(row);
             }
         } catch (IOException e) {
@@ -115,32 +115,32 @@ public class FileUtenteServiceImpl implements UserService {
     }
 
     @Override
-    public User findPatientByFiscalCode(String fiscalCode) throws BusinessException {
+    public Utente trovaPazienteDaCodiceFiscale(String fiscalCode) throws BusinessException {
 
         try {
             FileData fileData = Utility.readAllRows(userFileName);
             for (String[] colonne : fileData.getRighe()) {
                 if (colonne[6].equals(fiscalCode)) {
-                    User user = new User();
-                    user.setId((long) Integer.parseInt(colonne[0]));
-                    user.setName(colonne[1]);
-                    user.setSurname(colonne[2]);
-                    user.setUsername(colonne[3]);
-                    user.setPassword(colonne[4]);
-                    user.setRole(Role.valueOf(colonne[5]));
-                    user.setFiscalCode(colonne[6]);
-                    return user;
+                    Utente utente = new Utente();
+                    utente.setId((long) Integer.parseInt(colonne[0]));
+                    utente.setNome(colonne[1]);
+                    utente.setCognome(colonne[2]);
+                    utente.setUsername(colonne[3]);
+                    utente.setPassword(colonne[4]);
+                    utente.setRuolo(Ruolo.valueOf(colonne[5]));
+                    utente.setCodiceFiscale(colonne[6]);
+                    return utente;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(e);
         }
-        throw new UserNotFoundException();
+        throw new UtenteNonTrovato();
     }
 
     @Override
-    public User findPatientById(int id) throws BusinessException {
+    public Utente findPatientById(int id) throws BusinessException {
         return null;
     }
 }

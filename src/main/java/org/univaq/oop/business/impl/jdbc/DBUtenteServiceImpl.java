@@ -1,58 +1,59 @@
 package org.univaq.oop.business.impl.jdbc;
 
 import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.UserNotFoundException;
-import org.univaq.oop.business.UserService;
-import org.univaq.oop.domain.Role;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.business.UtenteNonTrovato;
+import org.univaq.oop.business.UtenteService;
+import org.univaq.oop.domain.Ruolo;
+import org.univaq.oop.domain.Utente;
 
 import java.sql.*;
 import java.util.List;
 
-public class DBUtenteServiceImpl implements UserService {
+public class DBUtenteServiceImpl implements UtenteService {
+
 
     private static final String SELECT_ALL = "select * from utente";
     private static final String SELECT_FROM_UTENTE_WHERE_ID = "select * from utente where id=?";
-    private static final String SELECT_FROM_UTENTE_WHERE_FISCALCODE = "select * from utente where codicefiscale=?";
+    private static final String SELEZIONA_UTENTE_TRAMITE_FISCALCODE = "select * from utente where codicefiscale=?";
     private static final String DELETE_FROM_UTENTE_WHERE_ID = "delete from utente where id=?";
-    private static final String CREATE_UTENTE = "insert into utente ( nome,cognome,username,password_,role,codicefiscale) values  (?,?,?,?,?,?) ;";
-    private static final String UTENTE_WHERE_USERNAME_AND_PASSWORD = "select * from utente where username=? and password_=?";
+    private static final String AGGIUNGI_UTENTE = "insert into utente ( nome,cognome,username,password_,role,codicefiscale) values  (?,?,?,?,?,?) ;";
+    private static final String SELEZIONA_UTENTE_DA_USERNAME_E_PASSWORD = "select * from utente where username=? and password_=?";
 
     @Override
-    public User authenticate(String username, String password) throws BusinessException {
-        User user = null;
+    public Utente autenticazione(String username, String password) throws BusinessException {
+        Utente utente = null;
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(UTENTE_WHERE_USERNAME_AND_PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(SELEZIONA_UTENTE_DA_USERNAME_E_PASSWORD);
             statement.setString(1, username);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                user = mapTo(resultSet);
+                utente = mapTo(resultSet);
             } else {
-                throw new UserNotFoundException();
+                throw new UtenteNonTrovato();
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return user;
+        return utente;
     }
 
     @Override
-    public List<User> userslist() {
+    public List<Utente> userslist() {
         return null;
     }
 
     @Override
-    public void addUser(User user) throws BusinessException {
+    public void aggiungiUtente(Utente utente) throws BusinessException {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(CREATE_UTENTE, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getSurname());
-            statement.setString(3, user.getUsername());
-            statement.setString(4, user.getPassword());
-            statement.setString(5, user.getRole().toString());
-            statement.setString(6, user.getFiscalCode());
+            PreparedStatement statement = connection.prepareStatement(AGGIUNGI_UTENTE, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, utente.getNome());
+            statement.setString(2, utente.getCognome());
+            statement.setString(3, utente.getUsername());
+            statement.setString(4, utente.getPassword());
+            statement.setString(5, utente.getRuolo().toString());
+            statement.setString(6, utente.getCodiceFiscale());
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -67,21 +68,21 @@ public class DBUtenteServiceImpl implements UserService {
     }
 
     @Override
-    public User findPatientByFiscalCode(String fiscalCode) throws BusinessException {
-        User utente = new User();
+    public Utente trovaPazienteDaCodiceFiscale(String fiscalCode) throws BusinessException {
+        Utente utente = new Utente();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SELECT_FROM_UTENTE_WHERE_FISCALCODE);
+            PreparedStatement statement = connection.prepareStatement(SELEZIONA_UTENTE_TRAMITE_FISCALCODE);
             statement.setString(1, fiscalCode);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 utente.setId(rs.getLong("id"));
-                utente.setName(rs.getString("nome"));
-                utente.setSurname(rs.getString("cognome"));
+                utente.setNome(rs.getString("nome"));
+                utente.setCognome(rs.getString("cognome"));
                 utente.setUsername(rs.getString("username"));
                 utente.setPassword(rs.getString("password_"));
-                utente.setFiscalCode(rs.getString("codicefiscale"));
+                utente.setCodiceFiscale(rs.getString("codicefiscale"));
             } else {
-                throw new UserNotFoundException();
+                throw new UtenteNonTrovato();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -90,27 +91,27 @@ public class DBUtenteServiceImpl implements UserService {
     }
 
     @Override
-    public User findPatientById(int id) throws BusinessException {
+    public Utente findPatientById(int id) throws BusinessException {
         return null;
     }
 
-    protected User mapTo(ResultSet resultSet) {
-        User user = null;
+    protected Utente mapTo(ResultSet resultSet) {
+        Utente utente = null;
         try {
-            user = new User(
+            utente = new Utente(
                     resultSet.getLong(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
                     resultSet.getString(5),
-                    Role.valueOf(resultSet.getString(6).toUpperCase()),
+                    Ruolo.valueOf(resultSet.getString(6).toUpperCase()),
                     resultSet.getString(7)
             );
         } catch (SQLException throwables) {
             System.err.println("ERROR WHILE CONVERTING SQL TO USER OBJECT");
             throwables.printStackTrace();
         }
-        return user;
+        return utente;
     }
 
 }

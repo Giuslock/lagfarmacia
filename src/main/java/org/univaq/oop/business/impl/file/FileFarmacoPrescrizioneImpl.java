@@ -2,8 +2,8 @@ package org.univaq.oop.business.impl.file;
 
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.FarmacoPrescrizioneService;
-import org.univaq.oop.domain.Medicine;
-import org.univaq.oop.domain.MedicinePrescription;
+import org.univaq.oop.domain.Farmaco;
+import org.univaq.oop.domain.FarmacoPrescrizione;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,9 +27,9 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
     }
 
     @Override
-    public Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId) throws BusinessException {
+    public Map<Farmaco, Integer> ottieniFarmaciDallaPrescrizione(Long prescriptionId) throws BusinessException {
 
-        Map<Medicine, Integer> result = new HashMap<>();
+        Map<Farmaco, Integer> result = new HashMap<>();
         try {
 
             FileData fileData = Utility.readAllRows(farmacoPrescrizioneFileName);
@@ -39,12 +39,12 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
                 if (Long.parseLong(colonne[2]) == prescriptionId) {
                     for (String[] colonne2 : fileData2.getRighe()) {
                         if (Integer.parseInt(colonne[1]) == Integer.parseInt(colonne2[0])) {
-                            Medicine farmacoresult = new Medicine();
+                            Farmaco farmacoresult = new Farmaco();
                             farmacoresult.setId((long) Integer.parseInt(colonne2[0]));
-                            farmacoresult.setName(colonne2[1]);
-                            farmacoresult.setDescription(colonne2[2]);
-                            farmacoresult.setMinimum(Integer.parseInt(colonne2[3]));
-                            farmacoresult.setQuantity(Integer.parseInt(colonne2[4]));
+                            farmacoresult.setNome(colonne2[1]);
+                            farmacoresult.setDescrizione(colonne2[2]);
+                            farmacoresult.setMinimo(Integer.parseInt(colonne2[3]));
+                            farmacoresult.setQuantita(Integer.parseInt(colonne2[4]));
                             farmacoresult.setOutOfStock();
                             farmacoresult.setStatoFarmaco();
                             result.put(farmacoresult, Integer.parseInt(colonne[3]));
@@ -61,19 +61,19 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
     }
 
     @Override
-    public List<MedicinePrescription> mapToFarmacoPrescrizione(Map<Medicine, Integer> mappaFarmaci) {
+    public List<FarmacoPrescrizione> mappaFarmacoPrescrizione(Map<Farmaco, Integer> mappaFarmaci) {
         return mappaFarmaci.entrySet()
                 .stream()
-                .map(entry -> new MedicinePrescription(
+                .map(entry -> new FarmacoPrescrizione(
                         entry.getKey().getId(),
-                        entry.getKey().getName(),
+                        entry.getKey().getNome(),
                         entry.getValue())
                 )
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void deleteFarmacoFromPrescrizione(Long id, Long prescrizione_id) {
+    public void eliminaFarmacoDallaPrescrizione(Long id, Long prescrizione_id) {
 
         try {
             FileData fileData = Utility.readAllRows(farmacoPrescrizioneFileName);
@@ -100,7 +100,7 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
     }
 
     @Override
-    public void insertFarmacoInPrescrizione(Long farmacoId, Long prescrizioneId, int quantity) {
+    public void inserisciFarmacoNellaPrescrizione(Long farmacoId, Long prescrizioneId, int quantity) {
         try {
             FileData fileData = Utility.readAllRows(farmacoPrescrizioneFileName);
             try (PrintWriter writer = new PrintWriter(farmacoPrescrizioneFileName)) {
@@ -126,7 +126,7 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
     }
 
     @Override
-    public void updateFarmacoQuantityInFarmacoPrescrizione(Long farmacoId, Long prescrizioneId, int newQuantity) {
+    public void aggiornaQuantitaFarmacoInFarmacoPrescrizione(Long farmacoId, Long prescrizioneId, int newQuantity) {
         try {
             FileData fileData = Utility.readAllRows(farmacoPrescrizioneFileName);
             try (PrintWriter writer = new PrintWriter(farmacoPrescrizioneFileName)) {
@@ -155,8 +155,8 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
     }
 
     @Override
-    public MedicinePrescription farmacoSingoloInFarmacoPrescrizione(Medicine f) {
-        return new MedicinePrescription(f.getId(), f.getName(), 1);
+    public FarmacoPrescrizione farmacoSingoloInFarmacoPrescrizione(Farmaco f) {
+        return new FarmacoPrescrizione(f.getId(), f.getNome(), 1);
     }
 
 

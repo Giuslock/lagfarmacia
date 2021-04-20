@@ -8,9 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class DBLagBusinessFactoryImpl extends LagBusinessFactory {
-    private final UserService utenteService;
-    private final MedicineService farmacoService;
-    private final PrescriptionService prescrizioneService;
+    private final UtenteService utenteService;
+    private final FarmacoService farmacoService;
+    private final PrescrizioneService prescrizioneService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
 
     public DBLagBusinessFactoryImpl() {
@@ -23,17 +23,17 @@ public class DBLagBusinessFactoryImpl extends LagBusinessFactory {
     }
 
     @Override
-    public UserService getUtenteService() {
+    public UtenteService getUtenteService() {
         return utenteService;
     }
 
     @Override
-    public PrescriptionService getPrescrizioneService() {
+    public PrescrizioneService getPrescrizioneService() {
         return prescrizioneService;
     }
 
     @Override
-    public MedicineService getFarmacoService() {
+    public FarmacoService getFarmacoService() {
         return farmacoService;
     }
 

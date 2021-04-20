@@ -3,9 +3,9 @@ package org.univaq.oop.business.impl.jdbc;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.FarmacoInPrescrizioneException;
 import org.univaq.oop.business.FarmacoNonTrovato;
-import org.univaq.oop.business.MedicineService;
-import org.univaq.oop.domain.Medicine;
-import org.univaq.oop.domain.Prescription;
+import org.univaq.oop.business.FarmacoService;
+import org.univaq.oop.domain.Farmaco;
+import org.univaq.oop.domain.Prescrizione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,33 +14,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBFarmacoServiceImpl implements MedicineService {
+public class DBFarmacoServiceImpl implements FarmacoService {
 
-    private static final String SELECT_ALL = "select * from farmaco";
-    private static final String SELECT_FARMACO = "select * from farmaco where id=?";
-    private static final String SELECT_FARMACO_ESAURIMENTO = "select * from farmaco where in_esaurimento=1";
-    private static final String DESTROY_FARMACO = "delete from farmaco where id=?";
-    private static final String INSERT_FARMACO = "insert into farmaco ( nome,descrizione,minimo,quantita) values  (?,?,?,?) ;";
-    private static final String UPDATE_FARMACO = "update farmaco set nome=?,descrizione=?,minimo=?,quantita=?  where id=?";
+
+    private static final String SELEZIONA_TUTTI_I_FARMACI = "select * from farmaco";
+    private static final String SELEZIONA_FARMACO_PER_ID = "select * from farmaco where id=?";
+    private static final String SELEZIONA_FARMACO_IN_ESAURIMENTO = "select * from farmaco where in_esaurimento=1";
+    private static final String CANCELLA_FARMACO = "delete from farmaco where id=?";
+    private static final String INSERISCI_FARMACO = "insert into farmaco ( nome,descrizione,minimo,quantita) values  (?,?,?,?) ;";
+    private static final String AGGIORNA_FARMACO_PER_ID = "update farmaco set nome=?,descrizione=?,q_min=?,quantita=?  where id=?";
     private static final String UPDATE_QUANTITY_FARMACO = "update farmaco set quantita=? where id=?";
 
-    @Override
-    public List<Medicine> findAllFarmaci() throws BusinessException {
-        List<Medicine> ll = new ArrayList<>();
+  @Override
+    public List<Farmaco> trovaTuttiFarmaci() throws BusinessException {
+        List<Farmaco> ll = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
+            PreparedStatement statement = connection.prepareStatement(SELEZIONA_TUTTI_I_FARMACI);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Medicine medicine = new Medicine();
-                medicine.setId(rs.getLong("id"));
-                medicine.setName(rs.getString("nome"));
-                medicine.setDescription(rs.getString("descrizione"));
-                medicine.setQuantity(rs.getInt("quantita"));
-                medicine.setMinimum(rs.getInt("minimo"));
-                medicine.setOutOfStock();
-                medicine.setStatoFarmaco();
-                ll.add(medicine);
+
+                Farmaco farmaco = new Farmaco();
+                farmaco.setId(rs.getLong("id"));
+                farmaco.setNome(rs.getString("nome"));
+                farmaco.setDescrizione(rs.getString("descrizione"));
+                farmaco.setQuantita(rs.getInt("quantita"));
+                farmaco.setMinimo(rs.getInt("minimo"));
+                farmaco.setOutOfStock();
+                farmaco.setStatoFarmaco();
+                ll.add(farmaco);
             }
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -49,13 +52,13 @@ public class DBFarmacoServiceImpl implements MedicineService {
     }
 
     @Override
-    public void addFarmaco(Medicine farmaco) throws BusinessException {
+    public void aggiungiFarmaco(Farmaco farmaco) throws BusinessException {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(INSERT_FARMACO);
-            statement.setString(1, farmaco.getName());
-            statement.setString(2, farmaco.getDescription());
-            statement.setInt(3, farmaco.getMinimum());
-            statement.setInt(4, farmaco.getQuantity());
+            PreparedStatement statement = connection.prepareStatement(INSERISCI_FARMACO);
+            statement.setString(1, farmaco.getNome());
+            statement.setString(2, farmaco.getDescrizione());
+            statement.setInt(3, farmaco.getMinimo());
+            statement.setInt(4, farmaco.getQuantita());
             statement.executeUpdate();
 
         } catch (SQLException throwables) {
@@ -65,13 +68,13 @@ public class DBFarmacoServiceImpl implements MedicineService {
     }
 
     @Override
-    public void updateFarmaco(Medicine farmaco) throws BusinessException {
+    public void aggiornaFarmaco(Farmaco farmaco) throws BusinessException {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(UPDATE_FARMACO);
-            statement.setString(1, farmaco.getName());
-            statement.setString(2, farmaco.getDescription());
-            statement.setInt(3, farmaco.getMinimum());
-            statement.setInt(4, farmaco.getQuantity());
+            PreparedStatement statement = connection.prepareStatement(AGGIORNA_FARMACO_PER_ID);
+            statement.setString(1, farmaco.getNome());
+            statement.setString(2, farmaco.getDescrizione());
+            statement.setInt(3, farmaco.getMinimo());
+            statement.setInt(4, farmaco.getQuantita());
             statement.setLong(5, farmaco.getId());
             statement.executeUpdate();
 
@@ -82,35 +85,36 @@ public class DBFarmacoServiceImpl implements MedicineService {
     }
 
     @Override
-    public Medicine findMedicineById(Integer codice) throws BusinessException {
-        Medicine medicine = new Medicine();
+    public Farmaco trovaFarmacoDaId(Integer codice) throws BusinessException {
+        Farmaco farmaco = new Farmaco();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SELECT_FARMACO);
+            PreparedStatement statement = connection.prepareStatement(SELEZIONA_FARMACO_PER_ID);
             statement.setInt(1, codice);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                medicine.setId(rs.getLong("id"));
-                medicine.setName(rs.getString("nome"));
-                medicine.setDescription(rs.getString("descrizione"));
-                medicine.setQuantity(rs.getInt("quantita"));
-                medicine.setMinimum(rs.getInt("minimo"));
-                medicine.setOutOfStock();
-                medicine.setStatoFarmaco();
+
+                farmaco.setId(rs.getLong("id"));
+                farmaco.setNome(rs.getString("nome"));
+                farmaco.setDescrizione(rs.getString("descrizione"));
+                farmaco.setQuantita(rs.getInt("quantita"));
+                farmaco.setMinimo(rs.getInt("minimo"));
+                farmaco.setOutOfStock();
+                farmaco.setStatoFarmaco();
             } else {
                 throw new FarmacoNonTrovato();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return medicine;
+        return farmaco;
 
 
     }
 
     @Override
-    public void deleteFarmaco(Long codice) throws BusinessException {
+    public void eliminaFarmaco(Long codice) throws BusinessException {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(DESTROY_FARMACO);
+            PreparedStatement statement = connection.prepareStatement(CANCELLA_FARMACO);
             statement.setLong(1, codice);
             statement.executeUpdate();
         } catch (SQLException throwables) {
@@ -120,7 +124,7 @@ public class DBFarmacoServiceImpl implements MedicineService {
     }
 
     @Override
-    public void aggiornaQtaFarmaco(Prescription prescrizione) throws BusinessException {
+    public void aggiornaQtaFarmaco(Prescrizione prescrizione) throws BusinessException {
 
     }
 
@@ -130,26 +134,27 @@ public class DBFarmacoServiceImpl implements MedicineService {
     }
 
     @Override
-    public Medicine findFarmacoByName(String string) throws BusinessException {
+    public Farmaco findFarmacoByName(String string) throws BusinessException {
         return null;
     }
 
     @Override
-    public List<Medicine> findFarmaciInEsaurimento() throws BusinessException {
-        List<Medicine> ll = new ArrayList<>();
+    public List<Farmaco> trovaFarmaciInEsaurimento() throws BusinessException {
+        List<Farmaco> ll = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SELECT_FARMACO_ESAURIMENTO);
+            PreparedStatement statement = connection.prepareStatement(SELEZIONA_FARMACO_IN_ESAURIMENTO);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Medicine medicine = new Medicine();
-                medicine.setId(rs.getLong("id"));
-                medicine.setName(rs.getString("nome"));
-                medicine.setDescription(rs.getString("descrizione"));
-                medicine.setQuantity(rs.getInt("quantita"));
-                medicine.setMinimum(rs.getInt("minimo"));
-                medicine.setOutOfStock();
-                medicine.setStatoFarmaco();
-                ll.add(medicine);
+
+                Farmaco farmaco = new Farmaco();
+                farmaco.setId(rs.getLong("id"));
+                farmaco.setNome(rs.getString("nome"));
+                farmaco.setDescrizione(rs.getString("descrizione"));
+                farmaco.setQuantita(rs.getInt("quantita"));
+                farmaco.setMinimo(rs.getInt("minimo"));
+                farmaco.setOutOfStock();
+                farmaco.setStatoFarmaco();
+                ll.add(farmaco);
             }
 
         } catch (SQLException throwables) {
