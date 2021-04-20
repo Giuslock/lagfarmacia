@@ -22,7 +22,7 @@
          <columns>
             <TableColumn fx:id="nomeTableColumn" prefWidth="208.0" resizable="false" text="Nome" />
             <TableColumn fx:id="descriptionTableColumn" prefWidth="439.0" resizable="false" text="Descrizione" />
-            <TableColumn fx:id="azioniTableColumn" prefWidth="168.0" resizable="false" text="Column X" />
+            <TableColumn fx:id="azioniTableColumn" prefWidth="168.0" resizable="false" text="Azione" />
          </columns>
       </TableView>
       <Button fx:id="schedaButton" mnemonicParsing="false" styleClass="Button" stylesheets="@loginButton.css" text="Scheda Farmaco">

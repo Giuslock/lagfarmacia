@@ -91,7 +91,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="aggiungiButton" mnemonicParsing="false" onAction="#aggiungiAction" onMouseClicked="#aggiungiAction" prefHeight="25.0" prefWidth="89.0" text="Aggiungi">
+            <Button fx:id="aggiungiButton" mnemonicParsing="false" onAction="#aggiungiAction" onMouseClicked="#aggiungiAction" prefHeight="25.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Aggiungi">
                <font>
                   <Font size="14.0" />
                </font>
