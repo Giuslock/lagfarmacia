@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciEsaurimentoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciEsaurimentoController">
 
    <children>
       <Label prefHeight="73.0" prefWidth="366.0" text="  Elenco farmaci in esaurimento:">
@@ -26,6 +26,6 @@
             <TableColumn fx:id="azioniTableColumn" prefWidth="185.0" resizable="false" text="Azioni" />
          </columns>
       </TableView>
-      <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="232.0" />
+      <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="232.0" wrapText="true" />
    </children>
 </VBox>
