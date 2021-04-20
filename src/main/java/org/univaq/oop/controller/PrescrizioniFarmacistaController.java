@@ -15,31 +15,31 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import org.univaq.oop.business.*;
-import org.univaq.oop.domain.Prescription;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.domain.Prescrizione;
+import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PrescrizioniFarmacistaController implements DataInitializable<User>, Initializable {
+public class PrescrizioniFarmacistaController implements DataInitializable<Utente>, Initializable {
 
     private final ViewDispatcher dispatcher;
-    private final PrescriptionService prescrizioneService;
-    private final MedicineService farmacoService;
+    private final PrescrizioneService prescrizioneService;
+    private final FarmacoService farmacoService;
     @FXML
-    private TableView<Prescription> elencoPrescrizioniTable;
+    private TableView<Prescrizione> elencoPrescrizioniTable;
     @FXML
-    private TableColumn<Prescription, String> numeroTableColumn;
+    private TableColumn<Prescrizione, String> numeroTableColumn;
     @FXML
-    private TableColumn<Prescription, String> descriptionTableColumn;
+    private TableColumn<Prescrizione, String> descriptionTableColumn;
     @FXML
-    private TableColumn<Prescription, User> medicoTableColumn;
+    private TableColumn<Prescrizione, Utente> medicoTableColumn;
     @FXML
-    private TableColumn<Prescription, User> pazienteTableColumn;
+    private TableColumn<Prescrizione, Utente> pazienteTableColumn;
     @FXML
-    private TableColumn<Prescription, Button> azioniTableColumn;
+    private TableColumn<Prescrizione, Button> azioniTableColumn;
     @FXML
     private Label errorText;
     @FXML
@@ -57,10 +57,10 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
 
 
     @Override
-    public void initializeData(User user) {
+    public void initializeData(Utente utente) {
         try {
-            List<Prescription> prescrizioni = prescrizioneService.findToEvadePrescriptions();
-            ObservableList<Prescription> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
+            List<Prescrizione> prescrizioni = prescrizioneService.trovaPrescrizioniDaEvadere();
+            ObservableList<Prescrizione> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
             elencoPrescrizioniTable.setItems(prescrizioniData);
         } catch (BusinessException e) {
             dispatcher.renderError(e);
@@ -70,14 +70,14 @@ public class PrescrizioniFarmacistaController implements DataInitializable<User>
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         numeroTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        medicoTableColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
-        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
+        medicoTableColumn.setCellValueFactory(new PropertyValueFactory<>("codiceDottore"));
+        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
         azioniTableColumn.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Prescription, Button>, ObservableValue<Button>>() {
+                new Callback<TableColumn.CellDataFeatures<Prescrizione, Button>, ObservableValue<Button>>() {
                     @Override
-                    public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescription, Button> param) {
+                    public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescrizione, Button> param) {
                         final Button evadiButton = new Button("Evadi");
 
                         evadiButton.setOnAction(new EventHandler<ActionEvent>() {

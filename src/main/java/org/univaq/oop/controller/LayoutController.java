@@ -9,29 +9,29 @@ import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-import org.univaq.oop.domain.Role;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.domain.Ruolo;
+import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
 import org.univaq.oop.view.ViewException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LayoutController implements Initializable, DataInitializable<User> {
+public class LayoutController implements Initializable, DataInitializable<Utente> {
 
     //creazione degli elementi che faranno parte del menu per ogni utente
-    private static final MenuElement MENU_HOME = new MenuElement("Home", "home");
+    private static final ElementiDelMenu MENU_HOME = new ElementiDelMenu("Home", "home");
 
-    private static final MenuElement[] MENU_AMMINISTRATORI = {new MenuElement("Farmaci", "elencoFarmaci"),
-            new MenuElement("In esaurimento", "esaurimento")};
-    private static final MenuElement MENU_FARMACISTI = new MenuElement("Prescrizioni", "elencoTuttePrescrizioni");
+    private static final ElementiDelMenu[] MENU_AMMINISTRATORI = {new ElementiDelMenu("Farmaci", "elencoFarmaci"),
+            new ElementiDelMenu("In esaurimento", "esaurimento")};
+    private static final ElementiDelMenu MENU_FARMACISTI = new ElementiDelMenu("Prescrizioni", "elencoTuttePrescrizioni");
 
-    private static final MenuElement[] MENU_PAZIENTI = {new MenuElement("Prescrizioni", "elencoPrescrizioni"),
-            new MenuElement("Farmaci", "elencoFarmaciPaziente")};
+    private static final ElementiDelMenu[] MENU_PAZIENTI = {new ElementiDelMenu("Prescrizioni", "elencoPrescrizioni"),
+            new ElementiDelMenu("Farmaci", "elencoFarmaciPaziente")};
 
-    private static final MenuElement MENU_MEDICI = new MenuElement("Prescrizioni", "prescrizioniMedico");
+    private static final ElementiDelMenu MENU_MEDICI = new ElementiDelMenu("Prescrizioni", "prescrizioniMedico");
     private final ViewDispatcher dispatcher;
-    private User utente;
+    private Utente utente;
     @FXML
     private VBox menuBar;
 
@@ -45,25 +45,25 @@ public class LayoutController implements Initializable, DataInitializable<User> 
 
     //crea il menu in base all'utente
     @Override
-    public void initializeData(User utente) {
+    public void initializeData(Utente utente) {
         this.utente = utente;
         menuBar.getChildren().addAll(createButton(MENU_HOME));
         menuBar.getChildren().add(new Separator());
 
-        if (utente.getRole().equals(Role.ADMIN)) {
-            for (MenuElement menu : MENU_AMMINISTRATORI) {
+        if (utente.getRuolo().equals(Ruolo.AMMINISTRATORE)) {
+            for (ElementiDelMenu menu : MENU_AMMINISTRATORI) {
                 menuBar.getChildren().add(createButton(menu));
             }
         }
-        if (utente.getRole().equals(Role.PHARMACIST)) {
+        if (utente.getRuolo().equals(Ruolo.FARMACISTA)) {
             menuBar.getChildren().add(createButton(MENU_FARMACISTI));
         }
-        if (utente.getRole().equals(Role.PATIENT)) {
-            for (MenuElement menu : MENU_PAZIENTI) {
+        if (utente.getRuolo().equals(Ruolo.PAZIENTE)) {
+            for (ElementiDelMenu menu : MENU_PAZIENTI) {
                 menuBar.getChildren().add(createButton(menu));
             }
         }
-        if (utente.getRole().equals(Role.DOCTOR)) {
+        if (utente.getRuolo().equals(Ruolo.DOTTORE)) {
             menuBar.getChildren().add(createButton(MENU_MEDICI));
         }
     }
@@ -76,7 +76,7 @@ public class LayoutController implements Initializable, DataInitializable<User> 
     }
 
     //crea i bottoni per ogni voce del menu
-    private Button createButton(MenuElement viewItem) {
+    private Button createButton(ElementiDelMenu viewItem) {
         Button button = new Button(viewItem.getNome());
         button.setStyle("-fx-background-color: transparent; -fx-font-size: 14;");
         button.setTextFill(Paint.valueOf("white"));

@@ -14,34 +14,34 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.FarmacoService;
 import org.univaq.oop.business.LagBusinessFactory;
-import org.univaq.oop.business.MedicineService;
-import org.univaq.oop.domain.Medicine;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.domain.Farmaco;
+import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FarmaciController implements Initializable, DataInitializable<User> {
+public class FarmaciController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
-    private final MedicineService farmacoService;
+    private final FarmacoService farmacoService;
     @FXML
-    private TableView<Medicine> elencoFarmaciTable;
+    private TableView<Farmaco> elencoFarmaciTable;
     @FXML
-    private TableColumn<Medicine, String> nomeTableColumn;
+    private TableColumn<Farmaco, String> nomeTableColumn;
     @FXML
-    private TableColumn<Medicine, String> codiceTableColumn;
+    private TableColumn<Farmaco, String> codiceTableColumn;
     @FXML
-    private TableColumn<Medicine, Integer> minimumTableColumn;
+    private TableColumn<Farmaco, Integer> minimumTableColumn;
     @FXML
-    private TableColumn<Medicine, Integer> quantityTableColumn1;
+    private TableColumn<Farmaco, Integer> quantityTableColumn1;
     @FXML
-    private TableColumn<Medicine, String> statoTableColumn;
+    private TableColumn<Farmaco, String> statoTableColumn;
     @FXML
-    private TableColumn<Medicine, Button> azioniTableColumn;
+    private TableColumn<Farmaco, Button> azioniTableColumn;
     @FXML
     private Button aggiungiButton;
 
@@ -56,16 +56,16 @@ public class FarmaciController implements Initializable, DataInitializable<User>
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         codiceTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        minimumTableColumn.setCellValueFactory(new PropertyValueFactory<>("minimum"));
-        quantityTableColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("medicineStatus"));
+        minimumTableColumn.setCellValueFactory(new PropertyValueFactory<>("minimo"));
+        quantityTableColumn1.setCellValueFactory(new PropertyValueFactory<>("quantita"));
+        statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("statoFarmaco"));
         azioniTableColumn.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Medicine, Button>, ObservableValue<Button>>() {
+                new Callback<TableColumn.CellDataFeatures<Farmaco, Button>, ObservableValue<Button>>() {
                     @Override
-                    public ObservableValue<Button> call(TableColumn.CellDataFeatures<Medicine, Button> param) {
+                    public ObservableValue<Button> call(TableColumn.CellDataFeatures<Farmaco, Button> param) {
                         final Button farmaciButton = new Button("Modifica");
                         farmaciButton.setOnAction(new EventHandler<ActionEvent>() {
                                                       @Override
@@ -82,10 +82,10 @@ public class FarmaciController implements Initializable, DataInitializable<User>
     }
 
     @Override
-    public void initializeData(User user) {
+    public void initializeData(Utente utente) {
         try {
-            List<Medicine> farmaci = farmacoService.findAllFarmaci();
-            ObservableList<Medicine> farmaciData = FXCollections.observableArrayList(farmaci);
+            List<Farmaco> farmaci = farmacoService.trovaTuttiFarmaci();
+            ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             elencoFarmaciTable.setItems(farmaciData);
         } catch (BusinessException e) {
             dispatcher.renderError(e);
@@ -94,7 +94,7 @@ public class FarmaciController implements Initializable, DataInitializable<User>
 
 
     public void aggiungiAction(ActionEvent event) {
-        Medicine farmacoVuoto = new Medicine();
+        Farmaco farmacoVuoto = new Farmaco();
         dispatcher.renderView("modificaFarmaco", farmacoVuoto);
     }
 

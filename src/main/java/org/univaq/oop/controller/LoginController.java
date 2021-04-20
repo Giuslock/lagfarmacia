@@ -9,9 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.LagBusinessFactory;
-import org.univaq.oop.business.UserNotFoundException;
-import org.univaq.oop.business.UserService;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.business.UtenteNonTrovato;
+import org.univaq.oop.business.UtenteService;
+import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
 import org.univaq.oop.view.ViewException;
 
@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     private final ViewDispatcher dispatcher;
-    private final UserService utenteService;
+    private final UtenteService utenteService;
     @FXML
     private Label labelErrorLogin;
     @FXML
@@ -51,9 +51,9 @@ public class LoginController implements Initializable {
     private void loginAction(ActionEvent event) {
         try {
             //prova ad autenticare l'utente, se lo trova lo restituisce e carica la home page, altrimenti compare il messaggio del catch
-            User utente = utenteService.authenticate(usernameText.getText(), passwordText.getText());
+            Utente utente = utenteService.autentica(usernameText.getText(), passwordText.getText());
             dispatcher.loggedIn(utente);
-        } catch (UserNotFoundException e) {
+        } catch (UtenteNonTrovato e) {
             labelErrorLogin.setText("Ops! Username e/o password errati!");
         } catch (BusinessException e) {
             dispatcher.renderError(e);

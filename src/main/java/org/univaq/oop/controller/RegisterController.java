@@ -6,19 +6,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.LagBusinessFactory;
-import org.univaq.oop.business.UserService;
-import org.univaq.oop.domain.Role;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.business.UtenteService;
+import org.univaq.oop.domain.Ruolo;
+import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
 import org.univaq.oop.view.ViewException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterController implements Initializable, DataInitializable<User> {
+public class RegisterController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
-    private final UserService utenteService;
+    private final UtenteService utenteService;
     @FXML
     private TextField nomeText;
     @FXML
@@ -68,21 +68,21 @@ public class RegisterController implements Initializable, DataInitializable<User
     public void iscrivitiAction(ActionEvent event) throws BusinessException, ViewException {
         //se è selezionato il radio button Medico, crea un utente medico
 
-        User utente = new User();
-        utente.setName(nomeText.getText());
-        utente.setSurname(cognomeText.getText());
-        utente.setFiscalCode(codiceFiscaleText.getText());
+        Utente utente = new Utente();
+        utente.setNome(nomeText.getText());
+        utente.setCognome(cognomeText.getText());
+        utente.setCodiceFiscale(codiceFiscaleText.getText());
         utente.setUsername(usernameIscrivitiText.getText());
         utente.setPassword(passwordIscrivitiText.getText());
         if (medicoRadioButton.isSelected())
-            utente.setRole(Role.DOCTOR);
+            utente.setRuolo(Ruolo.DOTTORE);
         else if (farmacistaRadioButton.isSelected())
-            utente.setRole(Role.PHARMACIST);
+            utente.setRuolo(Ruolo.FARMACISTA);
         else
-            utente.setRole(Role.PATIENT);
+            utente.setRuolo(Ruolo.PAZIENTE);
         try {
             //aggiunge l'utente nell'elenco degli utenti e torna alla schermata di login
-            utenteService.addUser(utente);
+            utenteService.aggiungiUtente(utente);
             dispatcher.logout();
         } catch (BusinessException e) {
             e.printStackTrace();

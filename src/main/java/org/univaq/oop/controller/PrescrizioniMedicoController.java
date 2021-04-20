@@ -15,26 +15,26 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.FarmacoService;
 import org.univaq.oop.business.LagBusinessFactory;
-import org.univaq.oop.business.MedicineService;
-import org.univaq.oop.business.PrescriptionService;
-import org.univaq.oop.domain.Prescription;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.business.PrescrizioneService;
+import org.univaq.oop.domain.Prescrizione;
+import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PrescrizioniMedicoController implements DataInitializable<User>, Initializable {
+public class PrescrizioniMedicoController implements DataInitializable<Utente>, Initializable {
 
     private final ViewDispatcher dispatcher;
-    private final PrescriptionService prescrizioneService;
-    private final MedicineService farmacoService;
+    private final PrescrizioneService prescrizioneService;
+    private final FarmacoService farmacoService;
     @FXML
     private Label errorLab;
     @FXML
-    private TableView<Prescription> elencoPrescrizioniTable;
+    private TableView<Prescrizione> elencoPrescrizioniTable;
     @FXML
     private TableColumn<?, ?> numeroTableColumn;
     @FXML
@@ -42,7 +42,7 @@ public class PrescrizioniMedicoController implements DataInitializable<User>, In
     @FXML
     private TableColumn<?, ?> descriptionTableColumn;
     @FXML
-    private TableColumn<Prescription, Button> azioniTableColumn1;
+    private TableColumn<Prescrizione, Button> azioniTableColumn1;
     @FXML
     private TableColumn<?, ?> pazienteTableColumn;
     @FXML
@@ -51,7 +51,7 @@ public class PrescrizioniMedicoController implements DataInitializable<User>, In
     private Button modificaButton;
     @FXML
     private Button aggiungiButton;
-    private User utente;
+    private Utente utente;
 
     public PrescrizioniMedicoController() {
 
@@ -63,11 +63,11 @@ public class PrescrizioniMedicoController implements DataInitializable<User>, In
 
 
     @Override
-    public void initializeData(User user) {
-        this.utente = user;
+    public void initializeData(Utente utente) {
+        this.utente = utente;
         try {
-            List<Prescription> prescrizioni = prescrizioneService.findAllPrescrizioni();
-            ObservableList<Prescription> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
+            List<Prescrizione> prescrizioni = prescrizioneService.trovaPrescrizioniByMedicoDaEvadere(Math.toIntExact(utente.getId()));
+            ObservableList<Prescrizione> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
             elencoPrescrizioniTable.setItems(prescrizioniData);
         } catch (BusinessException e) {
             dispatcher.renderError(e);
@@ -77,14 +77,14 @@ public class PrescrizioniMedicoController implements DataInitializable<User>, In
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         idTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
-        azioniTableColumn1.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
+        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("codiceDottore"));
+        azioniTableColumn1.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
         azioniTableColumn1.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn1.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Prescription, Button>, ObservableValue<Button>>() {
+                new Callback<TableColumn.CellDataFeatures<Prescrizione, Button>, ObservableValue<Button>>() {
                     @Override
-                    public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescription, Button> param) {
+                    public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescrizione, Button> param) {
                         final Button updateButton = new Button("Modifica");
 
                         updateButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -102,19 +102,19 @@ public class PrescrizioniMedicoController implements DataInitializable<User>, In
 
     @FXML
     public void aggiungiAction() {
-        Prescription voidPrescription = new Prescription();
+        Prescrizione voidPrescrizione = new Prescrizione();
         dispatcher.renderView("CreaPrescrizione", utente);
     }
 
 
     @FXML
     public void modificaCercataAction() {
-        Prescription prescription = new Prescription();
+        Prescrizione prescrizione = new Prescrizione();
 
 
-        prescription.setUserId(Integer.parseInt(pazienteLab.getText()));
-        prescription.setDoctorId(Integer.parseInt(azioniTableColumn1.getText()));
-        dispatcher.renderView("modificaPrescrizione", prescription);
+        prescrizione.setCodicePaziente(Integer.parseInt(pazienteLab.getText()));
+        prescrizione.setCodiceDottore(Integer.parseInt(azioniTableColumn1.getText()));
+        dispatcher.renderView("modificaPrescrizione", prescrizione);
     }
 }
 

@@ -7,10 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.univaq.oop.business.*;
-import org.univaq.oop.domain.Medicine;
-import org.univaq.oop.domain.MedicinePrescription;
-import org.univaq.oop.domain.Prescription;
-import org.univaq.oop.domain.User;
+import org.univaq.oop.domain.Farmaco;
+import org.univaq.oop.domain.FarmacoPrescrizione;
+import org.univaq.oop.domain.Prescrizione;
+import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
 
 import java.net.URL;
@@ -19,28 +19,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class CreazioneDettaglioPrescrizioneController implements Initializable, DataInitializable<User> {
+public class CreazioneDettaglioPrescrizioneController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
-    private final MedicineService farmacoService;
-    private final PrescriptionService prescriptionService;
+    private final FarmacoService farmacoService;
+    private final PrescrizioneService prescrizioneService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
-    private final Map<Medicine, Integer> farmaciNellaPrescrizione;
-    private final UserService userService;
+    private final Map<Farmaco, Integer> farmaciNellaPrescrizione;
+    private final UtenteService utenteService;
     @FXML
-    public TableView<Medicine> tabellaFarmaci;
+    public TableView<Farmaco> tabellaFarmaci;
     @FXML
-    public TableColumn<Medicine, Integer> t1_id;
+    public TableColumn<Farmaco, Integer> t1_id;
     @FXML
-    public TableColumn<Medicine, String> t1_nome;
+    public TableColumn<Farmaco, String> t1_nome;
     @FXML
     public Button aggiungiFarmaco;
     @FXML
-    public TableView<MedicinePrescription> tabellaFarmaciInPrescrizione;
+    public TableView<FarmacoPrescrizione> tabellaFarmaciInPrescrizione;
     @FXML
-    public TableColumn<MedicinePrescription, String> t2_nome;
+    public TableColumn<FarmacoPrescrizione, String> t2_nome;
     @FXML
-    public TableColumn<MedicinePrescription, Integer> t2_quantity;
+    public TableColumn<FarmacoPrescrizione, Integer> t2_quantity;
     @FXML
     public Button deleteBtnT2;
     @FXML
@@ -49,35 +49,35 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     private TextField codicetextfield;
     @FXML
     private TextArea descrizione;
-    private final Prescription prescription;
-    private ObservableList<MedicinePrescription> listaFarmaciNellaPrescrizione;
-    private User user;
+    private final Prescrizione prescrizione;
+    private ObservableList<FarmacoPrescrizione> listaFarmaciNellaPrescrizione;
+    private Utente utente;
 
     public CreazioneDettaglioPrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
-        prescriptionService = factory.getPrescrizioneService();
-        userService = factory.getUtenteService();
+        prescrizioneService = factory.getPrescrizioneService();
+        utenteService = factory.getUtenteService();
         farmacoPrescrizioneService = factory.getFarmacoPrescrizioneService();
         this.farmaciNellaPrescrizione = new HashMap<>();
-        this.prescription = new Prescription();
+        this.prescrizione = new Prescrizione();
 
     }
 
     @Override
-    public void initializeData(User user) {
-        this.user = user;
+    public void initializeData(Utente utente) {
+        this.utente = utente;
 
         try {
-            List<Medicine> farmaci = null;
-            farmaci = farmacoService.findAllFarmaci();
-            ObservableList<Medicine> farmaciData = FXCollections.observableArrayList(farmaci);
+            List<Farmaco> farmaci = null;
+            farmaci = farmacoService.trovaTuttiFarmaci();
+            ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             tabellaFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {
             e.printStackTrace();
         }
-        List<MedicinePrescription> farmacoPrescrizioneList = farmacoPrescrizioneService.mapToFarmacoPrescrizione(this.farmaciNellaPrescrizione);
+        List<FarmacoPrescrizione> farmacoPrescrizioneList = farmacoPrescrizioneService.mappaFarmacoPrescrizione(this.farmaciNellaPrescrizione);
         this.listaFarmaciNellaPrescrizione = FXCollections.observableArrayList(farmacoPrescrizioneList);
         this.tabellaFarmaciInPrescrizione.setItems(this.listaFarmaciNellaPrescrizione);
 
@@ -95,7 +95,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
 
     @FXML
     public void aggiungifarmaco() {
-        Medicine f = this.tabellaFarmaci.getSelectionModel().getSelectedItem();
+        Farmaco f = this.tabellaFarmaci.getSelectionModel().getSelectedItem();
 
         if (this.farmaciNellaPrescrizione.containsKey(f)) {
             int quantity = this.farmaciNellaPrescrizione.get(f) + 1;
@@ -105,7 +105,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
         }
 
         this.listaFarmaciNellaPrescrizione.setAll(
-                farmacoPrescrizioneService.mapToFarmacoPrescrizione(farmaciNellaPrescrizione)
+                farmacoPrescrizioneService.mappaFarmacoPrescrizione(farmaciNellaPrescrizione)
         );
     }
 
@@ -113,7 +113,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @FXML
     public void rimuoviFarmacoDallaPrescrizione() {
 
-        MedicinePrescription fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
+        FarmacoPrescrizione fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
         long idMedicinale = fp.getId();
 
         // Optional e' come una scatola, all'interno puoi avere qualcosa oppure no
@@ -131,17 +131,17 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
 
     @FXML
     public void creaPrescrizione() throws BusinessException {
-        this.prescription.setUserId(Math.toIntExact(userService.findPatientByFiscalCode(codicetextfield.getText()).getId()));
-        this.prescription.setDoctorId(user.getId().intValue());
-        this.prescription.setDescription(this.descrizione.getText());
-        Prescription prescrizioneInserita = this.prescriptionService.createPrescrizione(this.prescription);
+        this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codicetextfield.getText()).getId()));
+        this.prescrizione.setCodiceDottore(utente.getId().intValue());
+        this.prescrizione.setDescrizione(this.descrizione.getText());
+        Prescrizione prescrizioneInserita = this.prescrizioneService.creaPrescrizione(this.prescrizione);
 
-        farmaciNellaPrescrizione.forEach((farmaco, quantity) -> this.farmacoPrescrizioneService.insertFarmacoInPrescrizione(
+        farmaciNellaPrescrizione.forEach((farmaco, quantity) -> this.farmacoPrescrizioneService.inserisciFarmacoNellaPrescrizione(
                 farmaco.getId(),
                 prescrizioneInserita.getId(),
                 quantity
         ));
-        dispatcher.renderView("prescrizioniMedico", user);
+        dispatcher.renderView("prescrizioniMedico", utente);
 
     }
 

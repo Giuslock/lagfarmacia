@@ -3,8 +3,8 @@ package org.univaq.oop.business.impl.jdbc;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.FarmacoNonTrovato;
 import org.univaq.oop.business.FarmacoPrescrizioneService;
-import org.univaq.oop.domain.Medicine;
-import org.univaq.oop.domain.MedicinePrescription;
+import org.univaq.oop.domain.Farmaco;
+import org.univaq.oop.domain.FarmacoPrescrizione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,8 +25,8 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
 
 
     @Override
-    public Map<Medicine, Integer> getMedicineFromPrescription(Long prescriptionId) throws BusinessException {
-        Map<Medicine, Integer> farmaciMap = new HashMap<>();
+    public Map<Farmaco, Integer> ottieniFarmaciDallaPrescrizione(Long prescriptionId) throws BusinessException {
+        Map<Farmaco, Integer> farmaciMap = new HashMap<>();
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(PRESCRIZIONE_WITH_FARMACI);
@@ -36,17 +36,17 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
             // ResultSet fields -> ["id", "farmaco_id", "prescrizione_id", "quantity"]
             while (resultSet.next()) {
 //                Medicine f = this.medicineService.findMedicineById(resultSet.getInt("farmaco_id"));
-                Medicine f = new Medicine();
+                Farmaco f = new Farmaco();
                 try (Connection connection2 = DatabaseConnection.getConnection()) {
                     PreparedStatement statement2 = connection2.prepareStatement(SELECT_FARMACO);
                     statement2.setLong(1, resultSet.getLong(2));
                     ResultSet rs = statement2.executeQuery();
                     if (rs.next()) {
                         f.setId(rs.getLong("id"));
-                        f.setName(rs.getString("nome"));
-                        f.setDescription(rs.getString("descrizione"));
-                        f.setQuantity(rs.getInt("quantity"));
-                        f.setMinimum(rs.getInt("q_min"));
+                        f.setNome(rs.getString("nome"));
+                        f.setDescrizione(rs.getString("descrizione"));
+                        f.setQuantita(rs.getInt("quantity"));
+                        f.setMinimo(rs.getInt("q_min"));
                         f.setOutOfStock();
                         f.setStatoFarmaco();
                     } else {
@@ -66,19 +66,19 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
     }
 
     @Override
-    public List<MedicinePrescription> mapToFarmacoPrescrizione(Map<Medicine, Integer> mappaFarmaci) {
+    public List<FarmacoPrescrizione> mappaFarmacoPrescrizione(Map<Farmaco, Integer> mappaFarmaci) {
         return mappaFarmaci.entrySet()
                 .stream()
-                .map(entry -> new MedicinePrescription(
+                .map(entry -> new FarmacoPrescrizione(
                         entry.getKey().getId(),
-                        entry.getKey().getName(),
+                        entry.getKey().getNome(),
                         entry.getValue())
                 )
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void deleteFarmacoFromPrescrizione(Long id, Long prescrizione_id) {
+    public void eliminaFarmacoDallaPrescrizione(Long id, Long prescrizione_id) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(DELETE_FARMACO_FROM_PRESCRIZIONE);
             statement.setInt(1, id.intValue());
@@ -90,7 +90,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
     }
 
     @Override
-    public void insertFarmacoInPrescrizione(Long farmacoId, Long prescrizioneId, int quantity) {
+    public void inserisciFarmacoNellaPrescrizione(Long farmacoId, Long prescrizioneId, int quantity) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(INSERT_FARMACO_IN_PRESCRIZIONE);
             statement.setInt(1, farmacoId.intValue());
@@ -103,7 +103,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
     }
 
     @Override
-    public void updateFarmacoQuantityInFarmacoPrescrizione(Long farmacoId, Long prescrizioneId, int newQuantity) {
+    public void aggiornaQuantitaFarmacoInFarmacoPrescrizione(Long farmacoId, Long prescrizioneId, int newQuantity) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(UPDATE_FARMACO_QUANTITY_IN_FARMACO_PRESCRIZIONE);
             statement.setInt(1, newQuantity);
@@ -116,7 +116,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
     }
 
     @Override
-    public MedicinePrescription farmacoSingoloInFarmacoPrescrizione(Medicine f) {
-        return new MedicinePrescription(f.getId(), f.getName(), 1);
+    public FarmacoPrescrizione farmacoSingoloInFarmacoPrescrizione(Farmaco f) {
+        return new FarmacoPrescrizione(f.getId(), f.getNome(), 1);
     }
 }

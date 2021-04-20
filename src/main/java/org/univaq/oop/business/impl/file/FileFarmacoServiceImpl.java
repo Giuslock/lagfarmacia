@@ -2,9 +2,9 @@ package org.univaq.oop.business.impl.file;
 
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.FarmacoInPrescrizioneException;
-import org.univaq.oop.business.MedicineService;
-import org.univaq.oop.domain.Medicine;
-import org.univaq.oop.domain.Prescription;
+import org.univaq.oop.business.FarmacoService;
+import org.univaq.oop.domain.Farmaco;
+import org.univaq.oop.domain.Prescrizione;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,29 +12,29 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileMedicineServiceImpl implements MedicineService {
+public class FileFarmacoServiceImpl implements FarmacoService {
 
     private final String farmacoFileName;
     private final String farmacoPrescrizioneFileName;
 
 
-    public FileMedicineServiceImpl(String farmacoFileName, String farmacoPrescrizioneFileName) {
+    public FileFarmacoServiceImpl(String farmacoFileName, String farmacoPrescrizioneFileName) {
         this.farmacoFileName = farmacoFileName;
         this.farmacoPrescrizioneFileName = farmacoPrescrizioneFileName;
     }
 
     @Override
-    public List<Medicine> findAllFarmaci() throws BusinessException {
-        List<Medicine> result = new ArrayList<>();
+    public List<Farmaco> trovaTuttiFarmaci() throws BusinessException {
+        List<Farmaco> result = new ArrayList<>();
         try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
             for (String[] colonne : fileData.getRighe()) {
-                Medicine farmaco = new Medicine();
+                Farmaco farmaco = new Farmaco();
                 farmaco.setId((long) Integer.parseInt(colonne[0]));
-                farmaco.setName(colonne[1]);
-                farmaco.setDescription(colonne[2]);
-                farmaco.setMinimum(Integer.parseInt(colonne[3]));
-                farmaco.setQuantity(Integer.parseInt(colonne[4]));
+                farmaco.setNome(colonne[1]);
+                farmaco.setDescrizione(colonne[2]);
+                farmaco.setMinimo(Integer.parseInt(colonne[3]));
+                farmaco.setQuantita(Integer.parseInt(colonne[4]));
                 farmaco.setOutOfStock();
                 farmaco.setStatoFarmaco();
                 result.add(farmaco);
@@ -49,7 +49,7 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public void addFarmaco(Medicine medicine) throws BusinessException {
+    public void aggiungiFarmaco(Farmaco farmaco) throws BusinessException {
         try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
             try (PrintWriter writer = new PrintWriter(new File(farmacoFileName))) {
@@ -61,13 +61,13 @@ public class FileMedicineServiceImpl implements MedicineService {
                 StringBuilder row = new StringBuilder();
                 row.append(counter);
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(medicine.getName());
+                row.append(farmaco.getNome());
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(medicine.getDescription());
+                row.append(farmaco.getDescrizione());
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(medicine.getMinimum());
+                row.append(farmaco.getMinimo());
                 row.append(Utility.SEPARATORE_COLONNA);
-                row.append(medicine.getQuantity());
+                row.append(farmaco.getQuantita());
                 writer.println(row);
             }
         } catch (IOException e) {
@@ -80,23 +80,23 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public void updateFarmaco(Medicine medicine) throws BusinessException {
+    public void aggiornaFarmaco(Farmaco farmaco) throws BusinessException {
         try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
             try (PrintWriter writer = new PrintWriter(farmacoFileName)) {
                 writer.println(fileData.getContatore());
                 for (String[] righe : fileData.getRighe()) {
-                    if (Long.parseLong(righe[0]) == medicine.getId()) {
+                    if (Long.parseLong(righe[0]) == farmaco.getId()) {
                         StringBuilder row = new StringBuilder();
-                        row.append(medicine.getId());
+                        row.append(farmaco.getId());
                         row.append(Utility.SEPARATORE_COLONNA);
-                        row.append(medicine.getName());
+                        row.append(farmaco.getNome());
                         row.append(Utility.SEPARATORE_COLONNA);
-                        row.append(medicine.getDescription());
+                        row.append(farmaco.getDescrizione());
                         row.append(Utility.SEPARATORE_COLONNA);
-                        row.append(medicine.getMinimum());
+                        row.append(farmaco.getMinimo());
                         row.append(Utility.SEPARATORE_COLONNA);
-                        row.append(medicine.getQuantity());
+                        row.append(farmaco.getQuantita());
                         writer.println(row);
                     } else {
                         writer.println(String.join(Utility.SEPARATORE_COLONNA, righe));
@@ -110,17 +110,17 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public Medicine findMedicineById(Integer codice) throws BusinessException {
-        Medicine far = new Medicine();
+    public Farmaco trovaFarmacoDaId(Integer codice) throws BusinessException {
+        Farmaco far = new Farmaco();
         try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
             for (String[] colonne : fileData.getRighe()) {
                 if (Integer.parseInt(colonne[0]) == codice) {
                     far.setId((long) Integer.parseInt(colonne[0]));
-                    far.setName(colonne[1]);
-                    far.setDescription(colonne[2]);
-                    far.setMinimum(Integer.parseInt(colonne[3]));
-                    far.setQuantity(Integer.parseInt(colonne[4]));
+                    far.setNome(colonne[1]);
+                    far.setDescrizione(colonne[2]);
+                    far.setMinimo(Integer.parseInt(colonne[3]));
+                    far.setQuantita(Integer.parseInt(colonne[4]));
                     far.setOutOfStock();
                     far.setStatoFarmaco();
 
@@ -135,7 +135,7 @@ public class FileMedicineServiceImpl implements MedicineService {
 
 
     @Override
-    public void deleteFarmaco(Long codice) throws FarmacoInPrescrizioneException {
+    public void eliminaFarmaco(Long codice) throws FarmacoInPrescrizioneException {
 
         FileData prescrizioni = null;
         try {
@@ -172,7 +172,7 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public void aggiornaQtaFarmaco(Prescription prescrizione) throws BusinessException {
+    public void aggiornaQtaFarmaco(Prescrizione prescrizione) throws BusinessException {
 
     }
 
@@ -182,25 +182,25 @@ public class FileMedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public Medicine findFarmacoByName(String string) throws BusinessException {
+    public Farmaco findFarmacoByName(String string) throws BusinessException {
         return null;
     }
 
     @Override
-    public List<Medicine> findFarmaciInEsaurimento() throws BusinessException {
-        List<Medicine> result = new ArrayList<>();
+    public List<Farmaco> trovaFarmaciInEsaurimento() throws BusinessException {
+        List<Farmaco> result = new ArrayList<>();
         try {
             FileData fileData = Utility.readAllRows(farmacoFileName);
             for (String[] colonne : fileData.getRighe()) {
-                Medicine farmaco = new Medicine();
+                Farmaco farmaco = new Farmaco();
                 farmaco.setId((long) Integer.parseInt(colonne[0]));
-                farmaco.setName(colonne[1]);
-                farmaco.setDescription(colonne[2]);
-                farmaco.setMinimum(Integer.parseInt(colonne[3]));
-                farmaco.setQuantity(Integer.parseInt(colonne[4]));
+                farmaco.setNome(colonne[1]);
+                farmaco.setDescrizione(colonne[2]);
+                farmaco.setMinimo(Integer.parseInt(colonne[3]));
+                farmaco.setQuantita(Integer.parseInt(colonne[4]));
                 farmaco.setOutOfStock();
                 farmaco.setStatoFarmaco();
-                if (farmaco.getMedicineStatus().equals("RUNNING OUT"))
+                if (farmaco.getStatoFarmaco().equals("RUNNING OUT"))
                     result.add(farmaco);
             }
         } catch (IOException e) {
