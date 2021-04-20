@@ -11,18 +11,19 @@ import java.util.List;
 
 public class DBUtenteServiceImpl implements UtenteService {
 
+
     private static final String SELECT_ALL = "select * from utente";
     private static final String SELECT_FROM_UTENTE_WHERE_ID = "select * from utente where id=?";
-    private static final String SELECT_FROM_UTENTE_WHERE_FISCALCODE = "select * from utente where fiscalCode=?";
+    private static final String SELEZIONA_UTENTE_TRAMITE_FISCALCODE = "select * from utente where fiscalCode=?";
     private static final String DELETE_FROM_UTENTE_WHERE_ID = "delete from utente where id=?";
-    private static final String CREATE_UTENTE = "insert into utente ( name,surname,username,password_,role,fiscalcode) values  (?,?,?,?,?,?) ;";
-    private static final String UTENTE_WHERE_USERNAME_AND_PASSWORD = "select * from utente where username=? and password_=?";
+    private static final String AGGIUNGI_UTENTE = "insert into utente ( name,surname,username,password_,role,fiscalcode) values  (?,?,?,?,?,?) ;";
+    private static final String SELEZIONA_UTENTE_DA_USERNAME_E_PASSWORD = "select * from utente where username=? and password_=?";
 
     @Override
-    public Utente autentica(String username, String password) throws BusinessException {
+    public Utente autenticazione(String username, String password) throws BusinessException {
         Utente utente = null;
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(UTENTE_WHERE_USERNAME_AND_PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(SELEZIONA_UTENTE_DA_USERNAME_E_PASSWORD);
             statement.setString(1, username);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
@@ -46,7 +47,7 @@ public class DBUtenteServiceImpl implements UtenteService {
     @Override
     public void aggiungiUtente(Utente utente) throws BusinessException {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(CREATE_UTENTE, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement(AGGIUNGI_UTENTE, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, utente.getNome());
             statement.setString(2, utente.getCognome());
             statement.setString(3, utente.getUsername());
@@ -70,7 +71,7 @@ public class DBUtenteServiceImpl implements UtenteService {
     public Utente trovaPazienteDaCodiceFiscale(String fiscalCode) throws BusinessException {
         Utente utente = new Utente();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SELECT_FROM_UTENTE_WHERE_FISCALCODE);
+            PreparedStatement statement = connection.prepareStatement(SELEZIONA_UTENTE_TRAMITE_FISCALCODE);
             statement.setString(1, fiscalCode);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {

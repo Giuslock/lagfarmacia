@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
     private void loginAction(ActionEvent event) {
         try {
             //prova ad autenticare l'utente, se lo trova lo restituisce e carica la home page, altrimenti compare il messaggio del catch
-            Utente utente = utenteService.autentica(usernameText.getText(), passwordText.getText());
+            Utente utente = utenteService.autenticazione(usernameText.getText(), passwordText.getText());
             dispatcher.loggedIn(utente);
         } catch (UtenteNonTrovato e) {
             labelErrorLogin.setText("Ops! Username e/o password errati!");

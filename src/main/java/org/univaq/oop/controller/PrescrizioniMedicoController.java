@@ -66,7 +66,7 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
     public void initializeData(Utente utente) {
         this.utente = utente;
         try {
-            List<Prescrizione> prescrizioni = prescrizioneService.trovaPrescrizioniByMedicoDaEvadere(Math.toIntExact(utente.getId()));
+            List<Prescrizione> prescrizioni = prescrizioneService.trovaTuttePrescrizioni();
             ObservableList<Prescrizione> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
             elencoPrescrizioniTable.setItems(prescrizioniData);
         } catch (BusinessException e) {

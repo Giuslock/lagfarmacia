@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UtenteService {
 
-    Utente autentica(String username, String password) throws BusinessException;
+    Utente autenticazione(String username, String password) throws BusinessException;
 
     List<Utente> userslist();
 

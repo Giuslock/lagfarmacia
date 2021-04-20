@@ -19,7 +19,7 @@ public class FileUtenteServiceImpl implements UtenteService {
     }
 
     @Override
-    public Utente autentica(String username, String password) throws BusinessException {
+    public Utente autenticazione(String username, String password) throws BusinessException {
         try {
             FileData fileData = Utility.readAllRows(userFileName);
             for (String[] colonne : fileData.getRighe()) {
