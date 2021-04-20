@@ -21,7 +21,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
     private static final String SELECT_FARMACO = "select * from farmaco where id=?";
     private static final String DELETE_FARMACO_FROM_PRESCRIZIONE = "delete from farmaco_prescrizione where farmaco_id=? and prescrizione_id=?";
     private static final String INSERT_FARMACO_IN_PRESCRIZIONE = "insert into farmaco_prescrizione(farmaco_id, prescrizione_id, quantita) values (?, ?, ?)";
-    private static final String UPDATE_FARMACO_QUANTITY_IN_FARMACO_PRESCRIZIONE = "update farmaco_prescrizione set quantity=? where prescrizione_id=? and farmaco_id=?";
+    private static final String UPDATE_FARMACO_QUANTITY_IN_FARMACO_PRESCRIZIONE = "update farmaco_prescrizione set quantita=? where prescrizione_id=? and farmaco_id=?";
 
 
     @Override
@@ -55,7 +55,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-                farmaciMap.put(f, resultSet.getInt("quantity"));
+                farmaciMap.put(f, resultSet.getInt("quantita"));
             }
 
         } catch (SQLException throwables) {
