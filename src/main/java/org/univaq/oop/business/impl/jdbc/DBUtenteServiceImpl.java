@@ -16,7 +16,7 @@ public class DBUtenteServiceImpl implements UtenteService {
     private static final String SELECT_FROM_UTENTE_WHERE_ID = "select * from utente where id=?";
     private static final String SELEZIONA_UTENTE_TRAMITE_FISCALCODE = "select * from utente where codicefiscale=?";
     private static final String DELETE_FROM_UTENTE_WHERE_ID = "delete from utente where id=?";
-    private static final String AGGIUNGI_UTENTE = "insert into utente ( nome,cognome,username,password_,role,codicefiscale) values  (?,?,?,?,?,?) ;";
+    private static final String AGGIUNGI_UTENTE = "insert into utente ( nome,cognome,username,password_,ruolo,codicefiscale) values  (?,?,?,?,?,?) ;";
     private static final String SELEZIONA_UTENTE_DA_USERNAME_E_PASSWORD = "select * from utente where username=? and password_=?";
 
     @Override

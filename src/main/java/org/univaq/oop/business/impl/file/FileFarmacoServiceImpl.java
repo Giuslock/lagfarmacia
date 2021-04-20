@@ -35,7 +35,7 @@ public class FileFarmacoServiceImpl implements FarmacoService {
                 farmaco.setDescrizione(colonne[2]);
                 farmaco.setMinimo(Integer.parseInt(colonne[3]));
                 farmaco.setQuantita(Integer.parseInt(colonne[4]));
-                farmaco.setOutOfStock();
+                farmaco.setInEsaurimento();
                 farmaco.setStatoFarmaco();
                 result.add(farmaco);
 
@@ -121,7 +121,7 @@ public class FileFarmacoServiceImpl implements FarmacoService {
                     far.setDescrizione(colonne[2]);
                     far.setMinimo(Integer.parseInt(colonne[3]));
                     far.setQuantita(Integer.parseInt(colonne[4]));
-                    far.setOutOfStock();
+                    far.setInEsaurimento();
                     far.setStatoFarmaco();
 
                 }
@@ -198,9 +198,9 @@ public class FileFarmacoServiceImpl implements FarmacoService {
                 farmaco.setDescrizione(colonne[2]);
                 farmaco.setMinimo(Integer.parseInt(colonne[3]));
                 farmaco.setQuantita(Integer.parseInt(colonne[4]));
-                farmaco.setOutOfStock();
+                farmaco.setInEsaurimento();
                 farmaco.setStatoFarmaco();
-                if (farmaco.getStatoFarmaco().equals("RUNNING OUT"))
+                if (farmaco.isInEsaurimento())
                     result.add(farmaco);
             }
         } catch (IOException e) {

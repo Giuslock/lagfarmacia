@@ -45,7 +45,7 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
                             farmacoresult.setDescrizione(colonne2[2]);
                             farmacoresult.setMinimo(Integer.parseInt(colonne2[3]));
                             farmacoresult.setQuantita(Integer.parseInt(colonne2[4]));
-                            farmacoresult.setOutOfStock();
+                            farmacoresult.setInEsaurimento();
                             farmacoresult.setStatoFarmaco();
                             result.put(farmacoresult, Integer.parseInt(colonne[3]));
                         }

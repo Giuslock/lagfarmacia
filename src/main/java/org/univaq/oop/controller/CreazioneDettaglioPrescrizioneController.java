@@ -87,9 +87,9 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         t1_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        t1_nome.setCellValueFactory(new PropertyValueFactory<>("name"));
-        t2_nome.setCellValueFactory(new PropertyValueFactory<>("name"));
-        t2_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        t1_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        t2_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        t2_quantity.setCellValueFactory(new PropertyValueFactory<>("quantita"));
 
     }
 

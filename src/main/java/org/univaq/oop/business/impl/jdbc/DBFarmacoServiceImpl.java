@@ -22,7 +22,7 @@ public class DBFarmacoServiceImpl implements FarmacoService {
     private static final String SELEZIONA_FARMACO_IN_ESAURIMENTO = "select * from farmaco where in_esaurimento=1";
     private static final String CANCELLA_FARMACO = "delete from farmaco where id=?";
     private static final String INSERISCI_FARMACO = "insert into farmaco ( nome,descrizione,minimo,quantita) values  (?,?,?,?) ;";
-    private static final String AGGIORNA_FARMACO_PER_ID = "update farmaco set nome=?,descrizione=?,q_min=?,quantita=?  where id=?";
+    private static final String AGGIORNA_FARMACO_PER_ID = "update farmaco set nome=?,descrizione=?,minimo=?,quantita=?  where id=?";
     private static final String UPDATE_QUANTITY_FARMACO = "update farmaco set quantita=? where id=?";
 
   @Override
@@ -39,7 +39,7 @@ public class DBFarmacoServiceImpl implements FarmacoService {
                 farmaco.setDescrizione(rs.getString("descrizione"));
                 farmaco.setQuantita(rs.getInt("quantita"));
                 farmaco.setMinimo(rs.getInt("minimo"));
-                farmaco.setOutOfStock();
+                farmaco.setInEsaurimento();
                 farmaco.setStatoFarmaco();
                 ll.add(farmaco);
             }
@@ -98,7 +98,7 @@ public class DBFarmacoServiceImpl implements FarmacoService {
                 farmaco.setDescrizione(rs.getString("descrizione"));
                 farmaco.setQuantita(rs.getInt("quantita"));
                 farmaco.setMinimo(rs.getInt("minimo"));
-                farmaco.setOutOfStock();
+                farmaco.setInEsaurimento();
                 farmaco.setStatoFarmaco();
             } else {
                 throw new FarmacoNonTrovato();
@@ -152,7 +152,7 @@ public class DBFarmacoServiceImpl implements FarmacoService {
                 farmaco.setDescrizione(rs.getString("descrizione"));
                 farmaco.setQuantita(rs.getInt("quantita"));
                 farmaco.setMinimo(rs.getInt("minimo"));
-                farmaco.setOutOfStock();
+                farmaco.setInEsaurimento();
                 farmaco.setStatoFarmaco();
                 ll.add(farmaco);
             }

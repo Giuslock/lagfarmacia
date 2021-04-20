@@ -46,7 +46,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
                         f.setDescrizione(rs.getString("descrizione"));
                         f.setQuantita(rs.getInt("quantita"));
                         f.setMinimo(rs.getInt("minimo"));
-                        f.setOutOfStock();
+                        f.setInEsaurimento();
                         f.setStatoFarmaco();
                     } else {
                         throw new FarmacoNonTrovato();

@@ -27,16 +27,16 @@ public class FileUtenteServiceImpl implements UtenteService {
                     Utente utente = new Utente();
                     // colonna[3] identifica il ruolo
                     switch (colonne[5]) {
-                        case "ADMIN":
+                        case "AMMINISTRATORE":
                             utente.setRuolo(Ruolo.AMMINISTRATORE);
                             break;
-                        case "PHARMACIST":
+                        case "FARMACISTA":
                             utente.setRuolo(Ruolo.FARMACISTA);
                             break;
-                        case "PATIENT":
+                        case "PAZIENTE":
                             utente.setRuolo(Ruolo.PAZIENTE);
                             break;
-                        case "DOCTOR":
+                        case "DOTTORE":
                             utente.setRuolo(Ruolo.DOTTORE);
                             break;
                         default:
@@ -94,10 +94,10 @@ public class FileUtenteServiceImpl implements UtenteService {
                 row.append(Utility.SEPARATORE_COLONNA);
                 row.append(utente.getPassword());
                 row.append(Utility.SEPARATORE_COLONNA);
-                if (utente.getRuolo().equals(Ruolo.AMMINISTRATORE)) row.append("ADMIN");
-                if (utente.getRuolo().equals(Ruolo.FARMACISTA)) row.append("PHARMACIST");
-                if (utente.getRuolo().equals(Ruolo.PAZIENTE)) row.append("PATIENT");
-                if (utente.getRuolo().equals(Ruolo.DOTTORE)) row.append("DOCTOR");
+                if (utente.getRuolo().equals(Ruolo.AMMINISTRATORE)) row.append("AMMINISTRATORE");
+                if (utente.getRuolo().equals(Ruolo.FARMACISTA)) row.append("FARMACISTA");
+                if (utente.getRuolo().equals(Ruolo.PAZIENTE)) row.append("PAZIENTE");
+                if (utente.getRuolo().equals(Ruolo.DOTTORE)) row.append("DOTTORE");
                 row.append(Utility.SEPARATORE_COLONNA);
                 row.append(utente.getCodiceFiscale());
                 writer.println(row);

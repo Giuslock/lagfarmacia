@@ -15,7 +15,7 @@ public class Farmaco implements Serializable {
 
     private int quantita;
 
-    private boolean nonDisponibile;
+    private boolean inEsaurimento;
 
     private String statoFarmaco;
 
@@ -29,13 +29,13 @@ public class Farmaco implements Serializable {
         this.quantita = quantita;
     }
 
-    public Farmaco(Long id, String nome, String descrizione, int minimo, int quantita, boolean nonDisponibile) {
+    public Farmaco(Long id, String nome, String descrizione, int minimo, int quantita, boolean inEsaurimento) {
         this.id = id;
         this.nome = nome;
         this.descrizione = descrizione;
         this.minimo = minimo;
         this.quantita = quantita;
-        this.nonDisponibile = nonDisponibile;
+        this.inEsaurimento = inEsaurimento;
     }
 
     public Long getId() {
@@ -78,17 +78,18 @@ public class Farmaco implements Serializable {
         this.quantita = quantita;
     }
 
-    public boolean isNonDisponibile() {
-        return nonDisponibile;
+    public boolean isInEsaurimento() {
+        return inEsaurimento;
     }
 
-    public void setOutOfStock() {
-        this.nonDisponibile = quantita <= minimo;
+    public void setInEsaurimento() {
+        this.inEsaurimento = quantita <= minimo;
     }
 
     public void setStatoFarmaco() {
-        if (this.nonDisponibile) this.statoFarmaco = "NON DISPONIBILE";
-        else this.statoFarmaco = "DISPONIBILE";
+        if (this.inEsaurimento && this.quantita == 0) {this.statoFarmaco = "NON DISPONIBILE";}
+        else if(this.inEsaurimento){this.statoFarmaco = "IN ESAURIMENTO";}
+        else this.statoFarmaco="DISPONIBILE";
     }
 
     public String getStatoFarmaco() {
@@ -103,7 +104,7 @@ public class Farmaco implements Serializable {
                 ", descrizione='" + descrizione + '\'' +
                 ", minimo=" + minimo +
                 ", quantita=" + quantita +
-                ", disponibilità=" + nonDisponibile +
+                ", disponibilità=" + inEsaurimento +
                 ", statoFarmaco=" + statoFarmaco +
                 '}';
     }

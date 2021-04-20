@@ -1,16 +1,2 @@
-16
-1,true,Possibile influenza,3,1
-2,true,Stato febbricitante,3,1
-3,true,Scorta di farmaci mensile,3,1
-4,true,cavallone,3,1
-5,true,aaaaa,3,1
-6,true,aaa,3,1
-7,true,ffffff,3,1
-8,true,proviamo se va,3,1
-9,true,proviamo se va,3,1
-10,true,tyyyyyyy,3,1
-11,false,aaaaasdasdas,3,1
-12,false,asddas,8,1
-13,false,sadasdsada,8,1
-14,false,ggggg,8,1
-15,false,asdasdasd,3,1
+2
+1,false,dsadasd,4,2

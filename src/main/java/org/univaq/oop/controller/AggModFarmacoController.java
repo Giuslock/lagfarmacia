@@ -66,7 +66,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
             farmaco.setDescrizione(descriptiontext.getText());
             farmaco.setQuantita(Integer.parseInt(quantitytext.getText()));
             farmaco.setMinimo(Integer.parseInt(mimimumtext.getText()));
-            farmaco.setOutOfStock();
+            farmaco.setInEsaurimento();
             farmaco.setStatoFarmaco();
 
             if (farmaco.getId() == null) {
