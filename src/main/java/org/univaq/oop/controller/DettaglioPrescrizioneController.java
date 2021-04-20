@@ -39,7 +39,9 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
     @FXML
     private Button evadiButton;
     @FXML
+
     private Label errorlabel;
+
     private Map<Farmaco, Integer> mappaFarmaciEQuantita;
     private Farmaco farmaco = new Farmaco();
     private Prescrizione prescrizione;
@@ -62,7 +64,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
 
         try {
             mappaFarmaciEQuantita = farmacoPrescrizioneService.ottieniFarmaciDallaPrescrizione(id);
-        } catch (org.univaq.oop.business.BusinessException e) {
+        } catch (BusinessException e) {
             e.printStackTrace();
         }
         List<FarmacoPrescrizione> listaFarmaciWithQuantity = mappaFarmaciEQuantita.entrySet().stream().map(entry -> new FarmacoPrescrizione(
