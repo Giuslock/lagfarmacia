@@ -13,11 +13,7 @@ mv src/main/resources/app-config.example src/main/resources/app-config
 ``` 
 mvn javafx:run
  ```
-- Dopo la prima esecuzione, bisogna commentare nel metodo main() del file App.java le seguenti righe
-```
-//        initDB();
-//        DatabaseSeeder databaseSeeder = new DatabaseSeeder();
-//        databaseSeeder.seed();
+
 ```
 
 
