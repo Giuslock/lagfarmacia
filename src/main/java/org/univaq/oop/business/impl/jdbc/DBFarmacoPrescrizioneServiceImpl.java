@@ -20,9 +20,8 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
     private static final String PRESCRIZIONE_CON_FARMACI = "select * from farmaco_prescrizione where prescrizione_id=?";
     private static final String SELEZIONA_FARMACO_PER_ID = "select * from farmaco where id=?";
     private static final String ELIMINA_FARMACO_DALLA_PRESCRIZIONE = "delete from farmaco_prescrizione where farmaco_id=? and prescrizione_id=?";
-    private static final String INSERISCI_FARMACO_IN_PRESCRIZIONE = "insert into farmaco_prescrizione(farmaco_id, prescrizione_id, quantity) values (?, ?, ?)";
-    private static final String AGGIORNA_QUANTITA_FARMACO_IN_FARMACO_PRESCRIZIONE = "update farmaco_prescrizione set quantity=? where prescrizione_id=? and farmaco_id=?";
-
+    private static final String INSERISCI_FARMACO_IN_PRESCRIZIONE = "insert into farmaco_prescrizione(farmaco_id, prescrizione_id, quantita) values (?, ?, ?)";
+    private static final String AGGIORNA_QUANTITA_FARMACO_IN_FARMACO_PRESCRIZIONE = "update farmaco_prescrizione set quantita=? where prescrizione_id=? and farmaco_id=?";
 
     @Override
     public Map<Farmaco, Integer> ottieniFarmaciDallaPrescrizione(Long prescriptionId) throws BusinessException {
@@ -45,8 +44,8 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
                         f.setId(rs.getLong("id"));
                         f.setNome(rs.getString("nome"));
                         f.setDescrizione(rs.getString("descrizione"));
-                        f.setQuantita(rs.getInt("quantity"));
-                        f.setMinimo(rs.getInt("q_min"));
+                        f.setQuantita(rs.getInt("quantita"));
+                        f.setMinimo(rs.getInt("minimo"));
                         f.setOutOfStock();
                         f.setStatoFarmaco();
                     } else {
@@ -55,7 +54,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-                farmaciMap.put(f, resultSet.getInt("quantity"));
+                farmaciMap.put(f, resultSet.getInt("quantita"));
             }
 
         } catch (SQLException throwables) {

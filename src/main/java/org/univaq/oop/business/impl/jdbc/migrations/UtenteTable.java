@@ -19,8 +19,8 @@ public class UtenteTable extends Migration {
         columns.add("password_ varchar(45) not null");
         columns.add("nome varchar(15) not null");
         columns.add("cognome varchar(20)  not null");
-        columns.add("ruolo varchar(30) default \"PAZIENTE\"");
-        columns.add("fiscalcode varchar(25) not null unique");
+        columns.add("role varchar(30) default \"PATIENT\"");
+        columns.add("codicefiscale varchar(25) not null unique");
 
         return columns;
     }

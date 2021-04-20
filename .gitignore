@@ -38,3 +38,6 @@ target
 farmaci.txt
 utenti.txt
 prescrizioni.txt
+
+*.DS_Store
+src/main/resources/app-config

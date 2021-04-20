@@ -11,13 +11,13 @@ import java.util.List;
 
 public class DBPrescrizioneServiceImpl implements PrescrizioneService {
     private static final String TROVA_PRESCRIZIONI_DA_ID_UTENTE = "select * from prescrizione where utente_id=?";
-    private static final String TROVA_PRESCRIZIONI_PER_MEDICO = "select * from prescrizione where medico_id=? and f_evaso=false";
-    private static final String TROVA_PRESCRIZIONI_DA_EVADERE = "select * from prescrizione where f_evaso=false";
+    private static final String TROVA_PRESCRIZIONI_PER_MEDICO = "select * from prescrizione where medico_id=? and evasa=false";
+    private static final String TROVA_PRESCRIZIONI_DA_EVADERE = "select * from prescrizione where evasa=false";
     private static final String SELEZIONA_TUTTE_LE_PRESCRIZIONI = "select * from prescrizione";
     private static final String PRESCRIZIONE_WITH_FARMACI = "select * from farmaco_prescrizione where prescrizione_id=?";
     private static final String SELECT_FROM_PRESCRIZIONE_WHERE_ID = "select * from prescrizione where id=?";
     private static final String AGGIUNGI_PRESCRIZIONE = "insert into prescrizione (descrizione, medico_id, utente_id) values (?,?,?)";
-    private static final String AGGIORNA_PRESCRIZIONE = "update prescrizione set f_evaso=true where id=?";
+    private static final String AGGIORNA_PRESCRIZIONE = "update prescrizione set evasa=true where id=?";
     private static final String DELETE_PRESCRIZIONE = "delete from prescrizione where id=?";
     private static final String DELETE_FARMACO_FROM_PRESCRIZIONE = "delete from farmaco_prescrizione where farmaco_id=? and prescrizione_id=?";
     private static final String INSERT_FARMACO_IN_PRESCRIZIONE = "insert into farmaco_prescrizione(farmaco_id, prescrizione_id, quantity) values (?, ?, ?)";
@@ -154,7 +154,7 @@ public class DBPrescrizioneServiceImpl implements PrescrizioneService {
         try {
             prescrizione = new Prescrizione(
                     resultSet.getLong("id"),
-                    resultSet.getBoolean("f_evaso"),
+                    resultSet.getBoolean("evasa"),
                     resultSet.getString("descrizione"),
                     resultSet.getInt("medico_id"),
                     resultSet.getInt("utente_id")
