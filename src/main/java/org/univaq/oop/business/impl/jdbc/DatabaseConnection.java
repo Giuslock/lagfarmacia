@@ -10,7 +10,7 @@ public class DatabaseConnection {
 
     public static Connection getConnection() {
         Properties props = AppConfigReader.getProps();
-        String host = "jdbc:mysql://"+ props.getProperty("DB_HOST") + props.getProperty("DB_DATABASE") + "?serverTimezone=UTC";
+        String host = "jdbc:mysql://"+ props.getProperty("DB_HOST")+ "/" + props.getProperty("DB_DATABASE") + "?serverTimezone=UTC";
         Connection connection = null;
 
         try {
