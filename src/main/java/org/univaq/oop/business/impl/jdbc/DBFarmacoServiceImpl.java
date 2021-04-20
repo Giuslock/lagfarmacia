@@ -20,9 +20,9 @@ public class DBFarmacoServiceImpl implements MedicineService {
     private static final String SELECT_FARMACO = "select * from farmaco where id=?";
     private static final String SELECT_FARMACO_ESAURIMENTO = "select * from farmaco where in_esaurimento=1";
     private static final String DESTROY_FARMACO = "delete from farmaco where id=?";
-    private static final String INSERT_FARMACO = "insert into farmaco ( nome,descrizione,q_min,quantity) values  (?,?,?,?) ;";
-    private static final String UPDATE_FARMACO = "update farmaco set nome=?,descrizione=?,q_min=?,quantity=?  where id=?";
-    private static final String UPDATE_QUANTITY_FARMACO = "update farmaco set quantity=? where id=?";
+    private static final String INSERT_FARMACO = "insert into farmaco ( nome,descrizione,minimo,quantita) values  (?,?,?,?) ;";
+    private static final String UPDATE_FARMACO = "update farmaco set nome=?,descrizione=?,minimo=?,quantita=?  where id=?";
+    private static final String UPDATE_QUANTITY_FARMACO = "update farmaco set quantita=? where id=?";
 
     @Override
     public List<Medicine> findAllFarmaci() throws BusinessException {
@@ -35,8 +35,8 @@ public class DBFarmacoServiceImpl implements MedicineService {
                 medicine.setId(rs.getLong("id"));
                 medicine.setName(rs.getString("nome"));
                 medicine.setDescription(rs.getString("descrizione"));
-                medicine.setQuantity(rs.getInt("quantity"));
-                medicine.setMinimum(rs.getInt("q_min"));
+                medicine.setQuantity(rs.getInt("quantita"));
+                medicine.setMinimum(rs.getInt("minimo"));
                 medicine.setOutOfStock();
                 medicine.setStatoFarmaco();
                 ll.add(medicine);
@@ -92,8 +92,8 @@ public class DBFarmacoServiceImpl implements MedicineService {
                 medicine.setId(rs.getLong("id"));
                 medicine.setName(rs.getString("nome"));
                 medicine.setDescription(rs.getString("descrizione"));
-                medicine.setQuantity(rs.getInt("quantity"));
-                medicine.setMinimum(rs.getInt("q_min"));
+                medicine.setQuantity(rs.getInt("quantita"));
+                medicine.setMinimum(rs.getInt("minimo"));
                 medicine.setOutOfStock();
                 medicine.setStatoFarmaco();
             } else {
@@ -145,8 +145,8 @@ public class DBFarmacoServiceImpl implements MedicineService {
                 medicine.setId(rs.getLong("id"));
                 medicine.setName(rs.getString("nome"));
                 medicine.setDescription(rs.getString("descrizione"));
-                medicine.setQuantity(rs.getInt("quantity"));
-                medicine.setMinimum(rs.getInt("q_min"));
+                medicine.setQuantity(rs.getInt("quantita"));
+                medicine.setMinimum(rs.getInt("minimo"));
                 medicine.setOutOfStock();
                 medicine.setStatoFarmaco();
                 ll.add(medicine);

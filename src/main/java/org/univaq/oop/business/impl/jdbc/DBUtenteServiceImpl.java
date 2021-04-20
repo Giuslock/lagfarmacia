@@ -13,9 +13,9 @@ public class DBUtenteServiceImpl implements UserService {
 
     private static final String SELECT_ALL = "select * from utente";
     private static final String SELECT_FROM_UTENTE_WHERE_ID = "select * from utente where id=?";
-    private static final String SELECT_FROM_UTENTE_WHERE_FISCALCODE = "select * from utente where fiscalCode=?";
+    private static final String SELECT_FROM_UTENTE_WHERE_FISCALCODE = "select * from utente where codicefiscale=?";
     private static final String DELETE_FROM_UTENTE_WHERE_ID = "delete from utente where id=?";
-    private static final String CREATE_UTENTE = "insert into utente ( name,surname,username,password_,role,fiscalcode) values  (?,?,?,?,?,?) ;";
+    private static final String CREATE_UTENTE = "insert into utente ( nome,cognome,username,password_,role,codicefiscale) values  (?,?,?,?,?,?) ;";
     private static final String UTENTE_WHERE_USERNAME_AND_PASSWORD = "select * from utente where username=? and password_=?";
 
     @Override
@@ -75,11 +75,11 @@ public class DBUtenteServiceImpl implements UserService {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 utente.setId(rs.getLong("id"));
-                utente.setName(rs.getString("name"));
-                utente.setSurname(rs.getString("surname"));
+                utente.setName(rs.getString("nome"));
+                utente.setSurname(rs.getString("cognome"));
                 utente.setUsername(rs.getString("username"));
                 utente.setPassword(rs.getString("password_"));
-                utente.setFiscalCode(rs.getString("fiscalCode"));
+                utente.setFiscalCode(rs.getString("codicefiscale"));
             } else {
                 throw new UserNotFoundException();
             }

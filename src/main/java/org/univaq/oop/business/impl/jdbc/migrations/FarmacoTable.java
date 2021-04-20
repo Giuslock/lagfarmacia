@@ -16,10 +16,9 @@ public class FarmacoTable extends Migration {
         columns.add("id bigint auto_increment primary key");
         columns.add("nome varchar(60) not null");
         columns.add("descrizione varchar(255) not null");
-        columns.add("minimum tinyint default 5");
-        columns.add("quantity smallint");
-        columns.add("in_esaurimento tinyint(1) generated always as (minimum > quantity) stored"); // mysql generated columns
-        columns.add("medicineStatus varchar(25)");
+        columns.add("minimo tinyint default 5");
+        columns.add("quantita smallint");
+        columns.add("in_esaurimento tinyint(1) generated always as (minimo > quantita) stored"); // mysql generated columns
 
 
         return columns;

@@ -20,7 +20,7 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
     private static final String PRESCRIZIONE_WITH_FARMACI = "select * from farmaco_prescrizione where prescrizione_id=?";
     private static final String SELECT_FARMACO = "select * from farmaco where id=?";
     private static final String DELETE_FARMACO_FROM_PRESCRIZIONE = "delete from farmaco_prescrizione where farmaco_id=? and prescrizione_id=?";
-    private static final String INSERT_FARMACO_IN_PRESCRIZIONE = "insert into farmaco_prescrizione(farmaco_id, prescrizione_id, quantity) values (?, ?, ?)";
+    private static final String INSERT_FARMACO_IN_PRESCRIZIONE = "insert into farmaco_prescrizione(farmaco_id, prescrizione_id, quantita) values (?, ?, ?)";
     private static final String UPDATE_FARMACO_QUANTITY_IN_FARMACO_PRESCRIZIONE = "update farmaco_prescrizione set quantity=? where prescrizione_id=? and farmaco_id=?";
 
 
@@ -45,8 +45,8 @@ public class DBFarmacoPrescrizioneServiceImpl implements FarmacoPrescrizioneServ
                         f.setId(rs.getLong("id"));
                         f.setName(rs.getString("nome"));
                         f.setDescription(rs.getString("descrizione"));
-                        f.setQuantity(rs.getInt("quantity"));
-                        f.setMinimum(rs.getInt("q_min"));
+                        f.setQuantity(rs.getInt("quantita"));
+                        f.setMinimum(rs.getInt("minimo"));
                         f.setOutOfStock();
                         f.setStatoFarmaco();
                     } else {

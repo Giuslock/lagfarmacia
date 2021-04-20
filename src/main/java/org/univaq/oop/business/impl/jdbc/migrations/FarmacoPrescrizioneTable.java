@@ -16,7 +16,7 @@ public class FarmacoPrescrizioneTable extends Migration {
         columns.add("id bigint auto_increment primary key");
         columns.add("farmaco_id bigint not null");
         columns.add("prescrizione_id bigint not null");
-        columns.add("quantity smallint default 1");
+        columns.add("quantita smallint default 1");
         columns.add("foreign key (farmaco_id) references farmaco (id)");
         columns.add("foreign key (prescrizione_id) references prescrizione (id) on delete cascade");
 
