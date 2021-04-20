@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizioneController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizioneController">
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="Dettaglio" textFill="#0e0e0e">
          <font>
@@ -26,7 +26,7 @@
             <TableColumn fx:id="quantityTableColumn" prefWidth="219.0" resizable="false" text="Quantity" />
          </columns>
       </TableView>
-      <Label fx:id="errorlabel" prefHeight="37.0" prefWidth="140.0" text="Label" />
+      <Label fx:id="errorlabel" prefHeight="37.0" prefWidth="140.0" />
       <Button fx:id="evadiButton" mnemonicParsing="false" onAction="#evadiAction" prefHeight="35.0" prefWidth="99.0" styleClass="Button" stylesheets="@loginButton.css" text="Evadi">
          <VBox.margin>
             <Insets left="350.0" top="25.0" />

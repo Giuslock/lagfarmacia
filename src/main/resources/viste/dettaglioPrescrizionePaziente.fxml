@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizionePazienteController">
+<VBox styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizionePazienteController">
 
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="Dettaglio">
@@ -15,7 +15,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="errorlabel" />
+      <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="106.0" />
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
       <TableView fx:id="dettaglioPrescrizioneTable" prefHeight="454.0" prefWidth="537.0">
          <columns>

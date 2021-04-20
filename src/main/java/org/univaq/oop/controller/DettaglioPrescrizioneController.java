@@ -94,7 +94,9 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
             try {
                 farmaco = farmacoService.trovaFarmacoDaId((entry.getKey().getId().intValue()));
             } catch (BusinessException e) {
-                errorlabel.setText("Errore nella ricerca del farmaco per id");
+
+                errorlabel.setText("Errore nella ricerca del farmaco da id");
+
             }
             return (farmaco.getQuantita() - entry.getValue()) > 0;
         });
