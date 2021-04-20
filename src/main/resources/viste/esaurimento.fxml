@@ -7,7 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciEsaurimentoController">
+
    <children>
       <Label prefHeight="73.0" prefWidth="366.0" text="  Elenco farmaci in esaurimento:">
          <font>
@@ -17,12 +19,12 @@
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
       <TableView fx:id="elencoFarmaciTable" prefHeight="370.0" prefWidth="700.0">
          <columns>
-            <TableColumn fx:id="codiceTableColumn" prefWidth="76.0" text="Codice" />
-            <TableColumn fx:id="nomeTableColumn" prefWidth="84.0" text="Nome" />
-            <TableColumn fx:id="disponibilitaTableColumn" prefWidth="125.0" text="ActualQuantity" />
-            <TableColumn fx:id="qtaMinimaTableColumn" prefWidth="86.0" text="Minimum" />
-            <TableColumn fx:id="statoTableColumn" prefWidth="118.0" text="Stato" />
-            <TableColumn fx:id="azioniTableColumn" prefWidth="60.0" text="Azioni" />
+            <TableColumn fx:id="codiceTableColumn" prefWidth="76.0" resizable="false" text="Codice" />
+            <TableColumn fx:id="nomeTableColumn" prefWidth="178.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="disponibilitaTableColumn" prefWidth="95.0" resizable="false" text="ActualQuantity" />
+            <TableColumn fx:id="qtaMinimaTableColumn" prefWidth="86.0" resizable="false" text="Minimum" />
+            <TableColumn fx:id="statoTableColumn" prefWidth="195.0" resizable="false" text="Stato" />
+            <TableColumn fx:id="azioniTableColumn" prefWidth="185.0" resizable="false" text="Azioni" />
          </columns>
       </TableView>
    </children>

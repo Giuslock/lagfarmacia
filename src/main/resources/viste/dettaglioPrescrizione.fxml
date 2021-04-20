@@ -21,9 +21,9 @@
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
       <TableView fx:id="dettaglioPrescrizioneTable" prefHeight="370.0" prefWidth="700.0">
          <columns>
-            <TableColumn fx:id="codiceTableColumn" prefWidth="142.0" text="Codice" />
-            <TableColumn fx:id="nomeTableColumn" prefWidth="451.0" text="Nome" />
-            <TableColumn fx:id="quantityTableColumn" prefWidth="105.0" text="Quantity" />
+            <TableColumn fx:id="codiceTableColumn" prefWidth="142.0" resizable="false" text="Codice" />
+            <TableColumn fx:id="nomeTableColumn" prefWidth="451.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="quantityTableColumn" prefWidth="219.0" resizable="false" text="Quantity" />
          </columns>
       </TableView>
       <Button fx:id="evadiButton" mnemonicParsing="false" onAction="#evadiAction" prefHeight="35.0" prefWidth="99.0" styleClass="Button" stylesheets="@loginButton.css" text="Evadi">
