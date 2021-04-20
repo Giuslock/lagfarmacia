@@ -48,6 +48,8 @@ public class PrescrizioniPazienteController implements DataInitializable<Utente>
     private Label errorText;
     @FXML
     private Button dettagliButton;
+    @FXML
+    private Label errorlabel;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
     public PrescrizioniPazienteController() {
