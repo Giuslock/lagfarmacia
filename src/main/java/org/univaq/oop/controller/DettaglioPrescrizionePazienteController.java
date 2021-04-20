@@ -37,6 +37,9 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
     private TableColumn<FarmacoPrescrizione, String> codiceTableColumn;
     @FXML
     private TableColumn<FarmacoPrescrizione, Integer> quantityTableColumn;
+    @FXML
+    private Label errorlabel;
+
     private Map<Farmaco, Integer> mappaFarmaciEQuantita;
     private Utente utente;
 

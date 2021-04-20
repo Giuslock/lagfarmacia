@@ -39,7 +39,8 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
     @FXML
     private Button schedaButton;
     @FXML
-    private Label errorLabel;
+    private Label errorlabel;
+
 
 
     public ElencoFarmaciPazienteController() {

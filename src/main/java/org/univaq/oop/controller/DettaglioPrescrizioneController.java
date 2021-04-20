@@ -39,7 +39,9 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
     @FXML
     private Button evadiButton;
     @FXML
-    private Label errorLabel;
+
+    private Label errorlabel;
+
     private Map<Farmaco, Integer> mappaFarmaciEQuantita;
     private Farmaco farmaco = new Farmaco();
     private Prescrizione prescrizione;

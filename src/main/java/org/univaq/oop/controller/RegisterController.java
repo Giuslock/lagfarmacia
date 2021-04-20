@@ -42,6 +42,8 @@ public class RegisterController implements Initializable, DataInitializable<Uten
     private RadioButton pazienteRadioButton;
     @FXML
     private RadioButton farmacistaRadioButton;
+    @FXML
+    private Label errorlabel;
 
 
     public RegisterController() throws BusinessException {

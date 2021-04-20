@@ -44,6 +44,9 @@ public class PrescrizioniFarmacistaController implements DataInitializable<Utent
     private Label errorText;
     @FXML
     private Button dettagliButton;
+    @FXML
+    private Label errorlabel;
+
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
     public PrescrizioniFarmacistaController() {
