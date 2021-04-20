@@ -3,6 +3,7 @@ package org.univaq.oop.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.LagBusinessFactory;
@@ -25,6 +26,8 @@ public class SchedaFarmacoController implements Initializable, DataInitializable
     private TextField statusText;
     @FXML
     private Button backButton;
+    @FXML
+    private Label errorlabel;
     private Utente utente;
     private Farmaco farmaco;
 

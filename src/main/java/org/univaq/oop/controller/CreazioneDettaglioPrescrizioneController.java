@@ -49,6 +49,8 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     private TextField codicetextfield;
     @FXML
     private TextArea descrizione;
+    @FXML
+    private Label errorlabel;
     private final Prescrizione prescrizione;
     private ObservableList<FarmacoPrescrizione> listaFarmaciNellaPrescrizione;
     private Utente utente;

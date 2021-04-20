@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -42,6 +43,8 @@ public class FarmaciEsaurimentoController implements Initializable, DataInitiali
     private TableColumn<Farmaco, String> qtaMinimaTableColumn;
     @FXML
     private TableColumn<Farmaco, Button> azioniTableColumn;
+    @FXML
+    private Label errorlabel;
 
 
     public FarmaciEsaurimentoController() {

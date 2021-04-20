@@ -51,6 +51,9 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
     private Button modificaButton;
     @FXML
     private Button aggiungiButton;
+    @FXML
+    private Label errorlabel;
+
     private Utente utente;
 
     public PrescrizioniMedicoController() {

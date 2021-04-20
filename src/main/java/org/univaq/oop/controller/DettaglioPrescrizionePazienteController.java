@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,6 +35,9 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
     private TableColumn<FarmacoPrescrizione, String> codiceTableColumn;
     @FXML
     private TableColumn<FarmacoPrescrizione, Integer> quantityTableColumn;
+    @FXML
+    private Label errorlabel;
+
     private Map<Farmaco, Integer> mappaFarmaciEQuantita;
     private Utente utente;
 

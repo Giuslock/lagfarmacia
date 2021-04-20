@@ -34,6 +34,8 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     private Button salvaButton;
     @FXML
     private Button eliminaButton;
+    @FXML
+    private Label errorlabel;
     private Utente utente;
     private Farmaco farmaco;
 
