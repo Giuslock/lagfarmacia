@@ -129,26 +129,26 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
                 }, 
                 () -> errorlabel.setText("Errore nella rimozione del farmaco")
             );
-            
     }
 
     @FXML
-    public void creaPrescrizione() throws BusinessException {
+    public void creaPrescrizione() {
         try {
             this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codicetextfield.getText()).getId()));
+            this.prescrizione.setCodiceDottore(this.utente.getId().intValue());
+            this.prescrizione.setDescrizione(this.descrizione.getText());
+            Prescrizione prescrizioneInserita = this.prescrizioneService.creaPrescrizione(this.prescrizione);
+
+            farmaciNellaPrescrizione.forEach((farmaco, quantity) -> this.farmacoPrescrizioneService.inserisciFarmacoNellaPrescrizione(
+                    farmaco.getId(),
+                    prescrizioneInserita.getId(),
+                    quantity
+            ));
+            dispatcher.renderView("prescrizioniMedico", utente);
         } catch (BusinessException e) {
             errorlabel.setText("Questo codice non esiste");
         }
-        this.prescrizione.setCodiceDottore(utente.getId().intValue());
-        this.prescrizione.setDescrizione(this.descrizione.getText());
-        Prescrizione prescrizioneInserita = this.prescrizioneService.creaPrescrizione(this.prescrizione);
 
-        farmaciNellaPrescrizione.forEach((farmaco, quantity) -> this.farmacoPrescrizioneService.inserisciFarmacoNellaPrescrizione(
-                farmaco.getId(),
-                prescrizioneInserita.getId(),
-                quantity
-        ));
-        dispatcher.renderView("prescrizioniMedico", utente);
 
     }
 

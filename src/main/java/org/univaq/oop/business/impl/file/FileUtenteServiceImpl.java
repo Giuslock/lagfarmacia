@@ -113,12 +113,12 @@ public class FileUtenteServiceImpl implements UtenteService {
 
     @Override
     public Utente trovaPazienteDaCodiceFiscale(String codiceFiscale) throws BusinessException {
-
+        Utente utente = new Utente();
         try {
             FileData fileData = Utility.readAllRows(userFileName);
             for (String[] colonne : fileData.getRighe()) {
                 if (colonne[6].equals(codiceFiscale)) {
-                    Utente utente = new Utente();
+
                     utente.setId((long) Integer.parseInt(colonne[0]));
                     utente.setNome(colonne[1]);
                     utente.setCognome(colonne[2]);
@@ -132,7 +132,7 @@ public class FileUtenteServiceImpl implements UtenteService {
 
         } catch (IOException e) {
             e.printStackTrace();
-            throw new BusinessException(e);
+            throw new BusinessException();
         }
     }
 

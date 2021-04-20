@@ -116,6 +116,8 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
             this.listaFarmaciNellaPrescrizione.add(farmacoPrescrizioneService.farmacoSingoloInFarmacoPrescrizione(f));
             this.farmacoPrescrizioneService.inserisciFarmacoNellaPrescrizione(f.getId(), prescrizione.getId(), 1);
         }
+        salva.setDisable(false);
+        errorlabel.setText("");
     }
 
     @FXML
@@ -127,17 +129,21 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     @FXML
     public void rimuoviFarmacoDallaPrescrizione() {
         FarmacoPrescrizione fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
-        this.farmacoPrescrizioneService.eliminaFarmacoDallaPrescrizione(fp.getId(), prescrizione.getId());
 
-        // Devo rimuovere anche dalla lista non solo dall'observable
-        // mi rendera' piu' facile l'eliminazione e/o aggiunta del farmaco nell'observable
-        Farmaco toDelete = null;
-        for (Farmaco f : farmaciNellaPrescrizione.keySet()) {
-            if (f.getId().equals(fp.getId())) toDelete = f;
-        }
-        this.farmaciNellaPrescrizione.remove(toDelete);
 
         this.listaFarmaciNellaPrescrizione.remove(fp);
+        if(listaFarmaciNellaPrescrizione.isEmpty()){
+            salva.setDisable(true);
+        this.listaFarmaciNellaPrescrizione.add(fp);
+        errorlabel.setText("Non puoi salvare una prescrizione vuota");
+        } else {
+            this.farmacoPrescrizioneService.eliminaFarmacoDallaPrescrizione(fp.getId(), prescrizione.getId());
+
+            Farmaco toDelete = null;
+            for (Farmaco f : farmaciNellaPrescrizione.keySet()) {
+                if (f.getId().equals(fp.getId())) toDelete = f;
+            }
+            this.farmaciNellaPrescrizione.remove(toDelete);}
     }
 
 
