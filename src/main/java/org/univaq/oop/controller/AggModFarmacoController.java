@@ -45,6 +45,9 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        salvaButton.disableProperty().bind(descriptiontext.textProperty().isEmpty());
+        eliminaButton.disableProperty().bind(descriptiontext.textProperty().isEmpty());
+
     }
 
     //vengono caricati i dati dei farmaci nelle textfield
