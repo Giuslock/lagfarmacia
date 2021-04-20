@@ -27,7 +27,7 @@ public class DBUtenteServiceImpl implements UtenteService {
             if (resultSet.next()) {
                 utente = mapTo(resultSet);
             } else {
-                throw new UtenteNonTrovato();
+                throw new UtenteNonTrovatoException();
             }
 
         } catch (SQLException throwables) {
@@ -69,7 +69,7 @@ public class DBUtenteServiceImpl implements UtenteService {
                 utente.setPassword(rs.getString("password_"));
                 utente.setCodiceFiscale(rs.getString("codicefiscale"));
             } else {
-                throw new UtenteNonTrovato();
+                throw new UtenteNonTrovatoException();
             }
         } catch (SQLException throwables) {
             throw new DatabaseException();

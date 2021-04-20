@@ -39,7 +39,6 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
     @FXML
     private Button evadiButton;
     @FXML
-
     private Label errorlabel;
 
     private Map<Farmaco, Integer> mappaFarmaciEQuantita;
@@ -65,7 +64,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
         try {
             mappaFarmaciEQuantita = farmacoPrescrizioneService.ottieniFarmaciDallaPrescrizione(id);
         } catch (BusinessException e) {
-            errorLabel.setText("Errore nella ricerca dei farmaci dalla prescrizione");
+            errorlabel.setText("Errore nella ricerca dei farmaci dalla prescrizione");
         }
 
         List<FarmacoPrescrizione> listaFarmaciWithQuantity = mappaFarmaciEQuantita.entrySet().stream().map(entry -> new FarmacoPrescrizione(
@@ -95,7 +94,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
             try {
                 farmaco = farmacoService.trovaFarmacoDaId((entry.getKey().getId().intValue()));
             } catch (BusinessException e) {
-                errorLabel.setText("Errore nella ricerca del farmaco da id");
+                errorlabel.setText("Errore nella ricerca del farmaco per id");
             }
             return (farmaco.getQuantita() - entry.getValue()) > 0;
         });
@@ -109,7 +108,7 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
             prescrizione.setEvasa(evadable);
             prescrizioneService.aggiornaPrescrizione(prescrizione);
             dispatcher.renderView("elencoTuttePrescrizioni", utente);
-        }
+        } else { errorlabel.setText("La prescrizione non e' evadibile");}
 
 
     }

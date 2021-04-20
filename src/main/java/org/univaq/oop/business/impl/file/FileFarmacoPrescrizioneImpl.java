@@ -56,6 +56,7 @@ public class FileFarmacoPrescrizioneImpl implements FarmacoPrescrizioneService {
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw new BusinessException();
         }
         return result;
     }

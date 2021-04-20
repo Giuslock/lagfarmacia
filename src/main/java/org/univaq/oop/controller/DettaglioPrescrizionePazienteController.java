@@ -28,8 +28,6 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
     private final PrescrizioneService prescrizioneService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
     @FXML
-    private Label errorLabel;
-    @FXML
     private TableView<FarmacoPrescrizione> dettaglioPrescrizioneTable;
     @FXML
     private TableColumn<FarmacoPrescrizione, String> nomeTableColumn;
@@ -58,7 +56,7 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
         try {
             mappaFarmaciEQuantita = farmacoPrescrizioneService.ottieniFarmaciDallaPrescrizione(id);
         } catch (BusinessException e) {
-            errorLabel.setText("Errore nella ricerca dei farmaci nella prescrizione");
+            errorlabel.setText("Errore nella ricerca dei farmaci nella prescrizione");
         }
         List<FarmacoPrescrizione> listaFarmaciWithQuantity = mappaFarmaciEQuantita.entrySet().stream().map(entry -> new FarmacoPrescrizione(
                 entry.getKey().getId(),

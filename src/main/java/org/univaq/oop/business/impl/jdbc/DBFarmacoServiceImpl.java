@@ -97,7 +97,7 @@ public class DBFarmacoServiceImpl implements FarmacoService {
                 farmaco.setInEsaurimento();
                 farmaco.setStatoFarmaco();
             } else {
-                throw new FarmacoNonTrovato();
+                throw new FarmacoNonTrovatoException();
             }
         } catch (SQLException throwables) {
             throw new DatabaseException();

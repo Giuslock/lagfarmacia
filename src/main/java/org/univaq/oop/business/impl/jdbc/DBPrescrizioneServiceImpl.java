@@ -1,7 +1,8 @@
 package org.univaq.oop.business.impl.jdbc;
 
 import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.PrescrizioneNonTrovata;
+import org.univaq.oop.business.DatabaseException;
+import org.univaq.oop.business.PrescrizioneNonTrovataException;
 import org.univaq.oop.business.PrescrizioneService;
 import org.univaq.oop.domain.Prescrizione;
 
@@ -35,7 +36,7 @@ public class DBPrescrizioneServiceImpl implements PrescrizioneService {
             }
 
         } catch (SQLException throwables) {
-            throw new PrescrizioneNonTrovata();
+            throw new PrescrizioneNonTrovataException();
         }
         return prescrizioni;
     }
@@ -53,7 +54,7 @@ public class DBPrescrizioneServiceImpl implements PrescrizioneService {
             }
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new DatabaseException();
         }
         return prescrizioni;
     }
@@ -76,7 +77,7 @@ public class DBPrescrizioneServiceImpl implements PrescrizioneService {
             }//setto lo stato per ogni elemento della lista delle prescrizioni
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new DatabaseException();
         }
 
         return prescrizioni;
@@ -100,7 +101,7 @@ public class DBPrescrizioneServiceImpl implements PrescrizioneService {
             }//setto lo stato per ogni elemento della lista delle prescrizioni
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new DatabaseException();
         }
 
         return prescrizioni;
@@ -122,7 +123,7 @@ public class DBPrescrizioneServiceImpl implements PrescrizioneService {
             }
 
         } catch (SQLException throwables) {
-            throw new PrescrizioneNonTrovata();
+            throw new DatabaseException();
         }
 
         return prescrizione;
@@ -135,7 +136,7 @@ public class DBPrescrizioneServiceImpl implements PrescrizioneService {
             statement.setInt(1, prescrizione.getId().intValue());
             statement.executeUpdate();
         } catch (SQLException throwables) {
-            throw new PrescrizioneNonTrovata();
+            throw new DatabaseException();
         }
     }
 

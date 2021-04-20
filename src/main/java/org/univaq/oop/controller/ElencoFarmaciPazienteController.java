@@ -56,7 +56,7 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             elencoFarmaciTable.setItems(farmaciData);
         } catch (BusinessException e) {
-            errorLabel.setText("Errore nella ricerca dei farmaci");
+            errorlabel.setText("Errore nella ricerca dei farmaci");
         }
 
     }

@@ -77,7 +77,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             tabellaFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {
-            e.printStackTrace();
+            errorlabel.setText("Errore nella ricerca dei farmaci");
         }
         List<FarmacoPrescrizione> farmacoPrescrizioneList = farmacoPrescrizioneService.mappaFarmacoPrescrizione(this.farmaciNellaPrescrizione);
         this.listaFarmaciNellaPrescrizione = FXCollections.observableArrayList(farmacoPrescrizioneList);
@@ -127,14 +127,18 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
                     this.farmaciNellaPrescrizione.remove(farmaco);
                     this.listaFarmaciNellaPrescrizione.remove(fp);
                 }, 
-                () -> System.out.println("SETTA UNA CAZZO DI LABEL")
+                () -> errorlabel.setText("Errore nella rimozione del farmaco")
             );
             
     }
 
     @FXML
     public void creaPrescrizione() throws BusinessException {
-        this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codicetextfield.getText()).getId()));
+        try {
+            this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codicetextfield.getText()).getId()));
+        } catch (BusinessException e) {
+            errorlabel.setText("Questo codice non esiste");
+        }
         this.prescrizione.setCodiceDottore(utente.getId().intValue());
         this.prescrizione.setDescrizione(this.descrizione.getText());
         Prescrizione prescrizioneInserita = this.prescrizioneService.creaPrescrizione(this.prescrizione);
