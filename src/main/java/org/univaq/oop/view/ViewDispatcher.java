@@ -26,6 +26,7 @@ public class ViewDispatcher {
 
     //metodo che carica la pagina di login
     public void loginView(Stage stage) throws ViewException {
+        stage.setResizable(false);
         try {
             this.stage = stage;
             FXMLLoader startPage = new FXMLLoader(getClass().getResource("/viste/login.fxml"));

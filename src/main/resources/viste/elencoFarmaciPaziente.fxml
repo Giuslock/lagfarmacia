@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.ElencoFarmaciPazienteController">
+<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.ElencoFarmaciPazienteController">
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="  Elenco Farmaci:">
          <font>
@@ -19,9 +19,9 @@
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
       <TableView fx:id="elencoFarmaciTable" prefHeight="370.0" prefWidth="700.0">
          <columns>
-            <TableColumn fx:id="nomeTableColumn" prefWidth="137.0" text="Nome" />
-            <TableColumn fx:id="descriptionTableColumn" prefWidth="349.0" text="Descrizione" />
-            <TableColumn fx:id="azioniTableColumn" prefWidth="109.0" text="Column X" />
+            <TableColumn fx:id="nomeTableColumn" prefWidth="208.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="439.0" resizable="false" text="Descrizione" />
+            <TableColumn fx:id="azioniTableColumn" prefWidth="168.0" resizable="false" text="Column X" />
          </columns>
       </TableView>
       <Button fx:id="schedaButton" mnemonicParsing="false" styleClass="Button" stylesheets="@loginButton.css" text="Scheda Farmaco">

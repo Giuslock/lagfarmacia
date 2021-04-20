@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniPazienteController">
+<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniPazienteController">
    <children>
       <Label prefHeight="105.0" prefWidth="268.0" text="Prescrizioni:">
          <font>
@@ -15,12 +15,12 @@
       </Label>
       <TableView fx:id="elencoPrescrizioniTable" prefHeight="359.0" prefWidth="622.0">
         <columns>
-          <TableColumn fx:id="numeroTableColumn" prefWidth="59.0" text="Numero" />
-            <TableColumn fx:id="descriptionTableColumn" prefWidth="112.0" text="Description" />
-            <TableColumn fx:id="medicoTableColumn" prefWidth="136.0" text="Medico" />
-            <TableColumn fx:id="pazienteTableColumn" prefWidth="176.79998779296875" text="Paziente" />
-            <TableColumn fx:id="azioniTableColumn" prefWidth="160.800048828125" text="Azioni" />
-            <TableColumn fx:id="statoTableColumn" prefWidth="172.7999267578125" text="Stato" />
+          <TableColumn fx:id="numeroTableColumn" prefWidth="59.0" resizable="false" text="Numero" />
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="112.0" resizable="false" text="Description" />
+            <TableColumn fx:id="medicoTableColumn" prefWidth="136.0" resizable="false" text="Medico" />
+            <TableColumn fx:id="pazienteTableColumn" prefWidth="176.79998779296875" resizable="false" text="Paziente" />
+            <TableColumn fx:id="azioniTableColumn" prefWidth="160.800048828125" resizable="false" text="Azioni" />
+            <TableColumn fx:id="statoTableColumn" prefWidth="172.7999267578125" resizable="false" text="Stato" />
         </columns>
       </TableView>
       <Label fx:id="errorText" prefHeight="79.0" prefWidth="316.0" textAlignment="CENTER" textFill="RED">

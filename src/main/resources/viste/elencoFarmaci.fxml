@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciController">
+<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciController">
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="  Elenco Farmaci:">
          <font>
@@ -23,12 +23,12 @@
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
       <TableView fx:id="elencoFarmaciTable" prefHeight="370.0" prefWidth="700.0">
          <columns>
-            <TableColumn fx:id="codiceTableColumn" prefWidth="89.0" text="Codice" />
-            <TableColumn fx:id="nomeTableColumn" prefWidth="93.0" text="Nome" />
-            <TableColumn fx:id="statoTableColumn" prefWidth="118.0" text="Stato" />
-            <TableColumn fx:id="minimumTableColumn" prefWidth="118.0" text="Minimum" />
-            <TableColumn fx:id="quantityTableColumn1" prefWidth="118.0" text="ActualQuantity" />
-            <TableColumn fx:id="azioniTableColumn" prefWidth="117.0" text="Azioni" />
+            <TableColumn fx:id="codiceTableColumn" prefWidth="89.0" resizable="false" text="Codice" />
+            <TableColumn fx:id="nomeTableColumn" prefWidth="198.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="statoTableColumn" prefWidth="102.0" resizable="false" text="Stato" />
+            <TableColumn fx:id="minimumTableColumn" prefWidth="102.0" resizable="false" text="Minimum" />
+            <TableColumn fx:id="quantityTableColumn1" prefWidth="125.0" resizable="false" text="ActualQuantity" />
+            <TableColumn fx:id="azioniTableColumn" prefWidth="197.0" resizable="false" text="Azioni" />
          </columns>
       </TableView>
    </children>

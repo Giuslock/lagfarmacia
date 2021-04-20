@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
    <children>
       <Label prefHeight="65.0" prefWidth="268.0" text="  Elenco Prescrizioni:">
          <font>
@@ -40,10 +40,10 @@
       <TableView fx:id="elencoPrescrizioniTable" prefHeight="402.0" prefWidth="700.0">
         <columns>
           <TableColumn fx:id="numeroTableColumn" prefWidth="54.33333206176758" text="Numero" visible="false" />
-            <TableColumn fx:id="idTableColumn" prefWidth="89.66666793823242" text="Numero" />
-            <TableColumn fx:id="descriptionTableColumn" prefWidth="145.0" text="Descrizione" />
-            <TableColumn fx:id="pazienteTableColumn" prefWidth="91.33331298828125" text="Paziente" />
-            <TableColumn fx:id="azioniTableColumn1" prefWidth="145.0" text="Azioni" />
+            <TableColumn fx:id="idTableColumn" prefWidth="89.66666793823242" resizable="false" text="Numero" />
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="234.0" resizable="false" text="Descrizione" />
+            <TableColumn fx:id="pazienteTableColumn" prefWidth="189.5" resizable="false" text="Paziente" />
+            <TableColumn fx:id="azioniTableColumn1" prefWidth="183.0" resizable="false" text="Azioni" />
         </columns>
       </TableView>
       <GridPane prefHeight="32.0" prefWidth="694.0">
