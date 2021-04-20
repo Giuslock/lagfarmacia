@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,8 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
     private final FarmacoService farmacoService;
     private final PrescrizioneService prescrizioneService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
+    @FXML
+    private Label errorLabel;
     @FXML
     private TableView<FarmacoPrescrizione> dettaglioPrescrizioneTable;
     @FXML
@@ -52,7 +55,7 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
         try {
             mappaFarmaciEQuantita = farmacoPrescrizioneService.ottieniFarmaciDallaPrescrizione(id);
         } catch (BusinessException e) {
-            e.printStackTrace();
+            errorLabel.setText("Errore nella ricerca dei farmaci nella prescrizione");
         }
         List<FarmacoPrescrizione> listaFarmaciWithQuantity = mappaFarmaciEQuantita.entrySet().stream().map(entry -> new FarmacoPrescrizione(
                 entry.getKey().getId(),
