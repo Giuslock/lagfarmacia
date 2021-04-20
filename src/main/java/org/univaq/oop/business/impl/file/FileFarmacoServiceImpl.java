@@ -4,7 +4,6 @@ import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.FarmacoInPrescrizioneException;
 import org.univaq.oop.business.FarmacoService;
 import org.univaq.oop.domain.Farmaco;
-import org.univaq.oop.domain.Prescrizione;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +40,6 @@ public class FileFarmacoServiceImpl implements FarmacoService {
 
             }
         } catch (IOException e) {
-            e.printStackTrace();
             throw new BusinessException(e);
         }
 
@@ -169,21 +167,6 @@ public class FileFarmacoServiceImpl implements FarmacoService {
             e.printStackTrace();
         }
 
-    }
-
-    @Override
-    public void aggiornaQtaFarmaco(Prescrizione prescrizione) throws BusinessException {
-
-    }
-
-    @Override
-    public List<String> findAllFarmaciByNome() throws BusinessException {
-        return null;
-    }
-
-    @Override
-    public Farmaco findFarmacoByName(String string) throws BusinessException {
-        return null;
     }
 
     @Override

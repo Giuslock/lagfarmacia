@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="482.0" style="-fx-background-color: #FFFFFFFF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="482.0" style="-fx-background-color: #FFFFFFFF;" xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.LoginController">
    <children>
       <ImageView fitHeight="281.0" fitWidth="488.0" layoutX="34.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>

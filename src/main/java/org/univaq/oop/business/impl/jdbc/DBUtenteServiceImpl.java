@@ -1,13 +1,10 @@
 package org.univaq.oop.business.impl.jdbc;
 
-import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.UtenteNonTrovato;
-import org.univaq.oop.business.UtenteService;
+import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Ruolo;
 import org.univaq.oop.domain.Utente;
 
 import java.sql.*;
-import java.util.List;
 
 public class DBUtenteServiceImpl implements UtenteService {
 
@@ -40,11 +37,6 @@ public class DBUtenteServiceImpl implements UtenteService {
     }
 
     @Override
-    public List<Utente> userslist() {
-        return null;
-    }
-
-    @Override
     public void aggiungiUtente(Utente utente) throws BusinessException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(AGGIUNGI_UTENTE, Statement.RETURN_GENERATED_KEYS);
@@ -56,15 +48,10 @@ public class DBUtenteServiceImpl implements UtenteService {
             statement.setString(6, utente.getCodiceFiscale());
             statement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new CodiceFiscaleException();
         }
 
 
-    }
-
-    @Override
-    public List<String> findAllPatients() throws BusinessException {
-        return null;
     }
 
     @Override
@@ -85,14 +72,9 @@ public class DBUtenteServiceImpl implements UtenteService {
                 throw new UtenteNonTrovato();
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new DatabaseException();
         }
         return utente;
-    }
-
-    @Override
-    public Utente findPatientById(int id) throws BusinessException {
-        return null;
     }
 
     protected Utente mapTo(ResultSet resultSet) {

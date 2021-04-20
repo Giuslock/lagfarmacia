@@ -1,6 +1,7 @@
 package org.univaq.oop.business.impl.file;
 
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.CodiceFiscaleException;
 import org.univaq.oop.business.UtenteNonTrovato;
 import org.univaq.oop.business.UtenteService;
 import org.univaq.oop.domain.Ruolo;
@@ -8,7 +9,6 @@ import org.univaq.oop.domain.Utente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 public class FileUtenteServiceImpl implements UtenteService {
 
@@ -68,12 +68,19 @@ public class FileUtenteServiceImpl implements UtenteService {
 
 
     @Override
-    public List<Utente> userslist() {
-        return null;
-    }
-
-    @Override
     public void aggiungiUtente(Utente utente) throws BusinessException {
+
+        try {
+            FileData fileData = Utility.readAllRows(userFileName);
+            for (String[] colonne : fileData.getRighe()) {
+                if (colonne[6].equals(utente.getCodiceFiscale())) {
+                    throw new CodiceFiscaleException();
+                }
+            }
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+
 
         try {
             FileData fileData = Utility.readAllRows(userFileName);
@@ -110,17 +117,12 @@ public class FileUtenteServiceImpl implements UtenteService {
     }
 
     @Override
-    public List<String> findAllPatients() throws BusinessException {
-        return null;
-    }
-
-    @Override
-    public Utente trovaPazienteDaCodiceFiscale(String fiscalCode) throws BusinessException {
+    public Utente trovaPazienteDaCodiceFiscale(String codiceFiscale) throws BusinessException {
 
         try {
             FileData fileData = Utility.readAllRows(userFileName);
             for (String[] colonne : fileData.getRighe()) {
-                if (colonne[6].equals(fiscalCode)) {
+                if (colonne[6].equals(codiceFiscale)) {
                     Utente utente = new Utente();
                     utente.setId((long) Integer.parseInt(colonne[0]));
                     utente.setNome(colonne[1]);
@@ -139,8 +141,4 @@ public class FileUtenteServiceImpl implements UtenteService {
         throw new UtenteNonTrovato();
     }
 
-    @Override
-    public Utente findPatientById(int id) throws BusinessException {
-        return null;
-    }
 }

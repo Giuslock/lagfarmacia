@@ -1,11 +1,7 @@
 package org.univaq.oop.business.impl.jdbc;
 
-import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.FarmacoInPrescrizioneException;
-import org.univaq.oop.business.FarmacoNonTrovato;
-import org.univaq.oop.business.FarmacoService;
+import org.univaq.oop.business.*;
 import org.univaq.oop.domain.Farmaco;
-import org.univaq.oop.domain.Prescrizione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,8 +41,8 @@ public class DBFarmacoServiceImpl implements FarmacoService {
             }
 
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException t) {
+            throw new DatabaseException();
         }
         return ll;
     }
@@ -62,7 +58,7 @@ public class DBFarmacoServiceImpl implements FarmacoService {
             statement.executeUpdate();
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new DatabaseException();
         }
 
     }
@@ -79,7 +75,7 @@ public class DBFarmacoServiceImpl implements FarmacoService {
             statement.executeUpdate();
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new DatabaseException();
         }
 
     }
@@ -121,21 +117,6 @@ public class DBFarmacoServiceImpl implements FarmacoService {
             throw new FarmacoInPrescrizioneException();
 
         }
-    }
-
-    @Override
-    public void aggiornaQtaFarmaco(Prescrizione prescrizione) throws BusinessException {
-
-    }
-
-    @Override
-    public List<String> findAllFarmaciByNome() throws BusinessException {
-        return null;
-    }
-
-    @Override
-    public Farmaco findFarmacoByName(String string) throws BusinessException {
-        return null;
     }
 
     @Override

@@ -139,16 +139,6 @@ public class DBPrescrizioneServiceImpl implements PrescrizioneService {
         }
     }
 
-    @Override
-    public void evadiPrescrizione(Prescrizione prescrizione) {
-
-    }
-
-    @Override
-    public void deletePrescrizione(int codice) {
-
-    }
-
     protected Prescrizione mapTo(ResultSet resultSet) {
         Prescrizione prescrizione = null;
         try {

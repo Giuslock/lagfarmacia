@@ -114,19 +114,20 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     public void rimuoviFarmacoDallaPrescrizione() {
 
         FarmacoPrescrizione fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
-        long idMedicinale = fp.getId();
-
-        // Optional e' come una scatola, all'interno puoi avere qualcosa oppure no
-        var entryDaDeletare = this.farmaciNellaPrescrizione
-                .keySet()
-                .stream()
-                .filter(medicine -> medicine.getId().equals(idMedicinale))
-                .findFirst();
-
-
-        this.farmaciNellaPrescrizione.remove(entryDaDeletare.get());
-
-        this.listaFarmaciNellaPrescrizione.remove(fp);
+             
+        this.farmaciNellaPrescrizione
+            .keySet()
+            .stream()
+            .filter(medicine -> medicine.getId().equals(fp.getId()))
+            .findFirst()
+            .ifPresentOrElse(
+                farmaco -> {
+                    this.farmaciNellaPrescrizione.remove(farmaco);
+                    this.listaFarmaciNellaPrescrizione.remove(fp);
+                }, 
+                () -> System.out.println("SETTA UNA CAZZO DI LABEL")
+            );
+            
     }
 
     @FXML
