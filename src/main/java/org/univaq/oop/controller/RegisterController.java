@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.univaq.oop.business.BusinessException;
+import org.univaq.oop.business.CodiceFiscaleException;
 import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.business.UtenteService;
 import org.univaq.oop.domain.Ruolo;
@@ -19,6 +20,8 @@ public class RegisterController implements Initializable, DataInitializable<Uten
 
     private final ViewDispatcher dispatcher;
     private final UtenteService utenteService;
+    @FXML
+    private Label erroreCodiceFiscale;
     @FXML
     private TextField nomeText;
     @FXML
@@ -65,8 +68,7 @@ public class RegisterController implements Initializable, DataInitializable<Uten
     }
 
     @FXML
-    public void iscrivitiAction(ActionEvent event) throws BusinessException, ViewException {
-        //se è selezionato il radio button Medico, crea un utente medico
+    public void iscrivitiAction() throws BusinessException, ViewException {
 
         Utente utente = new Utente();
         utente.setNome(nomeText.getText());
@@ -81,11 +83,10 @@ public class RegisterController implements Initializable, DataInitializable<Uten
         else
             utente.setRuolo(Ruolo.PAZIENTE);
         try {
-            //aggiunge l'utente nell'elenco degli utenti e torna alla schermata di login
             utenteService.aggiungiUtente(utente);
             dispatcher.logout();
         } catch (BusinessException e) {
-            e.printStackTrace();
+            erroreCodiceFiscale.setText("CODICE FISCALE USATO");
         }
     }
 

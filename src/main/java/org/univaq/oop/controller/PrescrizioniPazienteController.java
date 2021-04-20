@@ -29,6 +29,8 @@ public class PrescrizioniPazienteController implements DataInitializable<Utente>
     private final PrescrizioneService prescrizioneService;
     private final FarmacoService farmacoService;
     @FXML
+    private Label errorLabel;
+    @FXML
     private TableView<Prescrizione> elencoPrescrizioniTable;
     @FXML
     private TableColumn<Prescrizione, String> numeroTableColumn;

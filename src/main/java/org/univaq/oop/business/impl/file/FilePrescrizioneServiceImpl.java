@@ -33,7 +33,6 @@ public class FilePrescrizioneServiceImpl implements PrescrizioneService {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            throw new BusinessException(e);
         }
         return result;
     }
@@ -177,39 +176,6 @@ public class FilePrescrizioneServiceImpl implements PrescrizioneService {
             e.printStackTrace();
             throw new BusinessException(e);
         }
-    }
-
-    @Override
-    public void evadiPrescrizione(Prescrizione prescrizione) {
-
-    }
-
-    @Override
-    public void deletePrescrizione(int codice) {
-
-        try {
-            FileData fileData = Utility.readAllRows(prescrizioniFileName);
-            try (PrintWriter writer = new PrintWriter(prescrizioniFileName)) {
-                writer.println(fileData.getContatore() - 1);
-                boolean trovato = false;
-                for (String[] colonne : fileData.getRighe()) {
-
-                    if (colonne[0].equals(String.valueOf(codice))) {
-                        trovato = true;
-                        continue;
-                    }
-                    if (trovato) {
-                        colonne[0] = Integer.toString(Integer.parseInt(colonne[0]) - 1);
-                    }
-                    writer.println(String.join(Utility.SEPARATORE_COLONNA, colonne));
-                }
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
     }
 
 

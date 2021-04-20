@@ -18,14 +18,4 @@ public interface PrescrizioneService {
 
     void aggiornaPrescrizione(Prescrizione prescrizione) throws BusinessException;
 
-    void evadiPrescrizione(Prescrizione prescrizione);
-
-    void deletePrescrizione(int codice);
-
-
-    //Prescription findPrescrizioneByNumeroEMedico(int num, int id) throws BusinessException, PrescrizioneNonTrovata;
-
-    //Prescription findPrescrizioneByNumeroEPaziente(int num, int id) throws BusinessException, PrescrizioneNonTrovata;
-
-
 }

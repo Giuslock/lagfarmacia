@@ -78,18 +78,18 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
             dispatcher.renderView("elencoFarmaci", utente);
         } catch (BusinessException e) {
-
+            errorMessage.setText("Problemi di connessione al Database");
             dispatcher.renderError(e);
         }
     }
 
     @FXML
-    public void eliminaAction() throws BusinessException {
+    public void eliminaAction()  {
         Long id = farmaco.getId();
         try {
             farmacoService.eliminaFarmaco(id);
             dispatcher.renderView("elencoFarmaci", utente);
-        } catch (FarmacoInPrescrizioneException e) {
+        } catch (BusinessException e) {
             this.errorMessage.setText("Il farmaco e' presente in una prescrizione e non e' possibile eliminarlo");
         }
 

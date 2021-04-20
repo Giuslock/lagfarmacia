@@ -18,11 +18,5 @@ public interface FarmacoService {
 
     void eliminaFarmaco(Long codice) throws BusinessException;
 
-    void aggiornaQtaFarmaco(Prescrizione prescrizione) throws BusinessException;//, NonCiSonoAbbastanzaFarmaci, FarmacoNonTrovato;
-
-    List<String> findAllFarmaciByNome() throws BusinessException;
-
-    Farmaco findFarmacoByName(String string) throws BusinessException;
-
     List<Farmaco> trovaFarmaciInEsaurimento() throws BusinessException;
 }
