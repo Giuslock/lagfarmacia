@@ -83,21 +83,18 @@ public class PrescrizioniPazienteController implements DataInitializable<Utente>
         statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("stato"));
         azioniTableColumn.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Prescrizione, Button>, ObservableValue<Button>>() {
+                new Callback<>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescrizione, Button> param) {
                         final Button dettaglioButton = new Button("dettaglio");
 
-                        dettaglioButton.setOnAction(new EventHandler<ActionEvent>() {
+                        dettaglioButton.setOnAction(new EventHandler<>() {
                             @Override
                             public void handle(ActionEvent event) {
-//                              Map<Medicine, Integer> dettaglio = new HashMap<>();
-//                                dettaglio = farmacoPrescrizioneService.getMedicineFromPrescription(Long.parseLong(numeroTableColumn.getText()));
-//                               MedicinePrescription azz = new MedicinePrescription();
                                 dispatcher.renderView("dettaglioPrescrizionePaziente", param.getValue());
                             }
                         });
-                        return new SimpleObjectProperty<Button>(dettaglioButton);
+                        return new SimpleObjectProperty<>(dettaglioButton);
                     }
                 });
 

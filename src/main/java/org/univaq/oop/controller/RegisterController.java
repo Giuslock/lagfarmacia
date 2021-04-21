@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.CodiceFiscaleException;
 import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.business.UtenteService;
 import org.univaq.oop.domain.Ruolo;
@@ -20,8 +19,6 @@ public class RegisterController implements Initializable, DataInitializable<Uten
 
     private final ViewDispatcher dispatcher;
     private final UtenteService utenteService;
-    @FXML
-    private Label erroreCodiceFiscale;
     @FXML
     private TextField nomeText;
     @FXML
@@ -46,7 +43,7 @@ public class RegisterController implements Initializable, DataInitializable<Uten
     private Label errorlabel;
 
 
-    public RegisterController() throws BusinessException {
+    public RegisterController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         utenteService = factory.getUtenteService();
@@ -70,7 +67,7 @@ public class RegisterController implements Initializable, DataInitializable<Uten
     }
 
     @FXML
-    public void iscrivitiAction() throws BusinessException, ViewException {
+    public void iscrivitiAction() throws ViewException {
 
         Utente utente = new Utente();
         utente.setNome(nomeText.getText());
@@ -88,13 +85,13 @@ public class RegisterController implements Initializable, DataInitializable<Uten
             utenteService.aggiungiUtente(utente);
             dispatcher.logout();
         } catch (BusinessException e) {
-            erroreCodiceFiscale.setText("CODICE FISCALE USATO");
+            errorlabel.setText("CODICE FISCALE E/O USERNAME USATO");
         }
     }
 
 
     @FXML
-    public void tornaHomeAction(ActionEvent event) throws ViewException {
+    public void tornaHomeAction() throws ViewException {
         dispatcher.logout();
 
     }

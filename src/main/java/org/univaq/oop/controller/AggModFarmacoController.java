@@ -6,9 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.univaq.oop.business.BusinessException;
-import org.univaq.oop.business.FarmacoInPrescrizioneException;
-import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.business.FarmacoService;
+import org.univaq.oop.business.LagBusinessFactory;
 import org.univaq.oop.domain.Farmaco;
 import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
@@ -20,8 +19,6 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
-    @FXML
-    private Label errorMessage;
     @FXML
     private TextField nametext;
     @FXML
@@ -39,7 +36,7 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     private Utente utente;
     private Farmaco farmaco;
 
-    public AggModFarmacoController() throws BusinessException {
+    public AggModFarmacoController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
@@ -47,18 +44,16 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        salvaButton.disableProperty().bind(descriptiontext.textProperty().isEmpty());
-        eliminaButton.disableProperty().bind(descriptiontext.textProperty().isEmpty());
+        salvaButton.disableProperty().bind(descriptiontext.textProperty().isEmpty().or(mimimumtext.textProperty().isEqualTo("0")));
+        eliminaButton.disableProperty().bind(descriptiontext.textProperty().isEmpty().or(mimimumtext.textProperty().isEqualTo("0")));
 
     }
 
-    //vengono caricati i dati dei farmaci nelle textfield
     @Override
     public void initializeData(Farmaco farmaco) {
         this.farmaco = farmaco;
         this.nametext.setText(farmaco.getNome());
         this.descriptiontext.setText(farmaco.getDescrizione());
-
         this.quantitytext.setText(String.valueOf(farmaco.getQuantita()));
         this.mimimumtext.setText(String.valueOf(farmaco.getMinimo()));
 
@@ -83,19 +78,18 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
             dispatcher.renderView("elencoFarmaci", utente);
         } catch (BusinessException e) {
-            errorMessage.setText("Errore nell'aggiunta dei farmaci");
+            errorlabel.setText("Errore nell'aggiunta dei farmaci");
             dispatcher.renderError(e);
         }
     }
 
     @FXML
-    public void eliminaAction()  {
-        Long id = farmaco.getId();
+    public void eliminaAction() {
         try {
-            farmacoService.eliminaFarmaco(id);
+            farmacoService.eliminaFarmaco(farmaco.getId());
             dispatcher.renderView("elencoFarmaci", utente);
         } catch (BusinessException e) {
-            this.errorMessage.setText("Il farmaco e' presente in una prescrizione e non e' possibile eliminarlo");
+            this.errorlabel.setText("Il farmaco e' presente in una prescrizione e non e' possibile eliminarlo");
         }
 
     }
