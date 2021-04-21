@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniPazienteController">
+<VBox prefWidth="816.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniPazienteController">
    <children>
       <Label prefHeight="105.0" prefWidth="268.0" text="Prescrizioni:">
          <font>
             <Font name="Segoe Script" size="25.0" />
          </font>
       </Label>
-      <TableView fx:id="elencoPrescrizioniTable" prefHeight="359.0" prefWidth="622.0">
+      <TableView fx:id="elencoPrescrizioniTable" prefHeight="384.0" prefWidth="796.0">
         <columns>
           <TableColumn fx:id="numeroTableColumn" prefWidth="59.0" resizable="false" text="Numero" />
             <TableColumn fx:id="descriptionTableColumn" prefWidth="112.0" resizable="false" text="Descrizione" />
@@ -22,6 +23,9 @@
             <TableColumn fx:id="azioniTableColumn" prefWidth="160.800048828125" resizable="false" text="Azioni" />
             <TableColumn fx:id="statoTableColumn" prefWidth="172.7999267578125" resizable="false" text="Stato" />
         </columns>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
       </TableView>
       <Label fx:id="errorlabel" prefHeight="34.0" prefWidth="316.0" textAlignment="CENTER" textFill="#ff0404" wrapText="true">
          <font>

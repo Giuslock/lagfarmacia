@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.SchedaFarmacoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.SchedaFarmacoController">
 
    <children>
-      <Label prefHeight="44.0" prefWidth="256.0" text="      Scheda Farmaco" textAlignment="CENTER">
+      <Label prefHeight="41.0" prefWidth="252.0" text="      Scheda Farmaco" textAlignment="CENTER">
          <font>
             <Font name="Segoe Script" size="20.0" />
          </font>
@@ -43,11 +43,17 @@
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
                   </Label>
                   <Label prefHeight="17.0" prefWidth="180.0" text="    Description: " GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <padding>
+                        <Insets left="12.0" />
+                     </padding>
                   </Label>
                   <TextField fx:id="nametext" editable="false" GridPane.columnIndex="1" />
                   <TextField fx:id="descriptiontext" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -58,11 +64,14 @@
                      <GridPane.margin>
                         <Insets left="15.0" />
                      </GridPane.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </Label>
                   <TextField fx:id="statusText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#backAction" styleClass="Button" stylesheets="@loginButton.css" text="Back" GridPane.rowIndex="4">
                      <GridPane.margin>
-                        <Insets left="15.0" />
+                        <Insets left="25.0" />
                      </GridPane.margin></Button>
                   <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
