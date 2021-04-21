@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.SchedaFarmacoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.SchedaFarmacoController">
 
    <children>
-      <Label prefHeight="44.0" prefWidth="205.0" text="      Scheda Farmaco" textAlignment="CENTER">
+      <Label prefHeight="44.0" prefWidth="256.0" text="      Scheda Farmaco" textAlignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font name="Segoe Script" size="20.0" />
          </font>
       </Label>
       <HBox prefHeight="355.0" prefWidth="600.0">

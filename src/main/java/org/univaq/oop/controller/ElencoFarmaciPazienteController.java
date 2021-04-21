@@ -67,11 +67,11 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
         descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
         azioniTableColumn.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Farmaco, Button>, ObservableValue<Button>>() {
+                new Callback<>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Farmaco, Button> param) {
                         final Button farmaciButton = new Button("Scheda");
-                        farmaciButton.setOnAction(new EventHandler<ActionEvent>() {
+                        farmaciButton.setOnAction(new EventHandler<>() {
                                                       @Override
                                                       public void handle(ActionEvent event) {
                                                           //carica vista per modificare il farmaco
@@ -79,7 +79,7 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
                                                       }
                                                   }
                         );
-                        return new SimpleObjectProperty<Button>(farmaciButton);
+                        return new SimpleObjectProperty<>(farmaciButton);
                     }
 
                 });
