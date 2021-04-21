@@ -131,6 +131,7 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
         }
 
         errorlabel.setText("");
+        salva.setDisable(false);
         this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, farmacoPrescrizione, t1) -> this.aggiungifarmaco.setDisable(false));
     }

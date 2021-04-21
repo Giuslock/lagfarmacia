@@ -69,7 +69,7 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
     public void initializeData(Utente utente) {
         this.utente = utente;
         try {
-            List<Prescrizione> prescrizioni = prescrizioneService.trovaTuttePrescrizioni();
+            List<Prescrizione> prescrizioni = prescrizioneService.trovaPrescrizioniDaEvadere();
             ObservableList<Prescrizione> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
             elencoPrescrizioniTable.setItems(prescrizioniData);
         } catch (BusinessException e) {
@@ -109,15 +109,6 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
     }
 
 
-    @FXML
-    public void modificaCercataAction() {
-        Prescrizione prescrizione = new Prescrizione();
-
-
-        prescrizione.setCodicePaziente(Integer.parseInt(pazienteLab.getText()));
-        prescrizione.setCodiceDottore(Integer.parseInt(azioniTableColumn1.getText()));
-        dispatcher.renderView("modificaPrescrizione", prescrizione);
-    }
 }
 
 

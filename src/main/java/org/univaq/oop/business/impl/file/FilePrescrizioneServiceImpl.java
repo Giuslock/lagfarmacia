@@ -95,7 +95,7 @@ public class FilePrescrizioneServiceImpl implements PrescrizioneService {
         try {
             FileData fileData = Utility.readAllRows(prescrizioniFileName);
             for (String[] colonne : fileData.getRighe()) {
-                if (Integer.parseInt(colonne[3]) == id && colonne[1]=="false") {
+                if (Integer.parseInt(colonne[3]) == id && colonne[1].equals("false")) {
                     Prescrizione prescrizione = new Prescrizione();
                     prescrizione.setId((long) Integer.parseInt(colonne[0]));
                     prescrizione.setEvasa(Boolean.parseBoolean(colonne[1]));
