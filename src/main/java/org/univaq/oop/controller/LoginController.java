@@ -1,7 +1,6 @@
 package org.univaq.oop.controller;
 
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,7 +12,6 @@ import org.univaq.oop.business.UtenteNonTrovatoException;
 import org.univaq.oop.business.UtenteService;
 import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
-import org.univaq.oop.view.ViewException;
 
 import java.net.URL;
 import java.util.ResourceBundle;

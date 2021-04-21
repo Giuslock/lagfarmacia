@@ -1,7 +1,5 @@
 package org.univaq.oop.controller;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,8 +33,6 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     @FXML
     public TableColumn<Farmaco, String> t1_nome;
     @FXML
-    private Button aggiungifarmaco;
-    @FXML
     public TableView<FarmacoPrescrizione> tabellaFarmaciInPrescrizione;
     @FXML
     public TableColumn<FarmacoPrescrizione, String> t2_nome;
@@ -46,6 +42,8 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     public Button deleteBtnT2;
     @FXML
     public Button salva;
+    @FXML
+    private Button aggiungifarmaco;
     @FXML
     private TextField codicetextfield;
     @FXML
@@ -89,15 +87,13 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     //salva.setDisable(true);
-     deleteBtnT2.setDisable(true);
-     aggiungifarmaco.setDisable(true);
+        //salva.setDisable(true);
+        deleteBtnT2.setDisable(true);
+        aggiungifarmaco.setDisable(true);
         this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
         this.tabellaFarmaci.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null) );
-
-
+                (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null));
 
 
         //aggiungifarmaco.disableProperty().bind(Bindings.isEmpty(listaFarmaciNellaPrescrizione));
@@ -149,7 +145,7 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
 
         this.listaFarmaciNellaPrescrizione.remove(fp);
 
-        if(listaFarmaciNellaPrescrizione.isEmpty()){
+        if (listaFarmaciNellaPrescrizione.isEmpty()) {
             deleteBtnT2.setDisable(true);
             salva.setDisable(true);
             this.listaFarmaciNellaPrescrizione.add(fp);
@@ -162,11 +158,11 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
                 if (f.getId().equals(fp.getId())) toDelete = f;
             }
 
-            this.farmaciNellaPrescrizione.remove(toDelete);}
+            this.farmaciNellaPrescrizione.remove(toDelete);
+        }
 
         this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
-
 
 
     }

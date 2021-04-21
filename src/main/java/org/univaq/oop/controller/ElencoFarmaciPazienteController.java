@@ -42,7 +42,6 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
     private Label errorlabel;
 
 
-
     public ElencoFarmaciPazienteController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();

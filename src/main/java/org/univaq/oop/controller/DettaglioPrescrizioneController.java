@@ -110,7 +110,9 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
             prescrizione.setEvasa(evadable);
             prescrizioneService.aggiornaPrescrizione(prescrizione);
             dispatcher.renderView("elencoTuttePrescrizioni", utente);
-        } else { errorlabel.setText("La prescrizione non e' evadibile");}
+        } else {
+            errorlabel.setText("La prescrizione non e' evadibile");
+        }
 
 
     }

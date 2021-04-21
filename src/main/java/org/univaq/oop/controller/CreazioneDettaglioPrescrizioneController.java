@@ -27,14 +27,13 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
     private final Map<Farmaco, Integer> farmaciNellaPrescrizione;
     private final UtenteService utenteService;
+    private final Prescrizione prescrizione;
     @FXML
     public TableView<Farmaco> tabellaFarmaci;
     @FXML
     public TableColumn<Farmaco, Integer> t1_id;
     @FXML
     public TableColumn<Farmaco, String> t1_nome;
-    @FXML
-    private Button aggiungifarmaco;
     @FXML
     public TableView<FarmacoPrescrizione> tabellaFarmaciInPrescrizione;
     @FXML
@@ -44,6 +43,8 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @FXML
     public Button deleteBtnT2;
     @FXML
+    private Button aggiungifarmaco;
+    @FXML
     private Button salvaButton;
     @FXML
     private TextField codicetextfield;
@@ -51,7 +52,6 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     private TextArea descrizione;
     @FXML
     private Label errorlabel;
-    private final Prescrizione prescrizione;
     private ObservableList<FarmacoPrescrizione> listaFarmaciNellaPrescrizione;
     private Utente utente;
 
@@ -70,17 +70,17 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @Override
     public void initializeData(Utente utente) {
         this.utente = utente;
-       // salvaButton.setDisable(true);
+        // salvaButton.setDisable(true);
         deleteBtnT2.setDisable(true);
         aggiungifarmaco.setDisable(true);
         this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
         this.tabellaFarmaci.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null) );
+                (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null));
 
 
         try {
-            List<Farmaco> farmaci= farmacoService.trovaTuttiFarmaci();
+            List<Farmaco> farmaci = farmacoService.trovaTuttiFarmaci();
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             tabellaFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {
@@ -123,19 +123,19 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     public void rimuoviFarmacoDallaPrescrizione() {
 
         FarmacoPrescrizione fp = this.tabellaFarmaciInPrescrizione.getSelectionModel().getSelectedItem();
-             
+
         this.farmaciNellaPrescrizione
-            .keySet()
-            .stream()
-            .filter(medicine -> medicine.getId().equals(fp.getId()))
-            .findFirst()
-            .ifPresentOrElse(
-                farmaco -> {
-                    this.farmaciNellaPrescrizione.remove(farmaco);
-                    this.listaFarmaciNellaPrescrizione.remove(fp);
-                }, 
-                () -> errorlabel.setText("Errore nella rimozione del farmaco")
-            );
+                .keySet()
+                .stream()
+                .filter(medicine -> medicine.getId().equals(fp.getId()))
+                .findFirst()
+                .ifPresentOrElse(
+                        farmaco -> {
+                            this.farmaciNellaPrescrizione.remove(farmaco);
+                            this.listaFarmaciNellaPrescrizione.remove(fp);
+                        },
+                        () -> errorlabel.setText("Errore nella rimozione del farmaco")
+                );
     }
 
     @FXML
