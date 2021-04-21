@@ -96,7 +96,7 @@ public class FarmaciController implements Initializable, DataInitializable<Utent
     }
 
 
-    public void aggiungiAction(ActionEvent event) {
+    public void aggiungiAction() {
         Farmaco farmacoVuoto = new Farmaco();
         dispatcher.renderView("modificaFarmaco", farmacoVuoto);
     }

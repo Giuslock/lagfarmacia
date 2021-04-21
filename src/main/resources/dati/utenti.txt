@@ -1,11 +1,6 @@
-11
+5
 1,ammi,nistra,admin,secret,AMMINISTRATORE,admn222
 2,a,a,paziente,secret,PAZIENTE,aa
 3,a,a,farmacista,secret,FARMACISTA,dd
 4,a,a,dottore,secret,DOTTORE,dds
-5,a,a,a,a,DOTTORE,a
-6,a,a,a,a,DOTTORE,a
-7,dsfsdf,dfghd,asdasd,asdasd,DOTTORE,bcvnvbn
-8,b,b,b,b,DOTTORE,b
-9,aa,aa,dd,dd,PAZIENTE,ss
-10,qpsaokx,wpssmp,franco,secret,PAZIENTE,1r
+

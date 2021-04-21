@@ -71,6 +71,8 @@ public class FileUtenteServiceImpl implements UtenteService {
             for (String[] colonne : fileData.getRighe()) {
                 if (colonne[6].equals(utente.getCodiceFiscale())) {
                     throw new CodiceFiscaleException();
+                } else if(colonne[1].equals(utente.getUsername())){
+                    throw new BusinessException();
                 }
             }
         } catch (IOException e) {

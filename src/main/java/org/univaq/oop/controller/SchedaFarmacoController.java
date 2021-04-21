@@ -31,7 +31,7 @@ public class SchedaFarmacoController implements Initializable, DataInitializable
     private Utente utente;
     private Farmaco farmaco;
 
-    public SchedaFarmacoController() throws BusinessException {
+    public SchedaFarmacoController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
@@ -48,7 +48,6 @@ public class SchedaFarmacoController implements Initializable, DataInitializable
         this.farmaco = farmaco;
         this.nametext.setText(farmaco.getNome());
         this.descriptiontext.setText(farmaco.getDescrizione());
-
         this.statusText.setText(farmaco.getStatoFarmaco());
 
     }

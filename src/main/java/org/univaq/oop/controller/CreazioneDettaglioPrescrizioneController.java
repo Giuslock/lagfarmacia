@@ -80,8 +80,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
 
 
         try {
-            List<Farmaco> farmaci = null;
-            farmaci = farmacoService.trovaTuttiFarmaci();
+            List<Farmaco> farmaci= farmacoService.trovaTuttiFarmaci();
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             tabellaFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {

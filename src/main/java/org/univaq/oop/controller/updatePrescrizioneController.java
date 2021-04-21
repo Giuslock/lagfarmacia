@@ -74,19 +74,14 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     public void initializeData(Prescrizione prescrizione) {
         this.prescrizione = prescrizione;
         try {
-            List<Farmaco> farmaci = null;
-            farmaci = farmacoService.trovaTuttiFarmaci();
+            List<Farmaco> farmaci = farmacoService.trovaTuttiFarmaci();
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             tabellaFarmaci.setItems(farmaciData);
-        } catch (BusinessException e) {
-            e.printStackTrace();
-        }
-
-        try {
             this.farmaciNellaPrescrizione = this.farmacoPrescrizioneService.ottieniFarmaciDallaPrescrizione(this.prescrizione.getId());
         } catch (BusinessException e) {
-            e.printStackTrace();
+            errorlabel.setText("Errore nella ricerca di farmaci");
         }
+
         List<FarmacoPrescrizione> farmacoPrescrizioneList = farmacoPrescrizioneService.mappaFarmacoPrescrizione(this.farmaciNellaPrescrizione);
         this.listaFarmaciNellaPrescrizione = FXCollections.observableArrayList(farmacoPrescrizioneList);
         this.tabellaFarmaciInPrescrizione.setItems(this.listaFarmaciNellaPrescrizione);
@@ -152,11 +147,12 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
 
 
         this.listaFarmaciNellaPrescrizione.remove(fp);
+
         if(listaFarmaciNellaPrescrizione.isEmpty()){
             deleteBtnT2.setDisable(true);
             salva.setDisable(true);
-        this.listaFarmaciNellaPrescrizione.add(fp);
-        errorlabel.setText("Non puoi salvare una prescrizione vuota");
+            this.listaFarmaciNellaPrescrizione.add(fp);
+            errorlabel.setText("Non puoi salvare una prescrizione vuota");
         } else {
             this.farmacoPrescrizioneService.eliminaFarmacoDallaPrescrizione(fp.getId(), prescrizione.getId());
 
@@ -164,6 +160,7 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
             for (Farmaco f : farmaciNellaPrescrizione.keySet()) {
                 if (f.getId().equals(fp.getId())) toDelete = f;
             }
+
             this.farmaciNellaPrescrizione.remove(toDelete);}
 
         this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
