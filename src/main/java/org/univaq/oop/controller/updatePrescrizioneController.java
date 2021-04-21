@@ -1,5 +1,7 @@
 package org.univaq.oop.controller;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,7 +35,7 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     @FXML
     public TableColumn<Farmaco, String> t1_nome;
     @FXML
-    public Button aggiungiFarmaco;
+    private Button aggiungifarmaco;
     @FXML
     public TableView<FarmacoPrescrizione> tabellaFarmaciInPrescrizione;
     @FXML
@@ -87,17 +89,33 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+     //salva.setDisable(true);
+     deleteBtnT2.setDisable(true);
+     aggiungifarmaco.setDisable(true);
+        this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
+        this.tabellaFarmaci.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null) );
+
+
+
+
+        //aggiungifarmaco.disableProperty().bind(Bindings.isEmpty(listaFarmaciNellaPrescrizione));
+
 
         t1_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         t1_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         t2_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         t2_quantity.setCellValueFactory(new PropertyValueFactory<>("quantita"));
 
+
     }
 
     @FXML
     public void aggiungifarmaco() {
+
         Farmaco f = this.tabellaFarmaci.getSelectionModel().getSelectedItem();
+
 
         if (this.farmaciNellaPrescrizione.containsKey(f)) {
             int quantity = this.farmaciNellaPrescrizione.get(f) + 1;
@@ -111,8 +129,10 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
             this.listaFarmaciNellaPrescrizione.add(farmacoPrescrizioneService.farmacoSingoloInFarmacoPrescrizione(f));
             this.farmacoPrescrizioneService.inserisciFarmacoNellaPrescrizione(f.getId(), prescrizione.getId(), 1);
         }
-        salva.setDisable(false);
+
         errorlabel.setText("");
+        this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, farmacoPrescrizione, t1) -> this.aggiungifarmaco.setDisable(false));
     }
 
     @FXML
@@ -127,7 +147,9 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
 
 
         this.listaFarmaciNellaPrescrizione.remove(fp);
-        if (listaFarmaciNellaPrescrizione.isEmpty()) {
+
+        if(listaFarmaciNellaPrescrizione.isEmpty()){
+            deleteBtnT2.setDisable(true);
             salva.setDisable(true);
             this.listaFarmaciNellaPrescrizione.add(fp);
             errorlabel.setText("Non puoi salvare una prescrizione vuota");
@@ -138,8 +160,14 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
             for (Farmaco f : farmaciNellaPrescrizione.keySet()) {
                 if (f.getId().equals(fp.getId())) toDelete = f;
             }
-            this.farmaciNellaPrescrizione.remove(toDelete);
-        }
+
+            this.farmaciNellaPrescrizione.remove(toDelete);}
+
+        this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
+
+
+
     }
 
 

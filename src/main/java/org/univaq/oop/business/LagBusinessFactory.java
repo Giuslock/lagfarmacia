@@ -8,6 +8,7 @@ public abstract class LagBusinessFactory {
     private static final LagBusinessFactory factory = new FileLagBusinessFactoryImpl();
     //private static final LagBusinessFactory factory = new DBLagBusinessFactoryImpl();
 
+
     public static LagBusinessFactory getInstance() {
         return factory;
     }

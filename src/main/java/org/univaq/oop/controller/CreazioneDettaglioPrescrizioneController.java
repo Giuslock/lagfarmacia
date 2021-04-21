@@ -34,7 +34,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @FXML
     public TableColumn<Farmaco, String> t1_nome;
     @FXML
-    public Button aggiungiFarmaco;
+    private Button aggiungifarmaco;
     @FXML
     public TableView<FarmacoPrescrizione> tabellaFarmaciInPrescrizione;
     @FXML
@@ -44,7 +44,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @FXML
     public Button deleteBtnT2;
     @FXML
-    public Button creaBtn;
+    private Button salvaButton;
     @FXML
     private TextField codicetextfield;
     @FXML
@@ -70,6 +70,14 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @Override
     public void initializeData(Utente utente) {
         this.utente = utente;
+       // salvaButton.setDisable(true);
+        deleteBtnT2.setDisable(true);
+        aggiungifarmaco.setDisable(true);
+        this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
+        this.tabellaFarmaci.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null) );
+
 
         try {
             List<Farmaco> farmaci= farmacoService.trovaTuttiFarmaci();

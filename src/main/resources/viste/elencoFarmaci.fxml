@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciController">
+<VBox prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciController">
 
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="  Elenco Farmaci:">
@@ -32,6 +32,6 @@
             <TableColumn fx:id="azioniTableColumn" prefWidth="197.0" resizable="false" text="Azioni" />
          </columns>
       </TableView>
-      <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="213.0" />
+      <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="213.0" wrapText="true" />
    </children>
 </VBox>
