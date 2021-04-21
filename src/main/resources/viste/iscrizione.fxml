@@ -75,5 +75,10 @@
             <Font size="15.0" />
          </font></RadioButton>
       <Label fx:id="errorlabel" layoutX="186.0" layoutY="467.0" prefHeight="16.0" prefWidth="278.0" />
+      <RadioButton fx:id="amministratoreRadioButton" layoutX="414.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" text="Amministratore">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
    </children>
 </AnchorPane>

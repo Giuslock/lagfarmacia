@@ -40,6 +40,8 @@ public class RegisterController implements Initializable, DataInitializable<Uten
     @FXML
     private RadioButton farmacistaRadioButton;
     @FXML
+    private RadioButton amministratoreRadioButton;
+    @FXML
     private Label errorlabel;
 
 
@@ -75,7 +77,9 @@ public class RegisterController implements Initializable, DataInitializable<Uten
         utente.setCodiceFiscale(codiceFiscaleText.getText());
         utente.setUsername(usernameIscrivitiText.getText());
         utente.setPassword(passwordIscrivitiText.getText());
-        if (medicoRadioButton.isSelected())
+        if (amministratoreRadioButton.isSelected())
+            utente.setRuolo(Ruolo.AMMINISTRATORE);
+        else if (medicoRadioButton.isSelected())
             utente.setRuolo(Ruolo.DOTTORE);
         else if (farmacistaRadioButton.isSelected())
             utente.setRuolo(Ruolo.FARMACISTA);
