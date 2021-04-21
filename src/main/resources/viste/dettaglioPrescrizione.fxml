@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizioneController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizioneController">
    <children>
-      <Label prefHeight="73.0" prefWidth="199.0" text="Dettaglio" textFill="#0e0e0e">
+      <Label prefHeight="62.0" prefWidth="371.0" text="Evadi la prescrizione" textFill="#0e0e0e" wrapText="true">
          <font>
-            <Font size="25.0" />
+            <Font name="Segoe Script" size="30.0" />
          </font>
       </Label>
       <TextField fx:id="farmpreTextField" />
@@ -23,10 +23,9 @@
          <columns>
             <TableColumn fx:id="codiceTableColumn" prefWidth="142.0" resizable="false" text="Codice" />
             <TableColumn fx:id="nomeTableColumn" prefWidth="451.0" resizable="false" text="Nome" />
-            <TableColumn fx:id="quantityTableColumn" prefWidth="219.0" resizable="false" text="Quantity" />
+            <TableColumn fx:id="quantityTableColumn" prefWidth="219.0" resizable="false" text="Quantità" />
          </columns>
       </TableView>
-      <Label fx:id="errorlabel" prefHeight="37.0" prefWidth="140.0" wrapText="true" />
       <Button fx:id="evadiButton" mnemonicParsing="false" onAction="#evadiAction" prefHeight="35.0" prefWidth="99.0" styleClass="Button" stylesheets="@loginButton.css" text="Evadi">
          <VBox.margin>
             <Insets left="350.0" top="25.0" />
@@ -34,5 +33,6 @@
          <opaqueInsets>
             <Insets right="25.0" />
          </opaqueInsets></Button>
+      <Label fx:id="errorlabel" prefHeight="37.0" prefWidth="140.0" wrapText="true" />
    </children>
 </VBox>
