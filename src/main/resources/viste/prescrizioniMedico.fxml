@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
 
    <children>
@@ -22,7 +21,7 @@
       </Label>
 
       <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="258.0" />
-      <TableView fx:id="elencoPrescrizioniTable" prefHeight="350.0" prefWidth="700.0">
+      <TableView fx:id="elencoPrescrizioniTable" prefHeight="313.0" prefWidth="700.0">
 
         <columns>
           <TableColumn fx:id="numeroTableColumn" prefWidth="54.33333206176758" text="Numero" visible="false" />

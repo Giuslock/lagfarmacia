@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizionePazienteController">
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizionePazienteController">
 
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="Dettaglio">
@@ -23,6 +24,9 @@
             <TableColumn fx:id="nomeTableColumn" prefWidth="483.0" resizable="false" text="Nome" />
             <TableColumn fx:id="quantityTableColumn" prefWidth="127.0" resizable="false" text="Quantity" />
          </columns>
+         <VBox.margin>
+            <Insets bottom="20.0" left="10.0" right="10.0" />
+         </VBox.margin>
       </TableView>
    </children>
 </VBox>
