@@ -78,7 +78,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<Utent
         pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
         azioniTableColumn.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Prescrizione, Button>, ObservableValue<Button>>() {
+                new Callback<>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescrizione, Button> param) {
                         final Button evadiButton = new Button("Evadi");
@@ -91,7 +91,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<Utent
 
                             }
                         });
-                        return new SimpleObjectProperty<Button>(evadiButton);
+                        return new SimpleObjectProperty<>(evadiButton);
                     }
                 });
 

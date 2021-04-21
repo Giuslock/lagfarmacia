@@ -34,7 +34,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @FXML
     public TableColumn<Farmaco, String> t1_nome;
     @FXML
-    public Button aggiungiFarmaco;
+    private Button aggiungifarmaco;
     @FXML
     public TableView<FarmacoPrescrizione> tabellaFarmaciInPrescrizione;
     @FXML
@@ -44,7 +44,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @FXML
     public Button deleteBtnT2;
     @FXML
-    public Button creaBtn;
+    private Button salvaButton;
     @FXML
     private TextField codicetextfield;
     @FXML
@@ -70,14 +70,21 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @Override
     public void initializeData(Utente utente) {
         this.utente = utente;
+       // salvaButton.setDisable(true);
+        deleteBtnT2.setDisable(true);
+        aggiungifarmaco.setDisable(true);
+        this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
+        this.tabellaFarmaci.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null) );
+
 
         try {
-            List<Farmaco> farmaci = null;
-            farmaci = farmacoService.trovaTuttiFarmaci();
+            List<Farmaco> farmaci= farmacoService.trovaTuttiFarmaci();
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             tabellaFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {
-            e.printStackTrace();
+            errorlabel.setText("Errore nella ricerca dei farmaci");
         }
         List<FarmacoPrescrizione> farmacoPrescrizioneList = farmacoPrescrizioneService.mappaFarmacoPrescrizione(this.farmaciNellaPrescrizione);
         this.listaFarmaciNellaPrescrizione = FXCollections.observableArrayList(farmacoPrescrizioneList);
@@ -127,24 +134,28 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
                     this.farmaciNellaPrescrizione.remove(farmaco);
                     this.listaFarmaciNellaPrescrizione.remove(fp);
                 }, 
-                () -> System.out.println("SETTA UNA CAZZO DI LABEL")
+                () -> errorlabel.setText("Errore nella rimozione del farmaco")
             );
-            
     }
 
     @FXML
-    public void creaPrescrizione() throws BusinessException {
-        this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codicetextfield.getText()).getId()));
-        this.prescrizione.setCodiceDottore(utente.getId().intValue());
-        this.prescrizione.setDescrizione(this.descrizione.getText());
-        Prescrizione prescrizioneInserita = this.prescrizioneService.creaPrescrizione(this.prescrizione);
+    public void creaPrescrizione() {
+        try {
+            this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codicetextfield.getText()).getId()));
+            this.prescrizione.setCodiceDottore(this.utente.getId().intValue());
+            this.prescrizione.setDescrizione(this.descrizione.getText());
+            Prescrizione prescrizioneInserita = this.prescrizioneService.creaPrescrizione(this.prescrizione);
 
-        farmaciNellaPrescrizione.forEach((farmaco, quantity) -> this.farmacoPrescrizioneService.inserisciFarmacoNellaPrescrizione(
-                farmaco.getId(),
-                prescrizioneInserita.getId(),
-                quantity
-        ));
-        dispatcher.renderView("prescrizioniMedico", utente);
+            farmaciNellaPrescrizione.forEach((farmaco, quantity) -> this.farmacoPrescrizioneService.inserisciFarmacoNellaPrescrizione(
+                    farmaco.getId(),
+                    prescrizioneInserita.getId(),
+                    quantity
+            ));
+            dispatcher.renderView("prescrizioniMedico", utente);
+        } catch (BusinessException e) {
+            errorlabel.setText("Questo codice non esiste");
+        }
+
 
     }
 

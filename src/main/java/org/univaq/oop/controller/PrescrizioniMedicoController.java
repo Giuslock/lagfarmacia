@@ -81,11 +81,10 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
     public void initialize(URL location, ResourceBundle resources) {
         idTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
-        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("codiceDottore"));
-        azioniTableColumn1.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
+        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
         azioniTableColumn1.setStyle("-fx-alignment: CENTER;");
         azioniTableColumn1.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Prescrizione, Button>, ObservableValue<Button>>() {
+                new Callback<>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescrizione, Button> param) {
                         final Button updateButton = new Button("Modifica");
@@ -98,7 +97,7 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
 
                             }
                         });
-                        return new SimpleObjectProperty<Button>(updateButton);
+                        return new SimpleObjectProperty<>(updateButton);
                     }
                 });
     }

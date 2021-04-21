@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.univaq.oop.business.BusinessException;
 import org.univaq.oop.business.LagBusinessFactory;
-import org.univaq.oop.business.UtenteNonTrovato;
+import org.univaq.oop.business.UtenteNonTrovatoException;
 import org.univaq.oop.business.UtenteService;
 import org.univaq.oop.domain.Utente;
 import org.univaq.oop.view.ViewDispatcher;
@@ -34,7 +34,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button iscrivitiButton;
 
-    public LoginController() throws BusinessException {
+    public LoginController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         utenteService = factory.getUtenteService();
@@ -48,12 +48,12 @@ public class LoginController implements Initializable {
 
     //al click del tasto login
     @FXML
-    private void loginAction(ActionEvent event) {
+    private void loginAction() {
         try {
             //prova ad autenticare l'utente, se lo trova lo restituisce e carica la home page, altrimenti compare il messaggio del catch
             Utente utente = utenteService.autenticazione(usernameText.getText(), passwordText.getText());
             dispatcher.loggedIn(utente);
-        } catch (UtenteNonTrovato e) {
+        } catch (UtenteNonTrovatoException e) {
             labelErrorLogin.setText("Ops! Username e/o password errati!");
         } catch (BusinessException e) {
             dispatcher.renderError(e);
@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
 
     //al click del tasto iscriviti
     @FXML
-    private void iscrivitiAction(ActionEvent event) throws ViewException {
+    private void iscrivitiAction() {
         dispatcher.iscrivitiView();
     }
 }
