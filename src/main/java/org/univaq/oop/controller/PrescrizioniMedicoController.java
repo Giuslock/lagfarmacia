@@ -34,25 +34,25 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
     @FXML
     private Label errorLab;
     @FXML
-    private TableView<Prescrizione> elencoPrescrizioniTable;
+    private TableView<Prescrizione> tabellaElencoPrescrizioni;
     @FXML
-    private TableColumn<?, ?> numeroTableColumn;
+    private TableColumn<?, ?> colonnaNumero;
     @FXML
-    private TableColumn<?, ?> idTableColumn;
+    private TableColumn<?, ?> colonnaId;
     @FXML
-    private TableColumn<?, ?> descriptionTableColumn;
+    private TableColumn<?, ?> colonnaDescrizione;
     @FXML
-    private TableColumn<Prescrizione, Button> azioniTableColumn1;
+    private TableColumn<Prescrizione, Button> colonnaAzioni;
     @FXML
-    private TableColumn<?, ?> pazienteTableColumn;
+    private TableColumn<?, ?> tabellaPaziente;
     @FXML
-    private Label pazienteLab;
+    private Label paziente;
     @FXML
-    private Button modificaButton;
+    private Button modifica;
     @FXML
-    private Button aggiungiButton;
+    private Button aggiungi;
     @FXML
-    private Label errorlabel;
+    private Label errore;
 
     private Utente utente;
 
@@ -71,7 +71,7 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
         try {
             List<Prescrizione> prescrizioni = prescrizioneService.trovaPrescrizioniDaEvadere();
             ObservableList<Prescrizione> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
-            elencoPrescrizioniTable.setItems(prescrizioniData);
+            tabellaElencoPrescrizioni.setItems(prescrizioniData);
         } catch (BusinessException e) {
             dispatcher.renderError(e);
         }
@@ -79,11 +79,11 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        idTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
-        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
-        azioniTableColumn1.setStyle("-fx-alignment: CENTER;");
-        azioniTableColumn1.setCellValueFactory(
+        colonnaId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colonnaDescrizione.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
+        tabellaPaziente.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
+        colonnaAzioni.setStyle("-fx-alignment: CENTER;");
+        colonnaAzioni.setCellValueFactory(
                 new Callback<>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescrizione, Button> param) {

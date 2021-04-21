@@ -19,34 +19,46 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class DettaglioPrescrizioneController implements Initializable, DataInitializable<Prescrizione> {
+public class EvasionePrescrizioneController implements Initializable, DataInitializable<Prescrizione> {
 
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
     private final PrescrizioneService prescrizioneService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
+
     @FXML
-    private TableView<FarmacoPrescrizione> dettaglioPrescrizioneTable;
+    private TextField idFarmacoPrescrizione;
+
     @FXML
-    private TableColumn<FarmacoPrescrizione, String> nomeTableColumn;
+    private TableView<FarmacoPrescrizione> tabellaDettaglioPrescrizione;
+
     @FXML
-    private TableColumn<FarmacoPrescrizione, Long> codiceTableColumn;
+    private TableColumn<?, ?> colonnaCodice;
+
     @FXML
-    private TableColumn<FarmacoPrescrizione, Integer> quantityTableColumn;
+    private TableColumn<?, ?>  colonnaNome;
+
     @FXML
-    private TextField farmpreTextField;
+    private TableColumn<?, ?> colonnaQuantità;
+
     @FXML
     private Button evadiButton;
+
     @FXML
     private Label errorlabel;
+
+
+
+
+
 
     private Map<Farmaco, Integer> mappaFarmaciEQuantita;
     private Farmaco farmaco = new Farmaco();
     private Prescrizione prescrizione;
     private Utente utente;
 
-    public DettaglioPrescrizioneController() {
+    public EvasionePrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
@@ -75,15 +87,15 @@ public class DettaglioPrescrizioneController implements Initializable, DataIniti
         )
                 .collect(Collectors.toList());
         ObservableList<FarmacoPrescrizione> farmaciData = FXCollections.observableArrayList(listaFarmaciWithQuantity);
-        dettaglioPrescrizioneTable.setItems(farmaciData);
-        this.farmpreTextField.setText(String.valueOf(prescrizione.getId()));
+        tabellaDettaglioPrescrizione.setItems(farmaciData);
+        this.idFarmacoPrescrizione.setText(String.valueOf(prescrizione.getId()));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        codiceTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        quantityTableColumn.setCellValueFactory(new PropertyValueFactory<>("quantita"));
+        colonnaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colonnaCodice.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colonnaQuantità.setCellValueFactory(new PropertyValueFactory<>("quantita"));
 
 
     }

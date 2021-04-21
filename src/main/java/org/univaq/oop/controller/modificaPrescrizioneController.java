@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class updatePrescrizioneController implements Initializable, DataInitializable<Prescrizione> {
+public class modificaPrescrizioneController implements Initializable, DataInitializable<Prescrizione> {
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
@@ -39,13 +39,13 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     @FXML
     public TableColumn<FarmacoPrescrizione, Integer> t2_quantity;
     @FXML
-    public Button deleteBtnT2;
+    public Button cancellaFarmaco;
     @FXML
     public Button salva;
     @FXML
     private Button aggiungifarmaco;
     @FXML
-    private TextField codicetextfield;
+    private TextField codice;
     @FXML
     private TextArea descrizione;
     @FXML
@@ -56,7 +56,7 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     private Map<Farmaco, Integer> farmaciNellaPrescrizione;
     private Utente utente;
 
-    public updatePrescrizioneController() {
+    public modificaPrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
@@ -88,10 +88,10 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //salva.setDisable(true);
-        deleteBtnT2.setDisable(true);
+        cancellaFarmaco.setDisable(true);
         aggiungifarmaco.setDisable(true);
         this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
+                (observableValue, farmacoPrescrizione, t1) -> this.cancellaFarmaco.setDisable(false));
         this.tabellaFarmaci.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null));
 
@@ -146,7 +146,7 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
         this.listaFarmaciNellaPrescrizione.remove(fp);
 
         if (listaFarmaciNellaPrescrizione.isEmpty()) {
-            deleteBtnT2.setDisable(true);
+            cancellaFarmaco.setDisable(true);
             salva.setDisable(true);
             this.listaFarmaciNellaPrescrizione.add(fp);
             errorlabel.setText("Non puoi salvare una prescrizione vuota");
@@ -162,7 +162,7 @@ public class updatePrescrizioneController implements Initializable, DataInitiali
         }
 
         this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
+                (observableValue, farmacoPrescrizione, t1) -> this.cancellaFarmaco.setDisable(false));
 
 
     }

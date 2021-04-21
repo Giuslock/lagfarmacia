@@ -24,26 +24,26 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class PrescrizioniPazienteController implements DataInitializable<Utente>, Initializable {
+public class elencoPrescrizioniPazienteController implements DataInitializable<Utente>, Initializable {
     private final ViewDispatcher dispatcher;
     private final PrescrizioneService prescrizioneService;
     private final FarmacoService farmacoService;
     @FXML
     private Label errorLabel;
     @FXML
-    private TableView<Prescrizione> elencoPrescrizioniTable;
+    private TableView<Prescrizione> tabellaElencoPrescrizioni;
     @FXML
-    private TableColumn<Prescrizione, String> numeroTableColumn;
+    private TableColumn<Prescrizione, String> colonnaNumero;
     @FXML
-    private TableColumn<Prescrizione, String> descriptionTableColumn;
+    private TableColumn<Prescrizione, String> colonnnaDescrizione;
     @FXML
-    private TableColumn<Prescrizione, Utente> medicoTableColumn;
+    private TableColumn<Prescrizione, Utente> colonnaMedico;
     @FXML
-    private TableColumn<Prescrizione, Utente> pazienteTableColumn;
+    private TableColumn<Prescrizione, Utente> colonnaPaziente;
     @FXML
-    private TableColumn<Prescrizione, Button> azioniTableColumn;
+    private TableColumn<Prescrizione, Button> colonnaAzioni;
     @FXML
-    private TableColumn<?, ?> statoTableColumn;
+    private TableColumn<?, ?> colonnaStato;
     @FXML
     private Label errorText;
     @FXML
@@ -52,7 +52,7 @@ public class PrescrizioniPazienteController implements DataInitializable<Utente>
     private Label errorlabel;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
-    public PrescrizioniPazienteController() {
+    public elencoPrescrizioniPazienteController() {
 
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
@@ -68,7 +68,7 @@ public class PrescrizioniPazienteController implements DataInitializable<Utente>
         try {
             List<Prescrizione> prescrizioni = prescrizioneService.trovaPrescrizioniDalPaziente(paziente);
             ObservableList<Prescrizione> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
-            elencoPrescrizioniTable.setItems(prescrizioniData);
+            tabellaElencoPrescrizioni.setItems(prescrizioniData);
         } catch (BusinessException e) {
             dispatcher.renderError(e);
         }
@@ -76,13 +76,13 @@ public class PrescrizioniPazienteController implements DataInitializable<Utente>
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        numeroTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
-        medicoTableColumn.setCellValueFactory(new PropertyValueFactory<>("codiceDottore"));
-        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
-        statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("stato"));
-        azioniTableColumn.setStyle("-fx-alignment: CENTER;");
-        azioniTableColumn.setCellValueFactory(
+        colonnaNumero.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colonnnaDescrizione.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
+        colonnaMedico.setCellValueFactory(new PropertyValueFactory<>("codiceDottore"));
+        colonnaPaziente.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
+        colonnaStato.setCellValueFactory(new PropertyValueFactory<>("stato"));
+        colonnaAzioni.setStyle("-fx-alignment: CENTER;");
+        colonnaAzioni.setCellValueFactory(
                 new Callback<>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescrizione, Button> param) {

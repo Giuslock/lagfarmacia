@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="816.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.AggModFarmacoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.ModificaFarmacoController">
    <children>
       <Label prefHeight="81.0" prefWidth="342.0" text="Modifica Medicine" textAlignment="CENTER">
          <font>
@@ -49,16 +49,16 @@
                         <Font name="Segoe Script" size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nametext" GridPane.columnIndex="1" />
-                  <TextField fx:id="descriptiontext" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="mimimumtext" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="nome" GridPane.columnIndex="1" />
+                  <TextField fx:id="descrizione" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="mimimo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                  <Button fx:id="salvaButton" mnemonicParsing="false" onAction="#salvaAction" prefHeight="25.0" prefWidth="90.0" styleClass="Button" stylesheets="@loginButton.css" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Button fx:id="salva" mnemonicParsing="false" onAction="#salvaAction" prefHeight="25.0" prefWidth="90.0" styleClass="Button" stylesheets="@loginButton.css" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="eliminaButton" mnemonicParsing="false" onAction="#eliminaAction" prefHeight="30.0" prefWidth="82.0" styleClass="Button" stylesheets="@loginButton.css" text="Elimina" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Button fx:id="elimina" mnemonicParsing="false" onAction="#eliminaAction" prefHeight="30.0" prefWidth="82.0" styleClass="Button" stylesheets="@loginButton.css" text="Elimina" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -68,7 +68,7 @@
                         <Font name="Segoe Script" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="quantitytext" layoutX="210.0" layoutY="96.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="quantità" layoutX="210.0" layoutY="96.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>

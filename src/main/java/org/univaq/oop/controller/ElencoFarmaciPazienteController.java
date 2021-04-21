@@ -29,15 +29,14 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
     @FXML
-    private TableView<Farmaco> elencoFarmaciTable;
+    private TableView<Farmaco> tabellaElencoFarmaci;
     @FXML
-    private TableColumn<Farmaco, String> nomeTableColumn;
+    private TableColumn<Farmaco, String> colonnaNome;
     @FXML
-    private TableColumn<Farmaco, String> descriptionTableColumn;
+    private TableColumn<Farmaco, String> colonnaDescrizione;
     @FXML
-    private TableColumn<Farmaco, Button> azioniTableColumn;
-    @FXML
-    private Button schedaButton;
+    private TableColumn<Farmaco, Button> colonnaAzioni;
+
     @FXML
     private Label errorlabel;
 
@@ -53,7 +52,7 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
         try {
             List<Farmaco> farmaci = farmacoService.trovaTuttiFarmaci();
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
-            elencoFarmaciTable.setItems(farmaciData);
+            tabellaElencoFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {
             errorlabel.setText("Errore nella ricerca dei farmaci");
         }
@@ -62,10 +61,10 @@ public class ElencoFarmaciPazienteController implements DataInitializable<Utente
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
-        azioniTableColumn.setStyle("-fx-alignment: CENTER;");
-        azioniTableColumn.setCellValueFactory(
+        colonnaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colonnaDescrizione.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
+        colonnaAzioni.setStyle("-fx-alignment: CENTER;");
+        colonnaAzioni.setCellValueFactory(
                 new Callback<>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Farmaco, Button> param) {

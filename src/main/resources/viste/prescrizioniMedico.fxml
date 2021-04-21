@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
 
    <children>
@@ -20,15 +21,15 @@
          </font>
       </Label>
 
-      <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="258.0" />
-      <TableView fx:id="elencoPrescrizioniTable" prefHeight="313.0" prefWidth="700.0">
+      <Label fx:id="errore" prefHeight="17.0" prefWidth="258.0" />
+      <TableView fx:id="tabellaElencoPrescrizioni" prefHeight="350.0" prefWidth="700.0">
 
         <columns>
-          <TableColumn fx:id="numeroTableColumn" prefWidth="54.33333206176758" text="Numero" visible="false" />
-            <TableColumn fx:id="idTableColumn" prefWidth="89.66666793823242" resizable="false" text="Numero" />
-            <TableColumn fx:id="descriptionTableColumn" prefWidth="234.0" resizable="false" text="Descrizione" />
-            <TableColumn fx:id="pazienteTableColumn" prefWidth="189.5" resizable="false" text="Paziente" />
-            <TableColumn fx:id="azioniTableColumn1" prefWidth="183.0" resizable="false" text="Azioni" />
+          <TableColumn fx:id="colonnaNumero" prefWidth="54.33333206176758" text="Numero" visible="false" />
+            <TableColumn fx:id="colonnaId" prefWidth="89.66666793823242" resizable="false" text="Numero" />
+            <TableColumn fx:id="colonnaDescrizione" prefWidth="234.0" resizable="false" text="Descrizione" />
+            <TableColumn fx:id="tabellaPaziente" prefWidth="189.5" resizable="false" text="Paziente" />
+            <TableColumn fx:id="colonnaAzioni" prefWidth="183.0" resizable="false" text="Azioni" />
         </columns>
 
          <VBox.margin>
@@ -95,12 +96,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="pazienteLab" prefHeight="31.0" prefWidth="87.0" GridPane.columnIndex="5">
+            <Label fx:id="paziente" prefHeight="31.0" prefWidth="87.0" GridPane.columnIndex="5">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="aggiungiButton" mnemonicParsing="false" onAction="#aggiungiAction" onMouseClicked="#aggiungiAction" prefHeight="25.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Aggiungi">
+            <Button fx:id="aggiungi" mnemonicParsing="false" onAction="#aggiungiAction" onMouseClicked="#aggiungiAction" prefHeight="25.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Aggiungi">
                <font>
                   <Font size="14.0" />
                </font>

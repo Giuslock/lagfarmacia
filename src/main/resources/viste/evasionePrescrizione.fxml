@@ -10,21 +10,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="813.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizioneController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.EvasionePrescrizioneController">
    <children>
       <Label prefHeight="62.0" prefWidth="371.0" text="Evadi la prescrizione" textFill="#0e0e0e" wrapText="true">
          <font>
             <Font name="Segoe Script" size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="farmpreTextField" />
+      <Label fx:id="errorlabel" prefHeight="34.0" prefWidth="266.0" textFill="#ff0000" wrapText="true" />
+      <TextField fx:id="idFarmacoPrescrizione" editable="false" prefHeight="26.0" prefWidth="750.0">
+         <VBox.margin>
+            <Insets left="600.0" right="30.0" />
+         </VBox.margin></TextField>
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
-      <TableView fx:id="dettaglioPrescrizioneTable" prefHeight="370.0" prefWidth="700.0">
+      <TableView fx:id="tabellaDettaglioPrescrizione" prefHeight="370.0" prefWidth="700.0">
          <columns>
-            <TableColumn fx:id="codiceTableColumn" prefWidth="142.0" resizable="false" text="Codice" />
-            <TableColumn fx:id="nomeTableColumn" prefWidth="451.0" resizable="false" text="Nome" />
-            <TableColumn fx:id="quantityTableColumn" prefWidth="219.0" resizable="false" text="Quantità" />
+            <TableColumn fx:id="colonnaCodice" prefWidth="142.0" resizable="false" text="Codice" />
+            <TableColumn fx:id="colonnaNome" prefWidth="451.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="colonnaQuantità" prefWidth="219.0" resizable="false" text="Quantità" />
          </columns>
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" />
+         </VBox.margin>
       </TableView>
       <Button fx:id="evadiButton" mnemonicParsing="false" onAction="#evadiAction" prefHeight="35.0" prefWidth="99.0" styleClass="Button" stylesheets="@loginButton.css" text="Evadi">
          <VBox.margin>
@@ -33,6 +40,6 @@
          <opaqueInsets>
             <Insets right="25.0" />
          </opaqueInsets></Button>
-      <Label fx:id="errorlabel" prefHeight="37.0" prefWidth="140.0" wrapText="true" />
+      <TextField />
    </children>
 </VBox>

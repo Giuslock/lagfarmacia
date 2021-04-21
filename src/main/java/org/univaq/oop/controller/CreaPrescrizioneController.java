@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class CreazioneDettaglioPrescrizioneController implements Initializable, DataInitializable<Utente> {
+public class CreaPrescrizioneController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
@@ -39,23 +39,23 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     @FXML
     public TableColumn<FarmacoPrescrizione, String> t2_nome;
     @FXML
-    public TableColumn<FarmacoPrescrizione, Integer> t2_quantity;
+    public TableColumn<FarmacoPrescrizione, Integer> t2_quantità;
     @FXML
-    public Button deleteBtnT2;
+    public Button eliminaFarmaco;
     @FXML
     private Button aggiungifarmaco;
     @FXML
-    private Button salvaButton;
+    private Button salva;
     @FXML
-    private TextField codicetextfield;
+    private TextField codice;
     @FXML
     private TextArea descrizione;
     @FXML
-    private Label errorlabel;
+    private Label errore;
     private ObservableList<FarmacoPrescrizione> listaFarmaciNellaPrescrizione;
     private Utente utente;
 
-    public CreazioneDettaglioPrescrizioneController() {
+    public CreaPrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
@@ -71,10 +71,10 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
     public void initializeData(Utente utente) {
         this.utente = utente;
         // salvaButton.setDisable(true);
-        deleteBtnT2.setDisable(true);
+        eliminaFarmaco.setDisable(true);
         aggiungifarmaco.setDisable(true);
         this.tabellaFarmaciInPrescrizione.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, farmacoPrescrizione, t1) -> this.deleteBtnT2.setDisable(false));
+                (observableValue, farmacoPrescrizione, t1) -> this.eliminaFarmaco.setDisable(false));
         this.tabellaFarmaci.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, farmaco, t1) -> this.aggiungifarmaco.setDisable(t1 == null));
 
@@ -84,7 +84,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             tabellaFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {
-            errorlabel.setText("Errore nella ricerca dei farmaci");
+            errore.setText("Errore nella ricerca dei farmaci");
         }
         List<FarmacoPrescrizione> farmacoPrescrizioneList = farmacoPrescrizioneService.mappaFarmacoPrescrizione(this.farmaciNellaPrescrizione);
         this.listaFarmaciNellaPrescrizione = FXCollections.observableArrayList(farmacoPrescrizioneList);
@@ -98,7 +98,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
         t1_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         t1_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         t2_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        t2_quantity.setCellValueFactory(new PropertyValueFactory<>("quantita"));
+        t2_quantità.setCellValueFactory(new PropertyValueFactory<>("quantita"));
 
     }
 
@@ -134,14 +134,14 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
                             this.farmaciNellaPrescrizione.remove(farmaco);
                             this.listaFarmaciNellaPrescrizione.remove(fp);
                         },
-                        () -> errorlabel.setText("Errore nella rimozione del farmaco")
+                        () -> errore.setText("Errore nella rimozione del farmaco")
                 );
     }
 
     @FXML
     public void creaPrescrizione() {
         try {
-            this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codicetextfield.getText()).getId()));
+            this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codice.getText()).getId()));
             this.prescrizione.setCodiceDottore(this.utente.getId().intValue());
             this.prescrizione.setDescrizione(this.descrizione.getText());
             Prescrizione prescrizioneInserita = this.prescrizioneService.creaPrescrizione(this.prescrizione);
@@ -153,7 +153,7 @@ public class CreazioneDettaglioPrescrizioneController implements Initializable, 
             ));
             dispatcher.renderView("prescrizioniMedico", utente);
         } catch (BusinessException e) {
-            errorlabel.setText("Questo codice non esiste");
+            errore.setText("Questo codice non esiste");
         }
 
 

@@ -21,10 +21,10 @@
             <Font name="Segoe Script" size="37.0" />
          </font>
       </Label>
-      <TextField id="usernameText" fx:id="usernameText" layoutX="14.0" layoutY="95.0" promptText="username..." />
-      <Button id="loginButton" fx:id="loginButton" layoutX="14.0" layoutY="168.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="35.0" prefWidth="75.0" styleClass="Button" stylesheets="@loginButton.css" text="Accedi" textFill="#1b0505" />
-      <Label id="labelErrorLogin" fx:id="labelErrorLogin" layoutX="14.0" layoutY="62.0" prefHeight="26.0" prefWidth="216.0" styleClass="titolo" stylesheets="@labeltitolo.css" />
-      <Button id="iscrivitiButton" fx:id="iscrivitiButton" layoutX="100.0" layoutY="168.0" mnemonicParsing="false" onAction="#iscrivitiAction" onMouseClicked="#iscrivitiAction" prefHeight="35.0" prefWidth="75.0" styleClass="Button" stylesheets="@loginButton.css" text="Iscriviti" textFill="#1b0505" />
-      <PasswordField id="passwordText" fx:id="passwordText" layoutX="14.0" layoutY="128.0" prefHeight="27.0" prefWidth="149.0" promptText="password..." />
+      <TextField id="usernameText" fx:id="username" layoutX="14.0" layoutY="95.0" promptText="username..." />
+      <Button id="loginButton" fx:id="login" layoutX="14.0" layoutY="168.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="35.0" prefWidth="75.0" styleClass="Button" stylesheets="@loginButton.css" text="Accedi" textFill="#1b0505" />
+      <Label id="labelErrorLogin" fx:id="errore" layoutX="14.0" layoutY="62.0" prefHeight="26.0" prefWidth="216.0" styleClass="titolo" stylesheets="@labeltitolo.css" />
+      <Button id="iscrivitiButton" fx:id="iscriviti" layoutX="100.0" layoutY="168.0" mnemonicParsing="false" onAction="#iscrivitiAction" onMouseClicked="#iscrivitiAction" prefHeight="35.0" prefWidth="75.0" styleClass="Button" stylesheets="@loginButton.css" text="Iscriviti" textFill="#1b0505" />
+      <PasswordField id="passwordText" fx:id="password" layoutX="14.0" layoutY="128.0" prefHeight="27.0" prefWidth="149.0" promptText="password..." />
    </children>
 </AnchorPane>

@@ -18,15 +18,15 @@ public class SchedaFarmacoController implements Initializable, DataInitializable
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
     @FXML
-    private TextField nametext;
+    private TextField nome;
     @FXML
-    private TextField descriptiontext;
+    private TextField descrizione;
     @FXML
-    private TextField statusText;
+    private TextField status;
     @FXML
-    private Button backButton;
+    private Button indietro;
     @FXML
-    private Label errorlabel;
+    private Label errore;
     private Utente utente;
     private Farmaco farmaco;
 
@@ -45,9 +45,9 @@ public class SchedaFarmacoController implements Initializable, DataInitializable
     @Override
     public void initializeData(Farmaco farmaco) {
         this.farmaco = farmaco;
-        this.nametext.setText(farmaco.getNome());
-        this.descriptiontext.setText(farmaco.getDescrizione());
-        this.statusText.setText(farmaco.getStatoFarmaco());
+        this.nome.setText(farmaco.getNome());
+        this.descrizione.setText(farmaco.getDescrizione());
+        this.status.setText(farmaco.getStatoFarmaco());
 
     }
 

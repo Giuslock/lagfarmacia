@@ -22,15 +22,15 @@ public class LoginController implements Initializable {
     private final ViewDispatcher dispatcher;
     private final UtenteService utenteService;
     @FXML
-    private Label labelErrorLogin;
+    private Label errore;
     @FXML
-    private TextField usernameText;
+    private TextField username;
     @FXML
-    private TextField passwordText;
+    private TextField password;
     @FXML
-    private Button loginButton;
+    private Button login;
     @FXML
-    private Button iscrivitiButton;
+    private Button iscriviti;
 
     public LoginController() {
         dispatcher = ViewDispatcher.getInstance();
@@ -41,7 +41,7 @@ public class LoginController implements Initializable {
     //se i campi sono vuoti, l'utente non può effettuare l'accesso
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loginButton.disableProperty().bind(usernameText.textProperty().isEmpty().or(passwordText.textProperty().isEmpty()));
+        login.disableProperty().bind(username.textProperty().isEmpty().or(password.textProperty().isEmpty()));
     }
 
     //al click del tasto login
@@ -49,10 +49,10 @@ public class LoginController implements Initializable {
     private void loginAction() {
         try {
             //prova ad autenticare l'utente, se lo trova lo restituisce e carica la home page, altrimenti compare il messaggio del catch
-            Utente utente = utenteService.autenticazione(usernameText.getText(), passwordText.getText());
+            Utente utente = utenteService.autenticazione(username.getText(), password.getText());
             dispatcher.loggedIn(utente);
         } catch (UtenteNonTrovatoException e) {
-            labelErrorLogin.setText("Ops! Username e/o password errati!");
+            errore.setText("Ops! Username e/o password errati!");
         } catch (BusinessException e) {
             dispatcher.renderError(e);
         }

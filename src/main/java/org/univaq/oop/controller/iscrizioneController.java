@@ -14,22 +14,22 @@ import org.univaq.oop.view.ViewException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterController implements Initializable, DataInitializable<Utente> {
+public class iscrizioneController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
     private final UtenteService utenteService;
     @FXML
-    private TextField nomeText;
+    private TextField nome;
     @FXML
-    private TextField cognomeText;
+    private TextField cognome;
     @FXML
-    private TextField codiceFiscaleText;
+    private TextField codiceFiscale;
     @FXML
-    private TextField usernameIscrivitiText;
+    private TextField usernameIscriviti;
     @FXML
-    private PasswordField passwordIscrivitiText;
+    private PasswordField passwordIscriviti;
     @FXML
-    private Button iscrivitiButton;
+    private Button iscriviti;
     @FXML
     private Button HomeButton;
     @FXML
@@ -41,10 +41,10 @@ public class RegisterController implements Initializable, DataInitializable<Uten
     @FXML
     private RadioButton amministratoreRadioButton;
     @FXML
-    private Label errorlabel;
+    private Label errore;
 
 
-    public RegisterController() {
+    public iscrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         utenteService = factory.getUtenteService();
@@ -60,22 +60,22 @@ public class RegisterController implements Initializable, DataInitializable<Uten
         pazienteRadioButton.setToggleGroup(group);
         farmacistaRadioButton.setToggleGroup(group);
 
-        iscrivitiButton.disableProperty().bind(usernameIscrivitiText.textProperty().isEmpty()
-                .or(passwordIscrivitiText.textProperty().isEmpty()
-                        .or(nomeText.textProperty().isEmpty()
-                                .or(cognomeText.textProperty().isEmpty()
-                                        .or(codiceFiscaleText.textProperty().isEmpty())))));
+        iscriviti.disableProperty().bind(usernameIscriviti.textProperty().isEmpty()
+                .or(passwordIscriviti.textProperty().isEmpty()
+                        .or(nome.textProperty().isEmpty()
+                                .or(cognome.textProperty().isEmpty()
+                                        .or(codiceFiscale.textProperty().isEmpty())))));
     }
 
     @FXML
     public void iscrivitiAction() throws ViewException {
 
         Utente utente = new Utente();
-        utente.setNome(nomeText.getText());
-        utente.setCognome(cognomeText.getText());
-        utente.setCodiceFiscale(codiceFiscaleText.getText());
-        utente.setUsername(usernameIscrivitiText.getText());
-        utente.setPassword(passwordIscrivitiText.getText());
+        utente.setNome(nome.getText());
+        utente.setCognome(cognome.getText());
+        utente.setCodiceFiscale(codiceFiscale.getText());
+        utente.setUsername(usernameIscriviti.getText());
+        utente.setPassword(passwordIscriviti.getText());
         if (amministratoreRadioButton.isSelected())
             utente.setRuolo(Ruolo.AMMINISTRATORE);
         else if (medicoRadioButton.isSelected())
@@ -88,7 +88,7 @@ public class RegisterController implements Initializable, DataInitializable<Uten
             utenteService.aggiungiUtente(utente);
             dispatcher.logout();
         } catch (BusinessException e) {
-            errorlabel.setText("CODICE FISCALE E/O USERNAME USATO");
+            errore.setText("CODICE FISCALE E/O USERNAME USATO");
         }
     }
 

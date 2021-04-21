@@ -25,31 +25,31 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FarmaciController implements Initializable, DataInitializable<Utente> {
+public class elencoFarmaciAmministratoreController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
     @FXML
-    private TableView<Farmaco> elencoFarmaciTable;
+    private TableView<Farmaco> tabellaElencoFarmaci;
     @FXML
-    private TableColumn<Farmaco, String> nomeTableColumn;
+    private TableColumn<Farmaco, String> colonnaNome;
     @FXML
-    private TableColumn<Farmaco, String> codiceTableColumn;
+    private TableColumn<Farmaco, String> colonnaCodice;
     @FXML
-    private TableColumn<Farmaco, Integer> minimumTableColumn;
+    private TableColumn<Farmaco, Integer> colonnaMinimo;
     @FXML
-    private TableColumn<Farmaco, Integer> quantityTableColumn1;
+    private TableColumn<Farmaco, Integer> colonnaQuantità;
     @FXML
-    private TableColumn<Farmaco, String> statoTableColumn;
+    private TableColumn<Farmaco, String> colonnaStato;
     @FXML
-    private TableColumn<Farmaco, Button> azioniTableColumn;
+    private TableColumn<Farmaco, Button> colonnaAzioni;
     @FXML
     private Button aggiungiButton;
     @FXML
     private Label errorlabel;
 
 
-    public FarmaciController() {
+    public elencoFarmaciAmministratoreController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
@@ -59,13 +59,13 @@ public class FarmaciController implements Initializable, DataInitializable<Utent
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        codiceTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        minimumTableColumn.setCellValueFactory(new PropertyValueFactory<>("minimo"));
-        quantityTableColumn1.setCellValueFactory(new PropertyValueFactory<>("quantita"));
-        statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("statoFarmaco"));
-        azioniTableColumn.setStyle("-fx-alignment: CENTER;");
-        azioniTableColumn.setCellValueFactory(
+        colonnaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colonnaCodice.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colonnaMinimo.setCellValueFactory(new PropertyValueFactory<>("minimo"));
+        colonnaQuantità.setCellValueFactory(new PropertyValueFactory<>("quantita"));
+        colonnaStato.setCellValueFactory(new PropertyValueFactory<>("statoFarmaco"));
+        colonnaAzioni.setStyle("-fx-alignment: CENTER;");
+        colonnaAzioni.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Farmaco, Button>, ObservableValue<Button>>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Farmaco, Button> param) {
@@ -89,7 +89,7 @@ public class FarmaciController implements Initializable, DataInitializable<Utent
         try {
             List<Farmaco> farmaci = farmacoService.trovaTuttiFarmaci();
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
-            elencoFarmaciTable.setItems(farmaciData);
+            tabellaElencoFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {
             errorlabel.setText("Errore nella ricerca dei farmaci");
         }

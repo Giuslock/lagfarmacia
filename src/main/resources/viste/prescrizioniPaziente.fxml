@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefWidth="813.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniPazienteController">
+<VBox prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.elencoPrescrizioniPazienteController">
    <children>
       <Label prefHeight="65.0" prefWidth="268.0" text="  Elenco Prescrizioni:">
          <font>
@@ -38,9 +38,9 @@
             <Label fx:id="erroreLabel" prefHeight="23.0" prefWidth="132.0" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <TableView fx:id="elencoPrescrizioniTable" prefHeight="402.0" prefWidth="700.0">
+      <TableView fx:id="tabellaElencoPrescrizioni" prefHeight="402.0" prefWidth="700.0">
         <columns>
-          <TableColumn fx:id="numeroTableColumn" prefWidth="54.33333206176758" text="Numero" visible="false" />
+          <TableColumn fx:id="colonnaNumero" prefWidth="54.33333206176758" text="Numero" visible="false" />
             <TableColumn fx:id="idTableColumn" prefWidth="89.66666793823242" text="Id" />
             <TableColumn fx:id="dottoreTableColumn" prefWidth="145.0" text="Dottore" />
         </columns>

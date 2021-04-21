@@ -22,11 +22,11 @@ public class LayoutController implements Initializable, DataInitializable<Utente
     //creazione degli elementi che faranno parte del menu per ogni utente
     private static final ElementiDelMenu MENU_HOME = new ElementiDelMenu("Home", "home");
 
-    private static final ElementiDelMenu[] MENU_AMMINISTRATORI = {new ElementiDelMenu("Farmaci", "elencoFarmaci"),
-            new ElementiDelMenu("In esaurimento", "esaurimento")};
+    private static final ElementiDelMenu[] MENU_AMMINISTRATORI = {new ElementiDelMenu("Farmaci", "elencoFarmaciAmministratore"),
+            new ElementiDelMenu("In esaurimento", "farmaciInEsaurimento")};
     private static final ElementiDelMenu MENU_FARMACISTI = new ElementiDelMenu("Prescrizioni", "elencoTuttePrescrizioni");
 
-    private static final ElementiDelMenu[] MENU_PAZIENTI = {new ElementiDelMenu("Prescrizioni", "elencoPrescrizioni"),
+    private static final ElementiDelMenu[] MENU_PAZIENTI = {new ElementiDelMenu("Prescrizioni", "elencoPrescrizioniPaziente"),
             new ElementiDelMenu("Farmaci", "elencoFarmaciPaziente")};
 
     private static final ElementiDelMenu MENU_MEDICI = new ElementiDelMenu("Prescrizioni", "prescrizioniMedico");

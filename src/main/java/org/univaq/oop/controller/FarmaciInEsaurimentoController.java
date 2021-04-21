@@ -25,29 +25,29 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FarmaciEsaurimentoController implements Initializable, DataInitializable<Utente> {
+public class FarmaciInEsaurimentoController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
     @FXML
-    private TableView<Farmaco> elencoFarmaciTable;
+    private TableView<Farmaco> tabellaElencoFarmaci;
     @FXML
-    private TableColumn<Farmaco, String> nomeTableColumn;
+    private TableColumn<Farmaco, String> colonnaNome;
     @FXML
-    private TableColumn<Farmaco, String> codiceTableColumn;
+    private TableColumn<Farmaco, String> colonnaCodice;
     @FXML
-    private TableColumn<Farmaco, String> statoTableColumn;
+    private TableColumn<Farmaco, String> colonnaStato;
     @FXML
-    private TableColumn<Farmaco, String> disponibilitaTableColumn;
+    private TableColumn<Farmaco, String> colonnaDisponibilità;
     @FXML
-    private TableColumn<Farmaco, String> qtaMinimaTableColumn;
+    private TableColumn<Farmaco, String> colonnaMinimo;
     @FXML
-    private TableColumn<Farmaco, Button> azioniTableColumn;
+    private TableColumn<Farmaco, Button> colonnaAzioni;
     @FXML
-    private Label errorlabel;
+    private Label errore;
 
 
-    public FarmaciEsaurimentoController() {
+    public FarmaciInEsaurimentoController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
@@ -58,7 +58,7 @@ public class FarmaciEsaurimentoController implements Initializable, DataInitiali
         try {
             List<Farmaco> farmaci = farmacoService.trovaFarmaciInEsaurimento();
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
-            elencoFarmaciTable.setItems(farmaciData);
+            tabellaElencoFarmaci.setItems(farmaciData);
         } catch (BusinessException e) {
             dispatcher.renderError(e);
         }
@@ -66,13 +66,13 @@ public class FarmaciEsaurimentoController implements Initializable, DataInitiali
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        codiceTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        statoTableColumn.setCellValueFactory(new PropertyValueFactory<>("statoFarmaco"));
-        disponibilitaTableColumn.setCellValueFactory(new PropertyValueFactory<>("quantita"));
-        qtaMinimaTableColumn.setCellValueFactory(new PropertyValueFactory<>("minimo"));
-        azioniTableColumn.setStyle("-fx-alignment: CENTER;");
-        azioniTableColumn.setCellValueFactory(
+        colonnaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colonnaCodice.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colonnaStato.setCellValueFactory(new PropertyValueFactory<>("statoFarmaco"));
+        colonnaDisponibilità.setCellValueFactory(new PropertyValueFactory<>("quantita"));
+        colonnaMinimo.setCellValueFactory(new PropertyValueFactory<>("minimo"));
+        colonnaAzioni.setStyle("-fx-alignment: CENTER;");
+        colonnaAzioni.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Farmaco, Button>, ObservableValue<Button>>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Farmaco, Button> param) {

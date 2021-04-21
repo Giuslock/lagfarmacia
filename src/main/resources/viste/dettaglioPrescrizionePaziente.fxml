@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -8,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizionePazienteController">
+<VBox styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizionePazienteController">
 
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="Dettaglio">
@@ -16,17 +15,14 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="106.0" wrapText="true" />
+      <Label fx:id="errore" textFill="RED" wrapText="true" />
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
-      <TableView fx:id="dettaglioPrescrizioneTable" prefHeight="454.0" prefWidth="537.0">
+      <TableView fx:id="tabellaPrescrizione" prefHeight="454.0" prefWidth="537.0">
          <columns>
-            <TableColumn fx:id="codiceTableColumn" prefWidth="89.0" resizable="false" text="Codice" />
-            <TableColumn fx:id="nomeTableColumn" prefWidth="483.0" resizable="false" text="Nome" />
-            <TableColumn fx:id="quantityTableColumn" prefWidth="127.0" resizable="false" text="Quantity" />
+            <TableColumn fx:id="colonnaCodice" prefWidth="89.0" resizable="false" text="Codice" />
+            <TableColumn fx:id="colonnaNome" prefWidth="483.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="colonnaQuantità" prefWidth="127.0" resizable="false" text="Quantity" />
          </columns>
-         <VBox.margin>
-            <Insets bottom="20.0" left="10.0" right="10.0" />
-         </VBox.margin>
       </TableView>
    </children>
 </VBox>

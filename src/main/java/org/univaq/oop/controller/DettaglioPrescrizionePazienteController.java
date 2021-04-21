@@ -28,15 +28,15 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
     private final PrescrizioneService prescrizioneService;
     private final FarmacoPrescrizioneService farmacoPrescrizioneService;
     @FXML
-    private TableView<FarmacoPrescrizione> dettaglioPrescrizioneTable;
+    private TableView<FarmacoPrescrizione> tabellaPrescrizione;
     @FXML
-    private TableColumn<FarmacoPrescrizione, String> nomeTableColumn;
+    private TableColumn<FarmacoPrescrizione, String> colonnaNome;
     @FXML
-    private TableColumn<FarmacoPrescrizione, String> codiceTableColumn;
+    private TableColumn<FarmacoPrescrizione, String> colonnaCodice;
     @FXML
-    private TableColumn<FarmacoPrescrizione, Integer> quantityTableColumn;
+    private TableColumn<FarmacoPrescrizione, Integer> colonnaQuantità;
     @FXML
-    private Label errorlabel;
+    private Label errore;
 
     private Map<Farmaco, Integer> mappaFarmaciEQuantita;
     private Utente utente;
@@ -56,7 +56,7 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
         try {
             mappaFarmaciEQuantita = farmacoPrescrizioneService.ottieniFarmaciDallaPrescrizione(id);
         } catch (BusinessException e) {
-            errorlabel.setText("Errore nella ricerca dei farmaci nella prescrizione");
+            errore.setText("Errore nella ricerca dei farmaci nella prescrizione");
         }
         List<FarmacoPrescrizione> listaFarmaciWithQuantity = mappaFarmaciEQuantita.entrySet().stream().map(entry -> new FarmacoPrescrizione(
                 entry.getKey().getId(),
@@ -66,14 +66,14 @@ public class DettaglioPrescrizionePazienteController implements DataInitializabl
         )
                 .collect(Collectors.toList());
         ObservableList<FarmacoPrescrizione> farmaciData = FXCollections.observableArrayList(listaFarmaciWithQuantity);
-        dettaglioPrescrizioneTable.setItems(farmaciData);
+        tabellaPrescrizione.setItems(farmaciData);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        nomeTableColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        codiceTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        quantityTableColumn.setCellValueFactory(new PropertyValueFactory<>("quantita"));
+        colonnaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colonnaCodice.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colonnaQuantità.setCellValueFactory(new PropertyValueFactory<>("quantita"));
 
 
     }

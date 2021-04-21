@@ -23,23 +23,23 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PrescrizioniFarmacistaController implements DataInitializable<Utente>, Initializable {
+public class elencoTuttePrescrizioniController implements DataInitializable<Utente>, Initializable {
 
     private final ViewDispatcher dispatcher;
     private final PrescrizioneService prescrizioneService;
     private final FarmacoService farmacoService;
     @FXML
-    private TableView<Prescrizione> elencoPrescrizioniTable;
+    private TableView<Prescrizione> tabellaElencoPrescrizioni;
     @FXML
     private TableColumn<Prescrizione, String> numeroTableColumn;
     @FXML
-    private TableColumn<Prescrizione, String> descriptionTableColumn;
+    private TableColumn<Prescrizione, String> colonnaDescrizione;
     @FXML
-    private TableColumn<Prescrizione, Utente> medicoTableColumn;
+    private TableColumn<Prescrizione, Utente> colonnaMedico;
     @FXML
-    private TableColumn<Prescrizione, Utente> pazienteTableColumn;
+    private TableColumn<Prescrizione, Utente> colonnaPaziente;
     @FXML
-    private TableColumn<Prescrizione, Button> azioniTableColumn;
+    private TableColumn<Prescrizione, Button> colonnaAzioni;
     @FXML
     private Label errorText;
     @FXML
@@ -49,7 +49,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<Utent
 
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
-    public PrescrizioniFarmacistaController() {
+    public elencoTuttePrescrizioniController() {
 
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
@@ -64,7 +64,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<Utent
         try {
             List<Prescrizione> prescrizioni = prescrizioneService.trovaPrescrizioniDaEvadere();
             ObservableList<Prescrizione> prescrizioniData = FXCollections.observableArrayList(prescrizioni);
-            elencoPrescrizioniTable.setItems(prescrizioniData);
+            tabellaElencoPrescrizioni.setItems(prescrizioniData);
         } catch (BusinessException e) {
             dispatcher.renderError(e);
         }
@@ -73,11 +73,11 @@ public class PrescrizioniFarmacistaController implements DataInitializable<Utent
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         numeroTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
-        medicoTableColumn.setCellValueFactory(new PropertyValueFactory<>("codiceDottore"));
-        pazienteTableColumn.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
-        azioniTableColumn.setStyle("-fx-alignment: CENTER;");
-        azioniTableColumn.setCellValueFactory(
+        colonnaDescrizione.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
+        colonnaMedico.setCellValueFactory(new PropertyValueFactory<>("codiceDottore"));
+        colonnaPaziente.setCellValueFactory(new PropertyValueFactory<>("codicePaziente"));
+        colonnaAzioni.setStyle("-fx-alignment: CENTER;");
+        colonnaAzioni.setCellValueFactory(
                 new Callback<>() {
                     @Override
                     public ObservableValue<Button> call(TableColumn.CellDataFeatures<Prescrizione, Button> param) {
@@ -87,7 +87,7 @@ public class PrescrizioniFarmacistaController implements DataInitializable<Utent
                             @Override
                             public void handle(ActionEvent event) {
 
-                                dispatcher.renderView("dettaglioPrescrizione", param.getValue());
+                                dispatcher.renderView("evasionePrescrizione", param.getValue());
 
                             }
                         });

@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="517.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.CreazioneDettaglioPrescrizioneController">
+<AnchorPane prefHeight="517.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.CreaPrescrizioneController">
    <children>
       <Label layoutX="14.0" layoutY="-7.0" prefHeight="63.0" prefWidth="726.0" stylesheets="@layout.css" text="Modifica Prescrizione">
 
@@ -33,16 +32,16 @@
 
         <columns>
           <TableColumn fx:id="t2_nome" prefWidth="137.5999755859375" resizable="false" text="Farmaci Selezionati" />
-            <TableColumn fx:id="t2_quantity" prefWidth="79.0" resizable="false" text="Quantità" />
+            <TableColumn fx:id="t2_quantità" prefWidth="79.0" resizable="false" text="Quantità" />
         </columns>
       </TableView>
+      <Label fx:id="errore" layoutX="253.0" layoutY="438.0" textFill="RED" />
 
-      <TextField fx:id="codicetextfield" alignment="TOP_CENTER" layoutX="551.0" layoutY="61.0" prefHeight="26.0" prefWidth="203.0" promptText="Codice Fiscale" />
+      <TextField fx:id="codice" alignment="TOP_CENTER" layoutX="551.0" layoutY="61.0" prefHeight="26.0" prefWidth="203.0" promptText="Codice Fiscale" />
       <TextArea fx:id="descrizione" layoutX="551.0" layoutY="109.0" prefHeight="315.0" prefWidth="203.0" promptText="Descrizione" />
-      <Button fx:id="salvaButton" layoutX="608.0" layoutY="448.0" mnemonicParsing="false" onAction="#creaPrescrizione" prefHeight="27.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Salva" />
+      <Button fx:id="salva" layoutX="608.0" layoutY="448.0" mnemonicParsing="false" onAction="#creaPrescrizione" prefHeight="27.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Salva" />
       <Button fx:id="aggiungifarmaco" layoutX="102.0" layoutY="448.0" mnemonicParsing="false" onAction="#aggiungifarmaco" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Aggiungi" />
-      <Button fx:id="deleteBtnT2" layoutX="350.0" layoutY="448.0" mnemonicParsing="false" onAction="#rimuoviFarmacoDallaPrescrizione" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Rimuovi" />
-      <Label fx:id="errorlabel" layoutX="543.0" layoutY="52.0" prefHeight="17.0" prefWidth="147.0" />
+      <Button fx:id="eliminaFarmaco" layoutX="350.0" layoutY="448.0" mnemonicParsing="false" onAction="#rimuoviFarmacoDallaPrescrizione" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="Rimuovi" />
 
 
    </children>

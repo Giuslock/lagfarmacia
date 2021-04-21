@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="812.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.FarmaciInEsaurimentoController">
+
+   <children>
+      <Label prefHeight="74.0" prefWidth="483.0" text="  Elenco farmaci in esaurimento:" wrapText="true">
+         <font>
+            <Font name="Segoe Script" size="25.0" />
+         </font>
+      </Label>
+      <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
+      <TableView fx:id="tabellaElencoFarmaci" prefHeight="370.0" prefWidth="627.0">
+         <columns>
+            <TableColumn fx:id="colonnaCodice" prefWidth="76.0" resizable="false" text="Codice" />
+            <TableColumn fx:id="colonnaNome" prefWidth="136.00000762939453" resizable="false" text="Nome" />
+            <TableColumn fx:id="colonnaDisponibilità" prefWidth="96.0" resizable="false" text="Quantità" />
+            <TableColumn fx:id="colonnaMinimo" prefWidth="128.0" resizable="false" text="Minimo" />
+            <TableColumn fx:id="colonnaStato" prefWidth="152.0" resizable="false" text="Stato" />
+            <TableColumn fx:id="colonnaAzioni" prefWidth="226.4000244140625" resizable="false" text="Azioni" />
+         </columns>
+      </TableView>
+      <Label fx:id="errore" prefHeight="17.0" prefWidth="232.0" wrapText="true" />
+   </children>
+</VBox>

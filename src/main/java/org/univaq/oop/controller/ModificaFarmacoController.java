@@ -15,28 +15,29 @@ import org.univaq.oop.view.ViewDispatcher;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AggModFarmacoController implements Initializable, DataInitializable<Farmaco> {
+public class ModificaFarmacoController implements Initializable, DataInitializable<Farmaco> {
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
     @FXML
-    private TextField nametext;
+    private TextField nome;
     @FXML
-    private TextField descriptiontext;
+    private TextField descrizione;
     @FXML
-    private TextField mimimumtext;
+    private TextField mimimo;
     @FXML
-    private TextField quantitytext;
+    private TextField quantità;
     @FXML
-    private Button salvaButton;
+    private Button salva;
     @FXML
-    private Button eliminaButton;
+    private Button elimina;
     @FXML
-    private Label errorlabel;
+    private Label errore;
+
     private Utente utente;
     private Farmaco farmaco;
 
-    public AggModFarmacoController() {
+    public ModificaFarmacoController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();
@@ -44,28 +45,28 @@ public class AggModFarmacoController implements Initializable, DataInitializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        salvaButton.disableProperty().bind(descriptiontext.textProperty().isEmpty().or(mimimumtext.textProperty().isEqualTo("0")));
-        eliminaButton.disableProperty().bind(descriptiontext.textProperty().isEmpty().or(mimimumtext.textProperty().isEqualTo("0")));
+        salva.disableProperty().bind(descrizione.textProperty().isEmpty().or(mimimo.textProperty().isEqualTo("0")));
+        elimina.disableProperty().bind(descrizione.textProperty().isEmpty().or(mimimo.textProperty().isEqualTo("0")));
 
     }
 
     @Override
     public void initializeData(Farmaco farmaco) {
         this.farmaco = farmaco;
-        this.nametext.setText(farmaco.getNome());
-        this.descriptiontext.setText(farmaco.getDescrizione());
-        this.quantitytext.setText(String.valueOf(farmaco.getQuantita()));
-        this.mimimumtext.setText(String.valueOf(farmaco.getMinimo()));
+        this.nome.setText(farmaco.getNome());
+        this.descrizione.setText(farmaco.getDescrizione());
+        this.quantità.setText(String.valueOf(farmaco.getQuantita()));
+        this.mimimo.setText(String.valueOf(farmaco.getMinimo()));
 
     }
 
     @FXML
     public void salvaAction() {
         try {
-            farmaco.setNome(nametext.getText());
-            farmaco.setDescrizione(descriptiontext.getText());
-            farmaco.setQuantita(Integer.parseInt(quantitytext.getText()));
-            farmaco.setMinimo(Integer.parseInt(mimimumtext.getText()));
+            farmaco.setNome(nome.getText());
+            farmaco.setDescrizione(descrizione.getText());
+            farmaco.setQuantita(Integer.parseInt(quantità.getText()));
+            farmaco.setMinimo(Integer.parseInt(mimimo.getText()));
             farmaco.setInEsaurimento();
             farmaco.setStatoFarmaco();
 
@@ -76,9 +77,9 @@ public class AggModFarmacoController implements Initializable, DataInitializable
                 farmacoService.aggiornaFarmaco(farmaco);
             }
 
-            dispatcher.renderView("elencoFarmaci", utente);
+            dispatcher.renderView("elencoFarmaciAmministratore", utente);
         } catch (BusinessException e) {
-            errorlabel.setText("Errore nell'aggiunta dei farmaci");
+            errore.setText("Errore nell'aggiunta dei farmaci");
             dispatcher.renderError(e);
         }
     }
@@ -87,9 +88,9 @@ public class AggModFarmacoController implements Initializable, DataInitializable
     public void eliminaAction() {
         try {
             farmacoService.eliminaFarmaco(farmaco.getId());
-            dispatcher.renderView("elencoFarmaci", utente);
+            dispatcher.renderView("elencoFarmaciAmministratore", utente);
         } catch (BusinessException e) {
-            this.errorlabel.setText("Il farmaco e' presente in una prescrizione e non e' possibile eliminarlo");
+            this.errore.setText("Il farmaco e' presente in una prescrizione e non e' possibile eliminarlo");
         }
 
     }

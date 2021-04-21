@@ -1,7 +1,7 @@
-21
+24
 1,true,dsadasd,4,2
 2,true,s,4,5
-3,false,d,4,5
+3,true,d,4,5
 4,false,dasf,4,0
 5,false,qq,4,0
 6,false,sdds,4,0
@@ -19,3 +19,6 @@
 18,false,asdfasdf,4,2
 19,false,adsfasdf,5,2
 20,false,sadgfsadgdfsg,4,2
+21,true,,4,2
+22,true,,4,2
+23,true,per provare,4,2
