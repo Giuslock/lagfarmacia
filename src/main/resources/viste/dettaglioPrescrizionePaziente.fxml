@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,13 +8,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizionePazienteController">
+<VBox prefHeight="543.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.DettaglioPrescrizionePazienteController">
 
    <children>
       <Label prefHeight="73.0" prefWidth="199.0" text="Dettaglio">
          <font>
             <Font size="25.0" />
          </font>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
       </Label>
       <Label fx:id="errore" textFill="RED" wrapText="true" />
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
@@ -23,6 +27,9 @@
             <TableColumn fx:id="colonnaNome" prefWidth="483.0" resizable="false" text="Nome" />
             <TableColumn fx:id="colonnaQuantità" prefWidth="127.0" resizable="false" text="Quantity" />
          </columns>
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </VBox.margin>
       </TableView>
    </children>
 </VBox>

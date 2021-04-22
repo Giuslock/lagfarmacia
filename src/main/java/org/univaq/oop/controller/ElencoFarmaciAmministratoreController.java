@@ -25,7 +25,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class elencoFarmaciAmministratoreController implements Initializable, DataInitializable<Utente> {
+public class ElencoFarmaciAmministratoreController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
@@ -49,7 +49,7 @@ public class elencoFarmaciAmministratoreController implements Initializable, Dat
     private Label errorlabel;
 
 
-    public elencoFarmaciAmministratoreController() {
+    public ElencoFarmaciAmministratoreController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();

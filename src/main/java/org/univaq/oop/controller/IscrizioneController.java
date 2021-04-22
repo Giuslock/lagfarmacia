@@ -14,7 +14,7 @@ import org.univaq.oop.view.ViewException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class iscrizioneController implements Initializable, DataInitializable<Utente> {
+public class IscrizioneController implements Initializable, DataInitializable<Utente> {
 
     private final ViewDispatcher dispatcher;
     private final UtenteService utenteService;
@@ -44,7 +44,7 @@ public class iscrizioneController implements Initializable, DataInitializable<Ut
     private Label errore;
 
 
-    public iscrizioneController() {
+    public IscrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         utenteService = factory.getUtenteService();
@@ -56,7 +56,7 @@ public class iscrizioneController implements Initializable, DataInitializable<Ut
 
         medicoRadioButton.setToggleGroup(group);
         medicoRadioButton.setSelected(true);
-
+        amministratoreRadioButton.setToggleGroup(group);
         pazienteRadioButton.setToggleGroup(group);
         farmacistaRadioButton.setToggleGroup(group);
 

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.iscrizioneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.IscrizioneController">
    <children>
       <Label layoutX="231.0" layoutY="14.0" text="PHARMAPP">
          <font>
@@ -25,17 +25,17 @@
             <Font name="Segoe Script" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="codiceFiscale" layoutX="55.0" layoutY="276.0" prefHeight="36.0" prefWidth="175.0" promptText="Codice fiscale">
+      <TextField fx:id="codiceFiscale" layoutX="55.0" layoutY="276.0" prefHeight="25.0" prefWidth="161.0" promptText="Codice fiscale">
          <font>
             <Font name="Segoe Script" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="usernameIscriviti" layoutX="56.0" layoutY="319.0" prefHeight="36.0" prefWidth="175.0" promptText="Username">
+      <TextField fx:id="usernameIscriviti" layoutX="56.0" layoutY="319.0" prefHeight="28.0" prefWidth="161.0" promptText="Username">
          <font>
             <Font name="Segoe Script" size="14.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="passwordIscriviti" layoutX="55.0" layoutY="359.0" prefHeight="25.0" prefWidth="174.0" promptText="Password">
+      <PasswordField fx:id="passwordIscriviti" layoutX="55.0" layoutY="359.0" prefHeight="28.0" prefWidth="161.0" promptText="Password">
          <font>
             <Font size="14.0" />
          </font>
@@ -55,27 +55,27 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <RadioButton fx:id="medicoRadioButton" layoutX="414.0" layoutY="258.0" mnemonicParsing="false" text="Medico">
+      <RadioButton fx:id="medicoRadioButton" layoutX="414.0" layoutY="202.0" mnemonicParsing="false" text="Medico">
          <font>
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="pazienteRadioButton" layoutX="414.0" layoutY="290.0" mnemonicParsing="false" text="Paziente">
+      <RadioButton fx:id="pazienteRadioButton" layoutX="414.0" layoutY="240.0" mnemonicParsing="false" text="Paziente">
          <font>
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <Label layoutX="414.0" layoutY="216.0" text="Che tipo di utente sei?" textFill="#080808">
+      <Label layoutX="404.0" layoutY="149.0" text="Che tipo di utente sei?" textFill="#080808">
          <font>
             <Font name="Segoe Script" size="18.0" />
          </font>
       </Label>
-      <RadioButton fx:id="farmacistaRadioButton" layoutX="414.0" layoutY="319.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Farmacista">
+      <RadioButton fx:id="farmacistaRadioButton" layoutX="414.0" layoutY="275.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Farmacista">
          <font>
             <Font size="15.0" />
          </font></RadioButton>
       <Label fx:id="errore" layoutX="186.0" layoutY="467.0" prefHeight="16.0" prefWidth="278.0" />
-      <RadioButton fx:id="amministratoreRadioButton" layoutX="414.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" text="Amministratore">
+      <RadioButton fx:id="amministratoreRadioButton" layoutX="414.0" layoutY="321.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" text="Amministratore">
          <font>
             <Font size="15.0" />
          </font>

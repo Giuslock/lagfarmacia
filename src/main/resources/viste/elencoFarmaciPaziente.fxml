@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,22 +8,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="665.0" prefWidth="816.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.ElencoFarmaciPazienteController">
+<VBox prefHeight="543.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.ElencoFarmaciPazienteController">
 
    <children>
-      <Label prefHeight="73.0" prefWidth="199.0" text="  Elenco Farmaci:" wrapText="true">
+      <Label prefHeight="73.0" prefWidth="199.0" text="Elenco Farmaci:" wrapText="true">
          <font>
             <Font size="25.0" />
          </font>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
       </Label>
       <Label fx:id="errorlabel" textFill="RED" wrapText="true" />
       <Separator opacity="0.0" prefHeight="12.0" prefWidth="700.0" />
-      <TableView fx:id="tabellaElencoFarmaci" prefHeight="370.0" prefWidth="700.0">
+      <TableView fx:id="tabellaElencoFarmaci" prefHeight="370.0" prefWidth="775.0">
          <columns>
             <TableColumn fx:id="colonnaNome" prefWidth="208.0" resizable="false" text="Nome" />
-            <TableColumn fx:id="colonnaDescrizione" prefWidth="439.0" resizable="false" text="Descrizione" />
-            <TableColumn fx:id="colonnaAzioni" prefWidth="168.0" resizable="false" text="Azione" />
+            <TableColumn fx:id="colonnaDescrizione" prefWidth="343.0" resizable="false" text="Descrizione" />
+            <TableColumn fx:id="colonnaAzioni" prefWidth="264.0" resizable="false" text="Azione" />
          </columns>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
       </TableView>
    </children>
 </VBox>

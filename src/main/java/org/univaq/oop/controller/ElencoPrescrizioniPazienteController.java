@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class elencoPrescrizioniPazienteController implements DataInitializable<Utente>, Initializable {
+public class ElencoPrescrizioniPazienteController implements DataInitializable<Utente>, Initializable {
     private final ViewDispatcher dispatcher;
     private final PrescrizioneService prescrizioneService;
     private final FarmacoService farmacoService;
@@ -52,7 +52,7 @@ public class elencoPrescrizioniPazienteController implements DataInitializable<U
     private Label errorlabel;
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
-    public elencoPrescrizioniPazienteController() {
+    public ElencoPrescrizioniPazienteController() {
 
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();

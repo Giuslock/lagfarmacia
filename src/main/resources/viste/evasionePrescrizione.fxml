@@ -10,12 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.EvasionePrescrizioneController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.EvasionePrescrizioneController">
    <children>
       <Label prefHeight="62.0" prefWidth="371.0" text="Evadi la prescrizione" textFill="#0e0e0e" wrapText="true">
          <font>
-            <Font name="Segoe Script" size="30.0" />
+            <Font size="25.0" />
          </font>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
       </Label>
       <Label fx:id="errorlabel" prefHeight="34.0" prefWidth="266.0" textFill="#ff0000" wrapText="true" />
       <TextField fx:id="idFarmacoPrescrizione" editable="false" prefHeight="26.0" prefWidth="750.0">

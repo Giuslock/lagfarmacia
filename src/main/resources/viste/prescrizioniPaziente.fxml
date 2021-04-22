@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,12 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.elencoPrescrizioniPazienteController">
+<VBox prefHeight="543.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.ElencoPrescrizioniPazienteController">
    <children>
-      <Label prefHeight="65.0" prefWidth="268.0" text="  Elenco Prescrizioni:">
+      <Label prefHeight="65.0" prefWidth="268.0" text="Elenco Prescrizioni:">
          <font>
             <Font size="25.0" />
          </font>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
       </Label>
       <Label fx:id="errorlabel" prefHeight="17.0" prefWidth="341.0" wrapText="true" />
       <GridPane prefHeight="34.0" prefWidth="684.0">
@@ -44,6 +48,9 @@
             <TableColumn fx:id="idTableColumn" prefWidth="89.66666793823242" text="Id" />
             <TableColumn fx:id="dottoreTableColumn" prefWidth="145.0" text="Dottore" />
         </columns>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
       </TableView>
       <GridPane prefHeight="32.0" prefWidth="694.0">
         <columnConstraints>

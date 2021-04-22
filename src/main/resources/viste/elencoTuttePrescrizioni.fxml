@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="813.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.elencoTuttePrescrizioniController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.ElencoTuttePrescrizioniController">
 
    <children>
       <Label prefHeight="65.0" prefWidth="268.0" text="Prescrizioni:">
          <font>
-            <Font name="Segoe Script" size="30.0" />
+            <Font size="25.0" />
          </font>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
       </Label>
       <TableView fx:id="tabellaElencoPrescrizioni" prefHeight="359.0" prefWidth="622.0">
         <columns>
@@ -22,6 +26,9 @@
             <TableColumn fx:id="colonnaPaziente" prefWidth="167.0" resizable="false" text="Paziente" />
             <TableColumn fx:id="colonnaAzioni" prefWidth="187.0" resizable="false" text="Azioni" />
         </columns>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
       </TableView>
       <Label fx:id="errorlabel" prefHeight="79.0" prefWidth="316.0" textAlignment="CENTER" textFill="RED" wrapText="true">
          <font>

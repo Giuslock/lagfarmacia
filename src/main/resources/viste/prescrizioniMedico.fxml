@@ -11,14 +11,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.PrescrizioniMedicoController">
 
    <children>
-      <Label prefHeight="66.0" prefWidth="354.0" text="  Elenco Prescrizioni:">
+      <Label prefHeight="66.0" prefWidth="354.0" text="Elenco Prescrizioni:">
          <font>
-            <Font name="Segoe Script" size="30.0" />
+            <Font size="25.0" />
          </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
       </Label>
 
       <Label fx:id="errore" prefHeight="17.0" prefWidth="258.0" />
@@ -28,12 +30,12 @@
           <TableColumn fx:id="colonnaNumero" prefWidth="54.33333206176758" text="Numero" visible="false" />
             <TableColumn fx:id="colonnaId" prefWidth="89.66666793823242" resizable="false" text="Numero" />
             <TableColumn fx:id="colonnaDescrizione" prefWidth="234.0" resizable="false" text="Descrizione" />
-            <TableColumn fx:id="tabellaPaziente" prefWidth="189.5" resizable="false" text="Paziente" />
-            <TableColumn fx:id="colonnaAzioni" prefWidth="183.0" resizable="false" text="Azioni" />
+            <TableColumn fx:id="tabellaPaziente" prefWidth="258.5" resizable="false" text="Paziente" />
+            <TableColumn fx:id="colonnaAzioni" prefWidth="176.0" resizable="false" text="Azioni" />
         </columns>
 
          <VBox.margin>
-            <Insets />
+            <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </TableView>
       <GridPane prefHeight="34.0" prefWidth="684.0">

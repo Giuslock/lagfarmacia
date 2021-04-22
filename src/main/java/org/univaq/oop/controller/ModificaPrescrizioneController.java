@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class modificaPrescrizioneController implements Initializable, DataInitializable<Prescrizione> {
+public class ModificaPrescrizioneController implements Initializable, DataInitializable<Prescrizione> {
 
     private final ViewDispatcher dispatcher;
     private final FarmacoService farmacoService;
@@ -56,7 +56,7 @@ public class modificaPrescrizioneController implements Initializable, DataInitia
     private Map<Farmaco, Integer> farmaciNellaPrescrizione;
     private Utente utente;
 
-    public modificaPrescrizioneController() {
+    public ModificaPrescrizioneController() {
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();
         farmacoService = factory.getFarmacoService();

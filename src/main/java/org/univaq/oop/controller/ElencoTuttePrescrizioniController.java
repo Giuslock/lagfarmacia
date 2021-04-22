@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class elencoTuttePrescrizioniController implements DataInitializable<Utente>, Initializable {
+public class ElencoTuttePrescrizioniController implements DataInitializable<Utente>, Initializable {
 
     private final ViewDispatcher dispatcher;
     private final PrescrizioneService prescrizioneService;
@@ -49,7 +49,7 @@ public class elencoTuttePrescrizioniController implements DataInitializable<Uten
 
     private FarmacoPrescrizioneService farmacoPrescrizioneService;
 
-    public elencoTuttePrescrizioniController() {
+    public ElencoTuttePrescrizioniController() {
 
         dispatcher = ViewDispatcher.getInstance();
         LagBusinessFactory factory = LagBusinessFactory.getInstance();

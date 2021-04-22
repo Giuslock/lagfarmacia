@@ -105,7 +105,7 @@ public class PrescrizioniMedicoController implements DataInitializable<Utente>, 
     @FXML
     public void aggiungiAction() {
         Prescrizione voidPrescrizione = new Prescrizione();
-        dispatcher.renderView("CreaPrescrizione", utente);
+        dispatcher.renderView("creaPrescrizione", utente);
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,31 +8,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="784.0" styleClass="layout" stylesheets="@layout.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.modificaPrescrizioneController">
+<AnchorPane prefHeight="543.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.univaq.oop.controller.ModificaPrescrizioneController">
    <children>
-      <Label layoutX="30.0" prefHeight="122.0" prefWidth="726.0" stylesheets="@layout.css" text="Modifica Prescrizione">
+      <Label layoutX="30.0" prefHeight="56.0" prefWidth="281.0" stylesheets="@layout.css" text="Modifica Prescrizione">
          <font>
-            <Font name="Segoe Script" size="35.0" />
+            <Font size="25.0" />
          </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
       </Label>
-      <TableView fx:id="tabellaFarmaci" layoutX="51.0" layoutY="121.0" prefHeight="334.0" prefWidth="203.0">
+      <TableView fx:id="tabellaFarmaci" layoutX="39.0" layoutY="72.0" prefHeight="334.0" prefWidth="203.0">
 
         <columns>
           <TableColumn fx:id="t1_id" prefWidth="123.20003968477249" resizable="false" text="Id" />
-            <TableColumn fx:id="t1_nome" prefWidth="75.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="t1_nome" prefWidth="78.5" resizable="false" text="Nome" />
         </columns>
       </TableView>
 
-      <TableView fx:id="tabellaFarmaciInPrescrizione" layoutX="492.0" layoutY="122.0" prefHeight="334.0" prefWidth="218.0">
+      <TableView fx:id="tabellaFarmaciInPrescrizione" layoutX="493.0" layoutY="72.0" prefHeight="334.0" prefWidth="203.0">
 
         <columns>
-          <TableColumn fx:id="t2_nome" prefWidth="137.5999755859375" resizable="false" text="Farmaci Selezionati" />
-            <TableColumn fx:id="t2_quantity" prefWidth="75.0" resizable="false" text="Quantità" />
+          <TableColumn fx:id="t2_nome" prefWidth="125.0" resizable="false" text="Farmaci Selezionati" />
+            <TableColumn fx:id="t2_quantity" prefWidth="88.0" resizable="false" text="Quantità" />
         </columns>
       </TableView>
-      <Button fx:id="aggiungifarmaco" layoutX="108.0" layoutY="473.0" mnemonicParsing="false" onAction="#aggiungifarmaco" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="aggiungi" />
-      <Button fx:id="cancellaFarmaco" layoutX="556.0" layoutY="473.0" mnemonicParsing="false" onAction="#rimuoviFarmacoDallaPrescrizione" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="rimuovi" />
-      <Button fx:id="salva" layoutX="305.0" layoutY="289.0" mnemonicParsing="false" onAction="#salva" prefHeight="56.0" prefWidth="139.0" styleClass="Button" stylesheets="@loginButton.css" text="Salva" />
+      <Button fx:id="aggiungifarmaco" layoutX="96.0" layoutY="415.0" mnemonicParsing="false" onAction="#aggiungifarmaco" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="aggiungi" />
+      <Button fx:id="cancellaFarmaco" layoutX="550.0" layoutY="415.0" mnemonicParsing="false" onAction="#rimuoviFarmacoDallaPrescrizione" prefHeight="26.0" prefWidth="89.0" styleClass="Button" stylesheets="@loginButton.css" text="rimuovi" />
+      <Button fx:id="salva" layoutX="304.0" layoutY="211.0" mnemonicParsing="false" onAction="#salva" prefHeight="56.0" prefWidth="139.0" styleClass="Button" stylesheets="@loginButton.css" text="Salva" />
       <Label fx:id="errorlabel" layoutX="328.0" layoutY="406.0" prefHeight="17.0" prefWidth="203.0" wrapText="true" />
 
    </children>
