@@ -71,7 +71,9 @@ public class ModificaPrescrizioneController implements Initializable, DataInitia
     @Override
     public void initializeData(Prescrizione prescrizione) {
         this.prescrizione = prescrizione;
+
         try {
+            this.utente = utenteService.trovaUtenteDaId(prescrizione.getCodiceDottore());
             List<Farmaco> farmaci = farmacoService.trovaTuttiFarmaci();
             ObservableList<Farmaco> farmaciData = FXCollections.observableArrayList(farmaci);
             tabellaFarmaci.setItems(farmaciData);

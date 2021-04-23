@@ -12,4 +12,6 @@ public interface UtenteService {
 
     Utente trovaPazienteDaCodiceFiscale(String fiscalCode) throws BusinessException;
 
+    Utente trovaUtenteDaId(int id) throws BusinessException;
+
 }

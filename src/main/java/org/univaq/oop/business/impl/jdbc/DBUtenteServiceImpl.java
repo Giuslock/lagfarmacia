@@ -77,6 +77,29 @@ public class DBUtenteServiceImpl implements UtenteService {
         return utente;
     }
 
+    @Override
+    public Utente trovaUtenteDaId(int id) throws BusinessException {
+        Utente utente = new Utente();
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(SELECT_FROM_UTENTE_WHERE_ID);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                utente.setId(rs.getLong("id"));
+                utente.setNome(rs.getString("nome"));
+                utente.setCognome(rs.getString("cognome"));
+                utente.setUsername(rs.getString("username"));
+                utente.setPassword(rs.getString("password_"));
+                utente.setCodiceFiscale(rs.getString("codicefiscale"));
+            } else {
+                throw new UtenteNonTrovatoException();
+            }
+        } catch (SQLException throwables) {
+            throw new DatabaseException();
+        }
+        return utente;
+    }
+
     protected Utente mapTo(ResultSet resultSet) {
         Utente utente = null;
         try {

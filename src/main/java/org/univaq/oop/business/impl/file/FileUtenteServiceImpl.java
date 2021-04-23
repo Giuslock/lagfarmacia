@@ -115,12 +115,12 @@ public class FileUtenteServiceImpl implements UtenteService {
 
     @Override
     public Utente trovaPazienteDaCodiceFiscale(String codiceFiscale) throws BusinessException {
-        Utente utente = new Utente();
+        Utente utente = null;
         try {
             FileData fileData = Utility.readAllRows(userFileName);
             for (String[] colonne : fileData.getRighe()) {
                 if (colonne[6].equals(codiceFiscale)) {
-
+                    utente = new Utente();                  
                     utente.setId((long) Integer.parseInt(colonne[0]));
                     utente.setNome(colonne[1]);
                     utente.setCognome(colonne[2]);
@@ -128,9 +128,38 @@ public class FileUtenteServiceImpl implements UtenteService {
                     utente.setPassword(colonne[4]);
                     utente.setRuolo(Ruolo.valueOf(colonne[5]));
                     utente.setCodiceFiscale(colonne[6]);
-                    return utente;
+                } 
+            } 
+            if(utente == null) throw new UtenteNonTrovatoException();
+
+            return utente;
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException();
+        }
+    }
+
+    @Override
+    public Utente trovaUtenteDaId(int id) throws BusinessException {
+        Utente utente = null;
+        try {
+            FileData fileData = Utility.readAllRows(userFileName);
+            for (String[] colonne : fileData.getRighe()) {
+                if (Integer.parseInt(colonne[0]) == id) {
+                    utente = new Utente();
+                    utente.setId((long) Integer.parseInt(colonne[0]));
+                    utente.setNome(colonne[1]);
+                    utente.setCognome(colonne[2]);
+                    utente.setUsername(colonne[3]);
+                    utente.setPassword(colonne[4]);
+                    utente.setRuolo(Ruolo.valueOf(colonne[5]));
+                    utente.setCodiceFiscale(colonne[6]);
                 }
-            } throw new UtenteNonTrovatoException();
+            }
+            if(utente == null) throw new UtenteNonTrovatoException();
+
+            return utente;
 
         } catch (IOException e) {
             e.printStackTrace();

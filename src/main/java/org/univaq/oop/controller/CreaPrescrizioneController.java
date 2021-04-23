@@ -141,7 +141,11 @@ public class CreaPrescrizioneController implements Initializable, DataInitializa
     @FXML
     public void creaPrescrizione() {
         try {
-            this.prescrizione.setCodicePaziente(Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codice.getText()).getId()));
+
+            this.prescrizione.setCodicePaziente(
+                Math.toIntExact(utenteService.trovaPazienteDaCodiceFiscale(codice.getText()).getId()));
+
+
             this.prescrizione.setCodiceDottore(this.utente.getId().intValue());
             this.prescrizione.setDescrizione(this.descrizione.getText());
             Prescrizione prescrizioneInserita = this.prescrizioneService.creaPrescrizione(this.prescrizione);

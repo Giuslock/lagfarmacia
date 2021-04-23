@@ -1,6 +1,7 @@
-6
+7
 1,ammi,nistra,admin,secret,AMMINISTRATORE,admn222
 2,a,a,paziente,secret,PAZIENTE,aa
 3,a,a,farmacista,secret,FARMACISTA,dd
 4,a,a,dottore,secret,DOTTORE,dds
 5,a,a,dottore2,secret,DOTTORE,das
+6,a,a,test,test,DOTTORE,test
