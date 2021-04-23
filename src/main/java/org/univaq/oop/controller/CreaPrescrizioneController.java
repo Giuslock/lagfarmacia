@@ -94,6 +94,7 @@ public class CreaPrescrizioneController implements Initializable, DataInitializa
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        salva.disableProperty().bind(codice.textProperty().isEmpty().or(descrizione.textProperty().isEmpty()));
 
         t1_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         t1_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
